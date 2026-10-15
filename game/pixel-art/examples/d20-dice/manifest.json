@@ -1,0 +1,25 @@
+{
+  "title": "D20 掷骰动画",
+  "size": [
+    32,
+    32
+  ],
+  "frames": 320,
+  "scope": "20 个结果各有 16 帧投掷序列；预览按 1、7、14、20 演播，预览为原生 32×32 的 6 倍展示。使用早期动画流程，未使用当前固定 Shader。",
+  "style": "parchment-fantasy",
+  "artifacts": {
+    "source.aseprite": {
+      "sha256": "b74e13812057272457868fe7283fa4abf5a0c97dc62976611ccf2f4bb2615ce3"
+    },
+    "sheet.png": {
+      "sha256": "82b837d39e46245f3cdb2c05fb10584bba365b00cfe20f8ada7e4a78d73ef3b8"
+    },
+    "sheet.json": {
+      "sha256": "953e4677f64cecff92b5c8dec31abb7899d59aa4f4b2311962997211b909353a"
+    },
+    "preview.gif": {
+      "sha256": "7eb14b0aa201973c88e290f3d0e465e907fc086df83827371996a12ba49a7f58"
+    }
+  },
+  "preview_scale": 6
+}

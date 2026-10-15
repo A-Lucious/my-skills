@@ -2,3 +2,8 @@ __pycache__/
 *.pyc
 .venv/
 node_modules/
+
+# Pixel Art local runtime and task outputs
+/Test Workspace/
+/tools/aseprite-mcp/
+/.codex/

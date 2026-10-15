@@ -1,0 +1,21 @@
+{
+  "title": "多口袋皮革背包",
+  "size": [
+    64,
+    64
+  ],
+  "frames": 1,
+  "scope": "Blender 建模、材质分区 Shader、Aseprite 粗稿与精修候选。",
+  "style": "parchment-fantasy",
+  "artifacts": {
+    "native.png": {
+      "sha256": "f2a45a5738f685f0e830d580249000c527eb038b62b7787ab515eb3b0b8cb47b"
+    },
+    "source.aseprite": {
+      "sha256": "ee92a4eb7bb97936f18355de339716aee4806344b65e144cef6a37b4d19462c5"
+    },
+    "preview.png": {
+      "sha256": "2b0048b4365bcc89809264e0d6993c07d8d2f6fcb12fc97417f1864ab459f1f1"
+    }
+  }
+}

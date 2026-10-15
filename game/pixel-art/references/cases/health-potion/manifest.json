@@ -1,0 +1,112 @@
+{
+  "style": "parchment-fantasy",
+  "case": "health-potion",
+  "shader": {
+    "path": "../../../styles/parchment-fantasy/pixel_shader.py",
+    "version": "1.3.0",
+    "sha256": "99ce57f0ea3fba5594ea2832e395154ce30586d262fc8443e7483d82faacc3a9"
+  },
+  "palette": {
+    "path": "../../../styles/parchment-fantasy/palette.json",
+    "version": "4.3",
+    "sha256": "7d35f906f7ec6d99d93c646909eef75631d713f69e554077822b515a3d4bd2dd"
+  },
+  "size": [
+    64,
+    64
+  ],
+  "families": [
+    "ruby",
+    "earth",
+    "blue"
+  ],
+  "material_families": {
+    "Mat_Cork": [
+      "earth"
+    ],
+    "Mat_Tie": [
+      "earth"
+    ],
+    "Mat_NeckGlass": [
+      "blue"
+    ],
+    "Mat_Glass": [
+      "ruby"
+    ],
+    "Mat_Liquid": [
+      "ruby"
+    ]
+  },
+  "case_material_settings": {
+    "body_glass": {
+      "base": [
+        0.65,
+        0.012,
+        0.02
+      ],
+      "roughness": 0.18,
+      "transmission": 0.15
+    },
+    "liquid": {
+      "base": [
+        0.65,
+        0.008,
+        0.012
+      ],
+      "roughness": 0.24,
+      "transmission": 0.1
+    },
+    "neck_glass": {
+      "base": [
+        0.15,
+        0.21,
+        0.27
+      ],
+      "roughness": 0.38,
+      "transmission": 0.2
+    },
+    "surface_normals": "smooth curved faces; cork and neck caps retain flat normals",
+    "samples": 512,
+    "adaptive_threshold": 0.002,
+    "adaptive_min_samples": 128
+  },
+  "case_settings_scope": "药水案例输入；新对象按实际材质、相机和渲染需要配置。",
+  "render": {
+    "engine": "CYCLES",
+    "camera": "Camera",
+    "projection": "ORTHO",
+    "ortho_scale": 3.5999999046325684,
+    "frame": 1,
+    "input_view_transform": "AgX",
+    "input_look": "None",
+    "input_exposure": 0.0,
+    "input_gamma": 1.0,
+    "filter_size": 0.01,
+    "alpha_threshold": 0.5,
+    "colour_distance": "2 * delta Oklab L squared + delta a squared + delta b squared",
+    "extra_brightness_curve": false
+  },
+  "artifacts": {
+    "native": {
+      "path": "native.png",
+      "sha256": "c64ec1851541f38c1bcc9226b3af7f7c6af9de33099051e8a819ea3ee29d7c65"
+    },
+    "preview": {
+      "path": "preview.png",
+      "sha256": "ef9eb067cb09d5cb4b9355764221318d31475d1deab0a50301c7f6097f08c9f5",
+      "scale": 4
+    }
+  },
+  "checks": {
+    "visible_colors": 25,
+    "alpha_values": [
+      0,
+      255
+    ],
+    "outside_palette": [],
+    "material_family_violations": [],
+    "mouth_cross_family_current": 0,
+    "aseprite_visible_roundtrip_matches": true
+  },
+  "scope": "第三阶段 Shader 底稿；不代表完成 Aseprite 粗稿、精修或最终交付。"
+}

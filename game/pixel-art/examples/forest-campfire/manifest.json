@@ -1,0 +1,28 @@
+{
+  "title": "森林篝火动画",
+  "size": [
+    180,
+    320
+  ],
+  "frames": 16,
+  "scope": "竖屏原创森林场景，含火焰、烟和余烬循环。使用早期 Shader to RGB/Color Ramp 流程；场景与动画技术候选不代表现行固定 Shader 的验证。",
+  "style": "parchment-fantasy",
+  "artifacts": {
+    "source.aseprite": {
+      "sha256": "7db102ceffe98fb1d70a56ec0f0cffb57db681e19635ebd71ce8aab6d3d02b2f"
+    },
+    "native.png": {
+      "sha256": "44fdd81c7d9adef750c73e64e7dd13de00a7bb3e8a5efbd008a33187d9fb3215"
+    },
+    "sheet.png": {
+      "sha256": "0aae54b825e28cd15e99e2d8ea6b28b6a627dbd824bb5d1dc9b7d509ec81f630"
+    },
+    "sheet.json": {
+      "sha256": "4cbc2871b512584a1e8415fffee5deae82dec8066acbab25820dec8de15c4fcd"
+    },
+    "preview.gif": {
+      "sha256": "3e75b2c2929fc6843be2c53e4df7d96e2ab63cf344daafa4ef4162c45a13d922"
+    }
+  },
+  "preview_scale": 2
+}

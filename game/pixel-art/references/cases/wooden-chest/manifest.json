@@ -1,0 +1,49 @@
+{
+  "case": "wooden-chest",
+  "style": "parchment-fantasy",
+  "parameters": {
+    "native_size": [
+      64,
+      64
+    ],
+    "with_shadow_size": [
+      96,
+      64
+    ],
+    "actual_colors": 11,
+    "families": [
+      "leather",
+      "gold",
+      "hair",
+      "earth"
+    ],
+    "texture_pixels": 66,
+    "wood_pixels": 1117,
+    "texture_coverage_percent": 5.91,
+    "visibility": "fraction of 9 fixed disk-light samples without geometric occlusion",
+    "normal_space": "WORLD",
+    "pixel_shader_used": false
+  },
+  "known_limits": [
+    "实心箱腔简化",
+    "九点几何遮挡近似",
+    "早期流程未使用当前固定 Pixel Shader"
+  ],
+  "artifacts": {
+    "native.png": {
+      "sha256": "edaa05122dc1f318468097b4c63550b11bf1b4dfaf9cd66f6764bc6c4899e492"
+    },
+    "source.aseprite": {
+      "sha256": "1683484f8b684ffe8dee5db086e2d22ab5307a2284e59a197b4f8eb86c59301a"
+    },
+    "with-shadow.png": {
+      "sha256": "1975350717d11f9bd01e7ab2ccd2c116c527cc406202769bafd1e68e19f0c622"
+    },
+    "with-shadow.aseprite": {
+      "sha256": "fa74f66fa88a57bf3e2c454972427c7b141572a60da3a907abd2145326b56eb1"
+    },
+    "preview.png": {
+      "sha256": "42edd60b46437f0a2685ba9fe6104fa9d543df1cdf7f1cd597c7fec71987bc90"
+    }
+  }
+}

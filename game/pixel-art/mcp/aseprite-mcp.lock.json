@@ -1,0 +1,14 @@
+{
+  "repository": "https://github.com/MalloyTheDev/aseprite-mcp.git",
+  "commit": "8b7e95b6a69405f279c17227d5314dcb63ca5533",
+  "version": "0.10.0",
+  "reported_runtime_version": "0.9.0",
+  "version_note": "Pinned upstream pyproject declares 0.10.0 while __version__/health_check reports 0.9.0; commit is the authoritative identity.",
+  "directory": "tools/aseprite-mcp",
+  "dependency_install": [
+    "uv",
+    "sync",
+    "--locked"
+  ],
+  "workspace": "Test Workspace"
+}

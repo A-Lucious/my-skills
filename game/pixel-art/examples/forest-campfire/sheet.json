@@ -1,0 +1,377 @@
+{
+  "frames": [
+    {
+      "filename": "forest-campfire-v01 0.aseprite",
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 180,
+        "h": 320
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 180,
+        "h": 320
+      },
+      "sourceSize": {
+        "w": 180,
+        "h": 320
+      },
+      "duration": 140
+    },
+    {
+      "filename": "forest-campfire-v01 1.aseprite",
+      "frame": {
+        "x": 180,
+        "y": 0,
+        "w": 180,
+        "h": 320
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 180,
+        "h": 320
+      },
+      "sourceSize": {
+        "w": 180,
+        "h": 320
+      },
+      "duration": 140
+    },
+    {
+      "filename": "forest-campfire-v01 2.aseprite",
+      "frame": {
+        "x": 360,
+        "y": 0,
+        "w": 180,
+        "h": 320
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 180,
+        "h": 320
+      },
+      "sourceSize": {
+        "w": 180,
+        "h": 320
+      },
+      "duration": 140
+    },
+    {
+      "filename": "forest-campfire-v01 3.aseprite",
+      "frame": {
+        "x": 540,
+        "y": 0,
+        "w": 180,
+        "h": 320
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 180,
+        "h": 320
+      },
+      "sourceSize": {
+        "w": 180,
+        "h": 320
+      },
+      "duration": 140
+    },
+    {
+      "filename": "forest-campfire-v01 4.aseprite",
+      "frame": {
+        "x": 0,
+        "y": 320,
+        "w": 180,
+        "h": 320
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 180,
+        "h": 320
+      },
+      "sourceSize": {
+        "w": 180,
+        "h": 320
+      },
+      "duration": 140
+    },
+    {
+      "filename": "forest-campfire-v01 5.aseprite",
+      "frame": {
+        "x": 180,
+        "y": 320,
+        "w": 180,
+        "h": 320
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 180,
+        "h": 320
+      },
+      "sourceSize": {
+        "w": 180,
+        "h": 320
+      },
+      "duration": 140
+    },
+    {
+      "filename": "forest-campfire-v01 6.aseprite",
+      "frame": {
+        "x": 360,
+        "y": 320,
+        "w": 180,
+        "h": 320
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 180,
+        "h": 320
+      },
+      "sourceSize": {
+        "w": 180,
+        "h": 320
+      },
+      "duration": 140
+    },
+    {
+      "filename": "forest-campfire-v01 7.aseprite",
+      "frame": {
+        "x": 540,
+        "y": 320,
+        "w": 180,
+        "h": 320
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 180,
+        "h": 320
+      },
+      "sourceSize": {
+        "w": 180,
+        "h": 320
+      },
+      "duration": 140
+    },
+    {
+      "filename": "forest-campfire-v01 8.aseprite",
+      "frame": {
+        "x": 0,
+        "y": 640,
+        "w": 180,
+        "h": 320
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 180,
+        "h": 320
+      },
+      "sourceSize": {
+        "w": 180,
+        "h": 320
+      },
+      "duration": 140
+    },
+    {
+      "filename": "forest-campfire-v01 9.aseprite",
+      "frame": {
+        "x": 180,
+        "y": 640,
+        "w": 180,
+        "h": 320
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 180,
+        "h": 320
+      },
+      "sourceSize": {
+        "w": 180,
+        "h": 320
+      },
+      "duration": 140
+    },
+    {
+      "filename": "forest-campfire-v01 10.aseprite",
+      "frame": {
+        "x": 360,
+        "y": 640,
+        "w": 180,
+        "h": 320
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 180,
+        "h": 320
+      },
+      "sourceSize": {
+        "w": 180,
+        "h": 320
+      },
+      "duration": 140
+    },
+    {
+      "filename": "forest-campfire-v01 11.aseprite",
+      "frame": {
+        "x": 540,
+        "y": 640,
+        "w": 180,
+        "h": 320
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 180,
+        "h": 320
+      },
+      "sourceSize": {
+        "w": 180,
+        "h": 320
+      },
+      "duration": 140
+    },
+    {
+      "filename": "forest-campfire-v01 12.aseprite",
+      "frame": {
+        "x": 0,
+        "y": 960,
+        "w": 180,
+        "h": 320
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 180,
+        "h": 320
+      },
+      "sourceSize": {
+        "w": 180,
+        "h": 320
+      },
+      "duration": 140
+    },
+    {
+      "filename": "forest-campfire-v01 13.aseprite",
+      "frame": {
+        "x": 180,
+        "y": 960,
+        "w": 180,
+        "h": 320
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 180,
+        "h": 320
+      },
+      "sourceSize": {
+        "w": 180,
+        "h": 320
+      },
+      "duration": 140
+    },
+    {
+      "filename": "forest-campfire-v01 14.aseprite",
+      "frame": {
+        "x": 360,
+        "y": 960,
+        "w": 180,
+        "h": 320
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 180,
+        "h": 320
+      },
+      "sourceSize": {
+        "w": 180,
+        "h": 320
+      },
+      "duration": 140
+    },
+    {
+      "filename": "forest-campfire-v01 15.aseprite",
+      "frame": {
+        "x": 540,
+        "y": 960,
+        "w": 180,
+        "h": 320
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 180,
+        "h": 320
+      },
+      "sourceSize": {
+        "w": 180,
+        "h": 320
+      },
+      "duration": 140
+    }
+  ],
+  "meta": {
+    "app": "http://www.aseprite.org/",
+    "version": "1.3.18.6-x64",
+    "image": "sheet.png",
+    "format": "RGBA8888",
+    "size": {
+      "w": 720,
+      "h": 1280
+    },
+    "scale": "1",
+    "frameTags": [
+      {
+        "name": "afternoon-campfire",
+        "from": 0,
+        "to": 15,
+        "direction": "forward",
+        "color": "#000000ff"
+      }
+    ],
+    "slices": []
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "title": "螺旋星光动画",
+  "size": [
+    64,
+    64
+  ],
+  "frames": 16,
+  "scope": "四向星展开为圆环，再以花瓣轨迹回聚；时长随动作节奏变化。使用早期动画流程。",
+  "style": "parchment-fantasy",
+  "artifacts": {
+    "source.aseprite": {
+      "sha256": "b45a379c7b198f2dbedc4e9931402e25356d3869b5287e00b2babd36c966022c"
+    },
+    "sheet.png": {
+      "sha256": "eba8606392914263cc861e239fb80eec9cdae6fee47b25cfafe243dbb79737c0"
+    },
+    "sheet.json": {
+      "sha256": "790741208da42961ae97d04f97b73d5784fbfd5480b677875ac5f357e8f8825d"
+    },
+    "preview.gif": {
+      "sha256": "593756f13b6bfba3ebcb6ff16d2b6f74b07a48333f79e5293200a2cba5c630cc"
+    }
+  }
+}
