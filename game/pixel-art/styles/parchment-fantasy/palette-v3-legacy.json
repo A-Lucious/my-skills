@@ -1,13 +1,13 @@
 {
   "style_id": "parchment-fantasy",
   "version": "3.0",
-  "provenance": "羊皮纸奇幻的历史六色系工作色板，用于解释旧自制输出。历史视觉研究包含对 Life in Adventure 的观察；不属于官方色板或精确取色。来源见 ../../NOTICE.md。",
+  "provenance": "Historical 6-family working palette for Parchment Fantasy, used to interpret legacy in-house outputs. Historical visual research referenced observations from Life in Adventure; not an official palette or exact color sampling. See ../../NOTICE.md for provenance.",
   "locked": true,
   "family_count": 6,
   "shades_per_family": 5,
   "families": {
     "neutral": {
-      "name": "中性灰",
+      "name": "Neutral grey",
       "ramp": [
         "#191b24",
         "#282a32",
@@ -17,7 +17,7 @@
       ]
     },
     "earth": {
-      "name": "土褐",
+      "name": "Earth brown",
       "ramp": [
         "#302826",
         "#675039",
@@ -27,7 +27,7 @@
       ]
     },
     "skin": {
-      "name": "暖肤色",
+      "name": "Warm skin tone",
       "ramp": [
         "#533b35",
         "#7d5440",
@@ -37,7 +37,7 @@
       ]
     },
     "green": {
-      "name": "灰绿",
+      "name": "Grey green",
       "ramp": [
         "#26312e",
         "#3b493b",
@@ -47,7 +47,7 @@
       ]
     },
     "blue": {
-      "name": "冷蓝",
+      "name": "Cool blue",
       "ramp": [
         "#29313f",
         "#465363",
@@ -57,7 +57,7 @@
       ]
     },
     "ember": {
-      "name": "火焰橙",
+      "name": "Flame orange",
       "ramp": [
         "#6d2e2a",
         "#a74627",
@@ -120,7 +120,7 @@
     "scene": 6,
     "cover": 6
   },
-  "counting_rule": "按实际使用色系计数；同一系的五阶明暗合计一系；透明像素不计；全部动画帧、特效及同素材生产 PNG 共用一份色系预算；color_count 仅为色阶库存统计，不是素材色数上限",
+  "counting_rule": "Counted by families actually used; 5 shades within the same family count as one family; transparent pixels excluded; all animation frames, visual effects, and production PNGs for the same asset share a single family budget; color_count is inventory statistics only, not an asset color count cap.",
   "alpha_policy": [
     0,
     255

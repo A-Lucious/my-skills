@@ -9,7 +9,7 @@
   "palette": {
     "path": "../../../styles/parchment-fantasy/palette.json",
     "version": "4.3",
-    "sha256": "7d35f906f7ec6d99d93c646909eef75631d713f69e554077822b515a3d4bd2dd"
+    "sha256": "54f294f2cb334a1eda6a8c74cf01f498bd207f2f4622af10f871e32e7cd949f5"
   },
   "size": [
     64,
@@ -70,7 +70,7 @@
     "adaptive_threshold": 0.002,
     "adaptive_min_samples": 128
   },
-  "case_settings_scope": "药水案例输入；新对象按实际材质、相机和渲染需要配置。",
+  "case_settings_scope": "Potion test case inputs; new objects configure parameters per actual materials, camera, and render requirements.",
   "render": {
     "engine": "CYCLES",
     "camera": "Camera",
@@ -108,5 +108,5 @@
     "mouth_cross_family_current": 0,
     "aseprite_visible_roundtrip_matches": true
   },
-  "scope": "第三阶段 Shader 底稿；不代表完成 Aseprite 粗稿、精修或最终交付。"
+  "scope": "Phase 3 Shader base; does not represent completed Aseprite rough drafting, refinement, or final delivery."
 }

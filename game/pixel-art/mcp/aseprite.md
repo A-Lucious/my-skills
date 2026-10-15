@@ -1,29 +1,29 @@
 # Aseprite MCP
 
-优先调用已连接的 `aseprite` 工具；未加载时用 [mcp_client.py](../scripts/mcp_client.py)连接同一项目服务器。以下命令以技能已复制到项目 `.agents/skills/pixel-art/` 为例，在项目根执行。若技能放在其他位置，替换命令中的技能路径并设置 `PIXEL_PROJECT_ROOT` 为目标项目绝对路径；安装器会将该路径写入项目 MCP 配置。
+Prioritize invoking the connected `aseprite` tool; when not loaded, use [mcp_client.py](../scripts/mcp_client.py) to connect to the same project server. The commands below assume the skill is copied to the project's `.agents/skills/pixel-art/` and executed from the project root. If located elsewhere, substitute the skill path and set `PIXEL_PROJECT_ROOT` to the absolute path of the target project; the installer writes this path into project MCP configurations.
 
-## 启动与诊断
+## Startup and Diagnostics
 
-开始作业先 `health_check`，确认 `ok=true` 和工作区为项目 `Test Workspace/`。若当前已连接服务仍使用旧目录，改用下述 `mcp_client.py` 启动新连接，确认工作区正确后再写入；不得在旧目录继续制作。连接或执行异常时运行：
+Begin tasks with `health_check`, confirming `ok=true` and that the workspace is set to project `Test Workspace/`. If the currently connected server still targets an old directory, launch a new connection with `mcp_client.py` as shown below, verify the correct workspace, and only then proceed with writes; do not continue production in an outdated directory. For connection or execution issues, run:
 
 ```bash
 python3 .agents/skills/pixel-art/scripts/mcp_client.py doctor
 ```
 
-`doctor` 建立真实 MCP session，检查 health、Lua 与临时源稿/PNG 导出。安装和项目路径迁移分别使用：
+`doctor` establishes a live MCP session, checking health, Lua functionality, and temporary source/PNG exports. For installation and project path migration, use:
 
 ```bash
 python3 .agents/skills/pixel-art/scripts/install_mcp.py
 python3 .agents/skills/pixel-art/scripts/install_mcp.py --configure-only
 ```
 
-安装从 技能内的 `mcp/aseprite-mcp.lock.json` 恢复固定提交并执行 `uv sync --locked`；已有 clone 提交不符时退出。升级需显式更新 lock 并验证。`--configure-only` 只更新项目配置。
+Installation restores the pinned commit from `mcp/aseprite-mcp.lock.json` within the skill and runs `uv sync --locked`; it aborts if an existing clone commit mismatches. Upgrades require explicitly updating the lock and verifying. `--configure-only` updates project configuration only.
 
-[start_mcp.sh](../scripts/start_mcp.sh)启动 stdio 服务，stdout 专供协议；自动定位项目虚拟环境与本机 Aseprite。自定义安装位置在 `.codex/config.toml` 的 `[mcp_servers.aseprite.env]` 设置 `ASEPRITE_PATH` 为可执行文件路径。项目受信任并重载 MCP 后读取注册；上游工具说明位于 `tools/aseprite-mcp/docs/TOOLS.md`。
+[start_mcp.sh](../scripts/start_mcp.sh) launches the stdio server, keeping stdout reserved exclusively for protocol messages; it automatically locates the project virtual environment and local Aseprite executable. For custom installations, set `ASEPRITE_PATH` under `[mcp_servers.aseprite.env]` in `.codex/config.toml`. Server registration is read once the project is trusted and MCP is reloaded; upstream tool documentation is at `tools/aseprite-mcp/docs/TOOLS.md`.
 
-## Schema 与写入约定
+## Schema and Writing Conventions
 
-按实时 schema 组织参数与批处理支持项：
+Structure arguments and batch operations according to live schemas:
 
 ```bash
 python3 .agents/skills/pixel-art/scripts/mcp_client.py tools
@@ -31,27 +31,27 @@ python3 .agents/skills/pixel-art/scripts/mcp_client.py tools draw_pixel_map
 python3 .agents/skills/pixel-art/scripts/mcp_client.py tools apply_operations
 ```
 
-- 文件参数相对 `Test Workspace/`，例如 `source/<id>-v01.aseprite`；路径不含绝对路径、`Test Workspace/` 前缀或 `..`。
-- 坐标从 0 起，帧与数字层索引从 1 起；每次写像素明确 `layer` 和 `frame`。
-- `draw_pixel_map` 的 rows 等长，每字一像素，`.` 保留原像素。擦除使用 `clear_layer` 或选择范围工具；全透明 map 是 no-op，跳过。现有版本单次上限 65,536 个实际绘制像素，大图可拆水平带并保留 y 偏移。
-  **重绘已有源稿前必须先 `clear_layer`（或 `create_sprite --overwrite` 重建）**：`.` 是"保持原像素"而不是擦除，反复重绘会在新形状之外留下上一版的像素，且工具仍报 `ok`。症状是 `assess_sprite` 的 `drawn_pixels` 大于像素图里非 `.` 字符数，多出来的颜色不属于当前 legend。已实测：32×32 齿轮重绘后残留 64 个旧像素。
-- `apply_operations` 的单项为 `{"op":"add_layer","args":{"name":"subject"}}`，先 `dry_run=true`。`draw_pixel_map` 独立调用。
-- `set_palette` 现有版本最多 256 色；RGB 临摹的完整观察白名单另存。
-- `shade_region_by_light`、`shift_along_ramp`、`outline_smart` 使用单个材料的有序 ramp。近似着色明确区域、`base_color` 与小 `tolerance`，遮挡关系另行检查。`assess_sprite` 可用素材完整色集检查覆盖，明度顺序提示按材料解释。
-- 插帧/复制后读取 `newFrame`、`renumbered_from` 并更新后续帧编号。
+- File paths are relative to `Test Workspace/`, e.g., `source/<id>-v01.aseprite`; paths must not include absolute paths, `Test Workspace/` prefixes, or `..`.
+- Coordinates start at 0; frames and numeric layer indices start at 1. Explicitly designate `layer` and `frame` on every pixel write.
+- `draw_pixel_map` rows must be equal in length, one character per pixel; `.` preserves the underlying pixel. Use `clear_layer` or selection tools for erasing; all-transparent maps are no-ops and should be skipped. The current version caps single calls at 65,536 drawn pixels; large sprites can be split into horizontal strips retaining the y offset.
+  **Always `clear_layer` (or recreate with `create_sprite --overwrite`) before redrawing an existing source**: `.` preserves original pixels rather than clearing them. Successive repainting without clearing leaves leftover pixels outside new shapes while the tool still returns `ok`. The symptom is `drawn_pixels` in `assess_sprite` exceeding non-`.` characters in the map, with extraneous colors outside the legend. Verified test: a 32x32 gear repainted without clearing retained 64 obsolete pixels.
+- `apply_operations` items take the form `{"op":"add_layer","args":{"name":"subject"}}`; test with `dry_run=true` first. Call `draw_pixel_map` independently.
+- `set_palette` currently supports up to 256 colors; full observation whitelists for RGB tracing should be stored separately.
+- `shade_region_by_light`, `shift_along_ramp`, and `outline_smart` operate on ordered ramps for a single material. For approximate shading, specify clear regions, `base_color`, and a small `tolerance`; check occlusion independently. `assess_sprite` verifies coverage against complete palette sets, and lightness order hints must be interpreted per material.
+- Read `newFrame` and `renumbered_from` after frame insertion/duplication, updating subsequent frame indices accordingly.
 
-## 单次调用与预览
+## Single Calls and Previews
 
-第四步直接导入第三步已确认的原生 PNG 作为底稿，再在 Aseprite 中修改为粗稿。以下相对路径均位于 `Test Workspace/`；`input_image` 使用第三步 `shader-manifest.json` 中 `outputs.pixel` 对应的实际文件。通过 `get_sprite_info` 核对尺寸及实际图层，保留未修改的底稿参考层，复制为粗稿工作层后，通过 Aseprite MCP 整理材料颜色、轮廓、关键识别点和大明暗；保存修改后源稿及底稿/粗稿对照。导入成功仅完成底稿准备，粗稿完成还须有实际像素修改和检查记录。
+Phase 4 imports the confirmed Phase 3 native PNG directly as a base, then modifies it into a rough draft in Aseprite. Relative paths below are within `Test Workspace/`; `input_image` uses the actual file corresponding to `outputs.pixel` in Phase 3's `shader-manifest.json`. Verify dimensions and actual layers with `get_sprite_info`. Retain the untouched base as a reference layer, duplicate it into an active draft layer, and refine material colors, silhouettes, key landmarks, and major value masses via Aseprite MCP. Save the modified source along with base-to-draft comparison previews. Successful import completes base preparation only; completing the rough draft requires actual pixel edits and inspection logs.
 
 ```bash
 python3 .agents/skills/pixel-art/scripts/mcp_client.py call import_image \
   '{"input_image":"<task-id>/shader-v01/pixel-base-v01.png","output":"source/<id>-v01.aseprite"}'
 ```
 
-调色使用任务声明的固定色系。需要整体映射时，可先 `set_palette` 指定选定颜色，再 `set_color_mode` 使用 `palette_source="keep"`、`dithering="none"` 转为 indexed，必要时转回 RGB 后细化；映射前后核对材料分区、alpha 和孔洞。`quantize_palette` 从图像推导颜色，不能代替锁定的生产色板。颜色混淆时按部件/材质区域通过 MCP 局部修正。
+Tuning colors uses the fixed families declared for the task. For global mapping, call `set_palette` with the target colors, then use `set_color_mode` with `palette_source="keep"` and `dithering="none"` to convert to indexed, converting back to RGB for detail work if needed; verify material zoning, alpha, and apertures before and after mapping. `quantize_palette` derives colors from images and cannot replace locked production palettes. For color bleed or ambiguity, apply localized MCP corrections per component/material region.
 
-下面的 `create_sprite`/`draw_pixel_map` 示例用于局部绘制或用户明确指定的其他粗稿方式，不作为绕过底稿导入的默认入口：
+The `create_sprite`/`draw_pixel_map` examples below are for localized drafting or user-specified alternative blockout methods, not default entrypoints that bypass base import:
 
 ```bash
 python3 .agents/skills/pixel-art/scripts/mcp_client.py call create_sprite \
@@ -63,7 +63,7 @@ python3 .agents/skills/pixel-art/scripts/mcp_client.py call render_preview \
   --save-image previews/torch-review.png
 ```
 
-参数文件为 JSON object，复杂参数优先用文件。像素 map 示例：
+Argument files are JSON objects; prefer files for complex arguments. Example pixel map:
 
 ```json
 {
@@ -74,11 +74,11 @@ python3 .agents/skills/pixel-art/scripts/mcp_client.py call render_preview \
 }
 ```
 
-`--save-image` 原样保存服务器返回 PNG 到 `Test Workspace/previews/`，随后用 `view_image` 查看。
+`--save-image` writes the server's returned PNG directly to `Test Workspace/previews/`, viewable via `view_image`.
 
-## 顺序作业与续跑
+## Sequential Jobs and Resumption
 
-作业文件使用 `tool/arguments`，与 `apply_operations` 的 `op/args` 分开：
+Job files use `tool/arguments`, distinct from `apply_operations`'s `op/args`:
 
 ```json
 {
@@ -95,20 +95,20 @@ python3 .agents/skills/pixel-art/scripts/mcp_client.py run "Test Workspace/repor
   --log-name demo.mcp-log.json
 ```
 
-客户端先校验 schema，逐项 `tools/call`，首个失败后停止；日志存 `Test Workspace/reports/`。`expect` 支持嵌套字段，字段取自实际结果。作业非事务，部分修改可能已生效。
+The client validates schemas first, calls `tools/call` step-by-step, and halts at the first failure; logs are stored in `Test Workspace/reports/`. `expect` supports nested fields matched against actual results. Jobs are non-transactional; partial modifications may have been applied.
 
-失败或中断后先读日志、`get_sprite_info` 和实际预览，确认源稿状态，再仅续跑未完成步骤。需要事务时使用 `apply_operations` 的支持操作。`extract_palette` 超过 `max_colors` 表示精确颜色过多，可诊断来源或压缩微差。
+Following failures or interruptions, inspect logs, `get_sprite_info`, and actual previews to confirm source state, resuming only uncompleted steps. For transactional guarantees, use supported operations in `apply_operations`. If `extract_palette` exceeds `max_colors`, too many distinct colors are present; diagnose the source or compress subtle variations.
 
-## 辅助脚本
+## Helper Scripts
 
-| 脚本 | 使用时机 |
+| Script | When to Use |
 |---|---|
-| [prepare_reference_crops.py](../scripts/prepare_reference_crops.py) | 传入 `--manifest` 裁切清单与 `--task-id`，原图复制进工作区，经 `import_image → crop_sprite → export_png` 制作局部参考；不写入公开技能库；重建可传 `--overwrite` |
-| [make_style_sample.py](../scripts/make_style_sample.py) | 重建已有四帧提灯演示，生成作业并交 MCP 执行；样例使用其历史配色，重建可传 `--overwrite` |
-| [reference_study.py](../scripts/reference_study.py) | 历史严格转录工具，读取来源与 manifest 后从空白生成作业；仅用户明确要求此转录方式时使用，不能替代默认 Blender 底稿导入 |
-| [compare_reference_study.py](../scripts/compare_reference_study.py) | 比较实际 MCP 导出与该轮冻结参照，输出逐对象报告 |
+| [prepare_reference_crops.py](../scripts/prepare_reference_crops.py) | Given `--manifest` and `--task-id`, copies original images to the workspace, generating localized crops via `import_image -> crop_sprite -> export_png`; never written to public skill repos; pass `--overwrite` to rebuild. |
+| [make_style_sample.py](../scripts/make_style_sample.py) | Rebuilds the 4-frame lantern sample, generating jobs for MCP execution; uses historical colors; pass `--overwrite` to rebuild. |
+| [reference_study.py](../scripts/reference_study.py) | Historical strict transcription tool that reads sources and manifests to generate jobs from scratch; run only when explicitly requested; cannot replace standard Blender base imports. |
+| [compare_reference_study.py](../scripts/compare_reference_study.py) | Compares actual MCP exports against frozen iteration references, outputting per-asset reports. |
 
-临摹工具示例，manifest 定义见[研究规范](../styles/parchment-fantasy/REFERENCE-STUDY.md)：
+Example invocation for reference study (manifest definition in [Study Specification](../styles/parchment-fantasy/REFERENCE-STUDY.md)):
 
 ```bash
 python3 .agents/skills/pixel-art/scripts/reference_study.py \
@@ -118,4 +118,4 @@ python3 .agents/skills/pixel-art/scripts/mcp_client.py run \
 python3 .agents/skills/pixel-art/scripts/compare_reference_study.py --iteration <new-id>
 ```
 
-研究作业按[制作流程](../workflow.md)分阶段执行；这里的 `structure/light/export` 作业属于像素阶段，不能代替前两阶段的 Blender 建模与光照渲染，默认须先完成它们，除非用户提示明确授权省略。比对在导出后运行。`--assets` 用于局部诊断，`--candidate-dir` 可指定当前任务的候选 PNG 目录；每轮使用新 ID 保存证据。
+Execute study jobs by phases matching the [Production Pipeline](../workflow.md); `structure/light/export` jobs belong to the pixel phase and cannot replace Phases 1 and 2 (Blender modeling and lighting), which must be completed first unless explicitly waived by user prompt. Comparisons run post-export. `--assets` allows localized diagnosis, and `--candidate-dir` designates current task candidate PNG folders; save verification artifacts under a new ID for each round.

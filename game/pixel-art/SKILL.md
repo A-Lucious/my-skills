@@ -1,60 +1,60 @@
 ---
 name: pixel-art
-description: "制作、修改和导出像素素材与精灵动画。按分类和风格规范，以 Blender MCP 建模、打光，调用风格目录中的固定 Pixel Shader 并提前展示效果，再经 Aseprite MCP 导入、精修和导出。"
+description: "Create, modify, and export pixel art assets and sprite animations. Follow category and style specs to model and light in Blender MCP, run fixed Pixel Shaders from style directories with advance previews, and import, polish, and export via Aseprite MCP."
 ---
 
 # Pixel Art
 
-从用户需求确定对象、用途和交付目标，将风格与分类规范组成任务输入，再执行制作流程。用户明确指定的风格、简化和评审方式优先于默认值。
+Determine the subject, purpose, and delivery goals from user requirements, assemble style and category specifications into task inputs, and execute the production pipeline. User-specified styles, simplifications, and review modes take precedence over defaults.
 
-## 1. 风格与内容规范
+## 1. Style and Content Specifications
 
-先读 [通用规范](styles/COMMON.md)。默认风格为 `parchment-fantasy`，读取其 [STYLE.md](styles/parchment-fantasy/STYLE.md)、[palette.json](styles/parchment-fantasy/palette.json) 和[参考使用规则](styles/parchment-fantasy/reference-library/INDEX.md)。需要图像参照时，从当前任务提供且可使用的素材中选择，公开包不附第三方游戏图像。其他风格从[风格库](styles/index.md)选择。
+Read [Common Specifications](styles/COMMON.md) first. The default style is `parchment-fantasy`; read its [STYLE.md](styles/parchment-fantasy/STYLE.md), [palette.json](styles/parchment-fantasy/palette.json), and [Reference Usage Rules](styles/parchment-fantasy/reference-library/INDEX.md). When visual references are needed, use only permissible references provided for the current task; public packages do not include third-party game assets. Select other styles from the [Style Library](styles/index.md).
 
-按任务读取对应分类；复合素材以主要对象为入口，再补相关分类：
+Read the corresponding category specification for the task; for composite assets, start from the primary subject and supplement with related specs:
 
-| 用户任务 | 分类规范 |
+| User Task | Category Specification |
 |---|---|
-| 头像、全身角色、生物 | [人物画像](specs/characters.md) |
-| 事件插图、环境、战斗画面 | [场景](specs/scenes.md) |
-| 道具、装备、图标、纸框、装饰 | [物品](specs/props.md) |
-| 房屋、遗迹、独立建筑 | [建筑](specs/buildings.md) |
+| Portraits, full-body characters, creatures | [Characters](specs/characters.md) |
+| Event illustrations, environments, battle scenes | [Scenes](specs/scenes.md) |
+| Props, equipment, icons, paper frames, decorations | [Props](specs/props.md) |
+| Houses, ruins, standalone buildings | [Buildings](specs/buildings.md) |
 
-所有任务读取[光照规范](specs/lighting.md)，需要表面纹理时补读[纹理规范](specs/texture.md)。所有任务按[交付规范](specs/production.md)建立任务卡；用户要求临摹或校准时，另读[参考研究规范](styles/parchment-fantasy/REFERENCE-STUDY.md)。
+All tasks read the [Lighting Specification](specs/lighting.md); read the [Texture Specification](specs/texture.md) when surface textures are needed. Establish a task card for every task following the [Production Specification](specs/production.md); when tracing or calibration is requested, also read the [Reference Study Specification](styles/parchment-fantasy/REFERENCE-STUDY.md).
 
-## 2. 制作流程
+## 2. Production Pipeline
 
-### 资产类型通道划分（工作流分流）
+### Asset Type Track Routing (Workflow Branching)
 
-不要对所有素材搞“一刀切”，按资产特性划分通道：
+Avoid a one-size-fits-all approach; route assets according to their inherent characteristics:
 
-- **A 轨（硬表面与空间资产）：** 建筑、机械、箱体、空间道具。继续严格走 3D 建模 → 真实射线/光照 → 底稿精修，充分利用 3D 的透视红利。
-- **B 轨（有机与装饰类 UI 资产）：** 卷轴、羊皮纸框、丝带、植物花环、平面图标。这类素材的核心魅力在于“手绘夸张感”与“造型韵律”，允许两种执行策略：
-  - **策略 1（纯 2D 手绘起稿通道）：** 允许直接在 Aseprite 中以 2D 剪影起稿（Silhouette Blockout），用经典的 2D 像素大色块切出非对称撕边、卷筒厚度和手绘弧度，直接规避 3D 的呆板。
-  - **策略 2（若必须走 3D，必须是有机雕刻/曲面 3D）：** 禁止使用死板的立方体拼凑。
+- **Track A (Hard-Surface & Spatial Assets):** Buildings, machinery, chests, spatial props. Strictly adhere to 3D modeling -> real ray/lighting -> base polish, taking full advantage of 3D perspective accuracy.
+- **Track B (Organic & Decorative UI Assets):** Scrolls, parchment frames, ribbons, plant wreaths, flat icons. The core appeal of these assets lies in hand-drawn exaggeration and rhythmic shape appeal. Two execution strategies are permitted:
+  - **Strategy 1 (Pure 2D Hand-drawn Blockout Track):** Block out silhouettes directly in 2D within Aseprite (Silhouette Blockout), cutting out asymmetric torn edges, scroll roll thickness, and hand-drawn curves using classic 2D pixel color blocks to avoid rigid 3D artifacts.
+  - **Strategy 2 (Organic Sculpt / Curved 3D if 3D is required):** Rigid box-modeling is strictly prohibited.
 
-### 执行规则
+### Execution Rules
 
-创建、修改或导出素材时，A 轨或选择 B 轨策略 2 时必须依次执行 [workflow.md](workflow.md) 的六个阶段：**1：3D 与相机 → 2：光照渲染 → 3：风格 Pixel Shader 与效果预览 → 4：Aseprite 像素粗稿 → 5：像素簇、细节与纹理 → 6：最终效果检查**。B 轨选择策略 1 时，在任务卡注明采用纯 2D 手绘起稿通道，直接进入第四步的 Aseprite 剪影起稿，保留实际产物与检查记录。
+When creating, modifying, or exporting assets in Track A or Track B Strategy 2, execute the six phases in [workflow.md](workflow.md) sequentially: **1: 3D & Camera -> 2: Lighting & Render -> 3: Style Pixel Shader & Advance Preview -> 4: Aseprite Rough Draft -> 5: Pixel Clusters, Details & Texture -> 6: Final Visual Check**. When Track B Strategy 1 is selected, record the pure 2D blockout track in the task card and proceed directly to Phase 4 for Aseprite silhouette blockout, retaining artifacts and check records.
 
-Pixel Shader 按风格固定为 `styles/<style-id>/pixel_shader.py`，通过 Blender MCP 在 Blender 内直接加载执行；不逐任务另写算法，也不跨风格套用。Parchment Fantasy 实现与调用见 [Pixel Shader](styles/parchment-fantasy/PIXEL-SHADER.md)。先展示当前已确认视角下的 Shader 效果，完成该环节评审后再进入第四步。
+The Pixel Shader is fixed per style as `styles/<style-id>/pixel_shader.py` and executed directly inside Blender via Blender MCP. Do not invent per-task algorithms or cross-apply shaders between styles. For Parchment Fantasy implementation and invocation, see [Pixel Shader](styles/parchment-fantasy/PIXEL-SHADER.md). Present the Shader preview under the confirmed camera angle and complete review before proceeding to Phase 4.
 
-羊皮纸奇幻当前技术基准为 Shader `1.3.0`、色板 `4.3`、原生 `64×64`：保留真实显示光影，支持实际材质到色系的分区，防止瓶口等部件串色。基准参数与阶段范围见 [Shader 基准](styles/parchment-fantasy/PIXEL-SHADER.md#技术基准)；新对象仍按第三步生成并展示本次效果。
+The current technical baseline for Parchment Fantasy is Shader `1.3.0`, Palette `4.3`, and native `64x64`: preserves real display lighting, supports material-to-family partitioning, and prevents cross-color bleeding on parts such as bottle necks. See [Shader Baseline](styles/parchment-fantasy/PIXEL-SHADER.md#technical-baseline) for baseline parameters and ranges; generate and showcase the current effect for each new object in Phase 3.
 
-仅当用户提示明确说明不需要某个阶段时，才可额外省略该阶段，并在任务卡引用用户原话、标明省略范围。除 B 轨明确策略外，不可擅自省略 3D 或光照。用户指定合并评审或一次试画只改变评审方式，不授权省略制作阶段。
+Phases may be omitted only when explicitly stated by user prompts; cite verbatim user text and define the omitted scope in the task card. Except for the explicit Track B strategy, do not omit 3D or lighting unilaterally. Consolidated reviews or one-shot trials modify review methods only; they do not authorize skipping production phases.
 
-阶段完成以实际产物、上游对照和视觉自检为依据，不能只凭文件存在或工具返回成功。A 轨 3D 指导须包含实际空间数据；第三步生成并展示 Blender 像素结果，第四步直接将第三步已确认的同一版原生 PNG 经 Aseprite MCP 导入作为底稿，再在 Aseprite 中修改底稿，形成像素粗稿。保留导入底稿与修改后粗稿的对照，单纯导入或另存不算粗稿制作完成。技术检查、Agent 视觉自检与用户验收分别记录，Agent 不得代填用户“通过”。
+Phase completion is validated through real artifacts, upstream comparisons, and visual self-checks, not mere file existence or tool return status. Track A 3D guidance must include real spatial data; Phase 3 generates and presents Blender pixel outputs, and Phase 4 imports the identical confirmed native PNG via Aseprite MCP as the base, modifying it in Aseprite into a rough draft. Maintain a side-by-side comparison between the imported base and the modified draft; importing or resaving alone does not constitute a completed rough draft. Technical checks, agent visual self-checks, and user acceptance are logged separately; agents must never fill in user "approved" on their behalf.
 
-## 3. MCP 操作
+## 3. MCP Operations
 
-- [Blender MCP](mcp/blender.md)：3D 草稿、相机、照明、指导数据及像素底稿直出。
-- [Aseprite MCP](mcp/aseprite.md)：底稿导入，以及其后的像素创建、修改、缩放、调色、合成与正式导出，工作区为项目 `Test Workspace/`。
-- 脚本负责数据/JSON 编排、只读分析、原字节保存与复制；像素写入和导出由真实 MCP 调用完成。
+- [Blender MCP](mcp/blender.md): 3D blockout, camera, lighting, guidance data, and direct native pixel base export.
+- [Aseprite MCP](mcp/aseprite.md): Base import, followed by pixel creation, editing, scaling, color tuning, compositing, and formal exports, with the workspace rooted in project `Test Workspace/`.
+- Scripts handle data/JSON orchestration, read-only analysis, byte-level saving, and copying; pixel writing and exports are performed via real MCP calls.
 
-所有生成物（含 Blender 文件、任务卡、临时脚本、调用日志、阶段预览与备份）集中放在 `Test Workspace/`，按任务组织。技能参考库默认只读；仅用户明确要求维护参考库时写入。交付后清理不再需要的临时文件、旧迭代和备份，保留最终素材、可编辑源稿与必要预览；游戏接入按用户任务另行执行。
+All generated files (including Blender files, task cards, temporary scripts, invocation logs, phase previews, and backups) are centralized under `Test Workspace/` organized by task. The skill reference library is read-only by default; write to it only upon explicit user instruction. After delivery, clean up intermediate files, obsolete iterations, and backups, retaining final assets, editable sources, and essential previews. Game integration proceeds as a separate step per user request.
 
-`references/` 保存自制技术案例：[木箱纹理](references/cases/wooden-chest/case.md)与[药水瓶 Shader 底稿](references/cases/health-potion/case.md)。第三方图像与其临摹稿不随技能分发；来源说明见 [NOTICE.md](NOTICE.md)。分类规范提供设计要点，具体尺寸、采样和纹理参数以本次任务及对应案例为依据。
+`references/` houses in-house technical cases: [Wooden Chest Texture](references/cases/wooden-chest/case.md) and [Potion Bottle Shader Base](references/cases/health-potion/case.md). Third-party images and tracing studies are not distributed with the skill; see [NOTICE.md](NOTICE.md) for provenance notes. Category specifications provide design principles; specific dimensions, sampling, and texture parameters follow the current task and reference cases.
 
-## 4. 公开分发
+## 4. Public Distribution
 
-公开案例只保留任务所需的技术信息与相对路径，不包含个人身份、账号、姓名、联系方式、本机绝对路径、生成日期、验收日期或私人对话原文。日期形种子不作为公开参数展示；技术版本号、动画时长可正常保留。本地任务卡可保留制作记录，发布案例时另行脱敏，不把日志和缓存打包。风格来源及第三方素材边界见 [NOTICE.md](NOTICE.md)。
+Public cases retain only technical data and relative paths required for the task. They must exclude personal identity, accounts, names, contact information, local absolute paths, creation dates, sign-off timestamps, and raw private conversation text. Date-like seeds must not be displayed as public parameters; technical version numbers and animation durations may be retained. Local task cards may keep production records, which must be sanitized before publishing without bundling logs or caches. See [NOTICE.md](NOTICE.md) for style provenance and third-party material boundaries.

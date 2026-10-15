@@ -1,27 +1,27 @@
-# 光照规范
+# Lighting Specification
 
-## 光照设定
+## Lighting Setup
 
-任务卡写明主光的屏幕方向、高度和软硬、环境光、主要遮挡物与受影面。采用当前风格默认值；无默认值时选能说明形体的单一主光并记录。额外光源记录位置、范围和相对强度。平涂或剪影同样完成 workflow 的 Blender 光照渲染，保持目标视觉风格；仅当用户提示明确要求不做光照时，才可声明“无体积光照”并引用原话。
+The task card must specify key light screen direction, elevation, softness/hardness, ambient fill, primary occluders, and shadow receivers. Use style defaults; if unspecified, choose a single key light that clarifies form and record it. Record secondary lights by position, range, and relative intensity. Flat or silhouette assets must also complete Blender lighting renders in the workflow while preserving target aesthetics; only when prompts explicitly waive lighting may "no volumetric lighting" be recorded with verbatim quotes.
 
-3D 指导与像素稿使用一致的光向及坐标依据。已有法线和遮挡信号时据此组织大明暗；像素离散化后的边界仍按形体整理。
+3D guidance and pixel drafts must share identical light directions and coordinate frames. When normals and occlusion signals exist, structure major values accordingly; boundaries resulting from pixel discretization must still follow anatomical forms.
 
-Shader 预览比较须对齐源渲染的 AgX/Look/曝光和输出色彩空间；不能拿 AgX 原图与经过另一种显示转换、提亮曲线的像素稿宣称明暗一致。检查灰度及受光/背光/高光代表点的实际亮度关系；分阶可合并连续值，不应凭映射新增原图没有的深黑面或明显放大对比。先修正色彩映射，再考虑是否需要改动真实灯光。
+Shader preview comparisons must align with the source render's AgX/Look/exposure and output color space; do not compare raw AgX renders against pixel drafts subjected to differing display transforms or brightening curves while claiming value consistency. Inspect greyscale values and representative pixel samples across illuminated, shadow, and specular points; tonal quantization may merge continuous values but must not introduce pitch-black planes absent from the original or exaggerate contrast. Correct color mapping before modifying actual scene lights.
 
-## 明暗关系
+## Value Relationships
 
-| 色块作用 | 成立条件 |
+| Role | Success Criteria |
 |---|---|
-| 固有色 | 表达材料身份，与照明明度分开判断 |
-| 形体阴影 | 随面转离光源而变化，边界跟随形体转折 |
-| 遮挡投影 | 能指出遮挡物、受影面与光向，影形贴合承接面 |
-| 接触暗部 | 集中在贴合、缝隙和狭窄遮挡处，离开接触处减弱 |
-| 受光面与高光 | 大亮面表达朝向，局部高光符合材质反射 |
+| Local Color (Albedo) | Communicates material identity, evaluated independently of illumination level. |
+| Form Shadow | Shifts as surfaces turn away from light; boundaries trace geometric turning edges. |
+| Cast Shadow | Clearly traces occluder, receiving surface, and light direction; shape conforms to receiver plane. |
+| Contact Shadow | Concentrated along joints, seams, and tight occlusions; diminishes away from contact points. |
+| Illuminated Face & Highlight | Broad illuminated planes indicate surface orientation; localized specular fits material reflectivity. |
 
-布料和皮革使用较宽、克制的亮面；金属和宝石可用窄而硬的亮面。每个材料的大面在灰度下仍能表达体积，深浅块有明确用途。地面影以可见的受影面为依据；画布保留设计所需的完整投影。
+Cloth and leather use broad, restrained illuminated planes; metals and gems use sharp, narrow highlights. Major planes for every material must express volume in greyscale, with light and dark masses serving clear semantic purposes. Ground shadows require visible receiving surfaces; canvas margins must preserve design-critical cast shadows in full.
 
-## 最终明暗复核
+## Final Value Re-Check
 
-大明暗在粗稿阶段成立，细节完成后再复核形体、投影、接触暗部和高光，修复被纹理切碎或提亮的区域。保留正确关系，具体问题与修正写入任务记录，并查看修改后的预览。
+Major values established during the rough draft phase must be re-checked after detail passes across forms, cast shadows, contact shadows, and highlights, repairing areas fragmented or washed out by textures. Maintain valid relationships, log defects and corrections in task records, and inspect updated previews.
 
-轮廓、姿态、遮挡物或发光源变动后重检受影响的明暗。动画各帧共享世界光源，随姿态调整阴影；自发光对象同时检查对周边的照明。平涂素材检查色块与遮挡的可读性。
+Re-evaluate affected lighting whenever silhouettes, poses, occluders, or light emitters change. Animation frames share world light sources, adapting shadows to poses; emissive objects must also be checked for localized illumination on neighboring surfaces. Flat assets verify readability of color blocks and occlusions.

@@ -1,18 +1,18 @@
 interface:
   display_name: "Pixel Art"
-  short_description: "按人物、场景、物品和建筑规范，经 Blender 与 Aseprite 制作像素素材"
-  default_prompt: "使用 $pixel-art，根据风格和分类规范执行六步制作流程；Blender 建模与光照后，在第三步调用风格目录的固定 Pixel Shader 并提前展示效果，再进入 Aseprite 粗稿、精修与检查。"
+  short_description: "Create pixel art via Blender and Aseprite following character, scene, prop, and building specifications"
+  default_prompt: "Using $pixel-art, execute the six-step production pipeline based on style and category specifications. After Blender modeling and lighting, invoke the fixed Pixel Shader from the style directory in Step 3 to preview the result in advance, then proceed to Aseprite rough drafting, refinement, and inspection."
 
 dependencies:
   tools:
     - type: "mcp"
       value: "aseprite"
-      description: "项目内 Aseprite stdio MCP，负责底稿导入、像素精修与正式导出"
+      description: "In-project Aseprite stdio MCP responsible for base import, pixel refinement, and formal export"
       transport: "stdio"
 
     - type: "mcp"
       value: "blender"
-      description: "Blender Lab stdio MCP，提供 3D 草稿、渲染指导与像素底稿直出"
+      description: "Blender Lab stdio MCP providing 3D blockout, render guidance, and direct pixel base export"
       transport: "stdio"
 
 policy:

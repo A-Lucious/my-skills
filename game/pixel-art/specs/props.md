@@ -1,22 +1,22 @@
-# 物品
+# Props
 
-适用于道具、装备和物品图标，也包含纸框、属性符号与界面装饰。
+Applies to items, equipment, and prop icons, as well as paper frames, attribute symbols, and UI decorations.
 
-## 任务输入
+## Task Inputs
 
-用途、部件及连接/开合关系、关键识别特征、材料、观察角度、允许简化和目标显示。容器明确开口、内腔与边厚；装备明确握持或挂接部位。
+Purpose, components and joint/opening relationships, key landmarks, materials, viewing angle, allowable simplifications, and display target. Containers specify opening, internal cavity, and rim thickness; equipment specifies grip or attachment points.
 
-## 设计要点
+## Design Principles
 
-- 立体道具先表达正侧面、厚度、开口与部件交叠；3D 草稿保留画面中可见的结构。曲面、透明体和机械结构按各自形体组织。
-- 平面符号以语义、孔洞和负空间为主；纸框以边界、台阶角、内容留白和轻重为主；装饰明确所在位置及功能。
-- 书区分封面、书脊和页块；箱区分盖、腔、锁扣和金属带；皮袋区分袋口、束口、褶皱与腹部转面。
-- 金属、宝石与皮革保持不同的反光形状；局部亮点服务材料与面朝向。
-- 武器明确主体、护手/连接件、握柄与配重的比例和锚点，检查连接轴线或设计偏置、刃宽变化、收尖与握持部位。弯曲、非对称或特殊连接按本次设计记录，不强制所有武器共轴对称。像素稿逐项对照 3D 结构；“大剑”等身份特征不能在转译时丢失。
-- 局部修正明确开放区域与保护区域。仅改纹理时保护已确认轮廓、关键部件和光照边界，使用可单独检查的修改层。
+- 3D props establish front/side faces, thickness, openings, and overlapping components first; 3D blockout preserves visible structural elements. Organize curved surfaces, transparent volumes, and mechanical assemblies according to their physical shapes.
+- Flat symbols prioritize semantic meaning, apertures, and negative space; paper frames prioritize outer borders, stepped corners, content margins, and visual weight; decorations specify placement and function.
+- Books distinguish cover, spine, and text block; chests distinguish lid, cavity, latch, and metal bands; leather pouches distinguish opening, drawstring, folds, and belly curvature.
+- Metals, gems, and leathers maintain distinct specular shapes; localized specular highlights serve material identity and surface orientation.
+- Weapons define proportions and anchors across blade/head, guard/joint, hilt, and pommel, inspecting connection axes or design offsets, blade taper, tips, and grip zones. Curved, asymmetrical, or specialized joints are logged per design, without forcing universal axial symmetry. Pixel drafts cross-check 3D structure item by item; identity landmarks such as "greatsword" must not be lost in translation.
+- Localized edits clearly define open zones and protected zones. When modifying textures only, protect confirmed silhouettes, key components, and lighting boundaries, working on isolated layers for clear inspection.
 
-## 检查重点与参照
+## Inspection Checklist & References
 
-原生尺寸下用途与部件关系清楚，孔洞和开口可读；材料可区分；完整投影与留白符合展示要求。
+At native resolution, function and component relationships are readable, apertures and openings are legible, materials are distinguishable, and complete cast shadows and margins satisfy display requirements.
 
-参照选择见[参考使用规则](../styles/parchment-fantasy/reference-library/INDEX.md)。[木箱案例](../references/cases/wooden-chest/case.md)提供小型木物体的技术记录；该例实心箱腔仅为对象级简化，不作为其他任务的默认值。
+For reference selection, see [Reference Usage Rules](../styles/parchment-fantasy/reference-library/INDEX.md). The [Wooden Chest Case](../references/cases/wooden-chest/case.md) provides technical logs for small wooden objects; its solid interior is an asset-level simplification and must not be treated as a default for other tasks.

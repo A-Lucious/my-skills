@@ -1,22 +1,22 @@
-# 像素簇与材质纹理
+# Pixel Clusters and Material Textures
 
-纹理建立在清楚的轮廓、材料分区和大明暗之上，按材料需要使用。
+Textures build upon clear silhouettes, material zoning, and major values, applied only as demanded by the material.
 
-## 区域与色阶
+## Zones and Tonal Ramps
 
-- 使用材料/部件分区、面朝向、光照分组和工作色阶；仅在用户明确授权省略 3D 阶段时，以明确规划的像素区域代替 3D 分区。
-- 独立纹理层便于比较和删减。保护轮廓、关键部件、细金属条、高光、深暗缝隙及投影边界。
-- 纹理选当前材料色阶中的邻近变化；背光面降低对比，深暗部减少细节。
+- Use material/component zoning, surface orientations, lighting groups, and working ramps; replace 3D zoning with planned pixel regions only when users explicitly waive 3D phases.
+- Maintain isolated texture layers for comparison and pruning. Protect silhouettes, key components, thin metal trim, specular highlights, deep crevices, and cast shadow boundaries.
+- Sample texture shades from adjacent steps within the material's active ramp; reduce contrast on shadow planes and minimize details in deep recesses.
 
-## 方向与疏密
+## Direction and Density
 
-- 以有关联、不均匀的小簇表现材料，保留安静区域。随机性只作用于簇的位置、长度、厚度、间隔和局部密度。
-- 木纹跟随板面投影，以短划、小结和断续接缝组织；金属磨损更少，高光更窄；布料与皮革的纹理跟随褶皱和形体。
-- 有意义的单像素磨损或亮点可保留；清理均匀撒点、重复花纹、跨材料/跨面的纹理及无用途浅斑。
-- 程序辅助纹理记录种子、算法版本和覆盖率定义，以便复现和比较候选。
+- Convey material properties through coherent, non-uniform micro-clusters, preserving resting areas. Randomness applies strictly to cluster position, length, thickness, spacing, and localized density.
+- Wood grain follows board perspective, structured via short strokes, small knots, and broken seams; metals use less wear with narrower highlights; cloth and leather textures follow folds and anatomical forms.
+- Meaningful single-pixel scuffs or specular dots may be retained; eliminate uniform noise, repetitive patterns, cross-material/cross-plane textures, and functionless pale spots.
+- Record seeds, algorithm versions, and coverage definitions for procedural textures to facilitate reproduction and comparison.
 
-## 结果检查
+## Inspection Checklist
 
-原生、放大和灰度下都能读出主体与材料，纹理不切碎投影边界，背光面与受光面层次保持清楚。孤立像素指标需查看具体位置；斜向阶梯可用八邻域只读复核。
+Subject and materials remain readable at native scale, under zoom, and in greyscale; textures do not fragment shadow boundaries; hierarchy between illuminated and shadow planes remains clear. Evaluate isolated pixel diagnostics by inspecting specific coordinates; diagonal staircasing can be cross-checked via read-only Moore neighborhood (8-connectivity) checks.
 
-小型木物体的试画参数见[木箱案例](../references/cases/wooden-chest/case.md)。其他材料、尺寸和类别根据本次观察选择密度与簇尺度。
+See [Wooden Chest Case](../references/cases/wooden-chest/case.md) for small wooden object test parameters. Choose density and cluster scale for other materials, dimensions, and categories based on current observations.

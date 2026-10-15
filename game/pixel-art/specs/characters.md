@@ -1,21 +1,21 @@
-# 人物画像
+# Characters
 
-适用于头像、全身角色和生物；当前风格决定比例、夸张程度与细节密度。
+Applies to portraits, full-body characters, and creatures; the chosen style dictates proportions, exaggeration, and detail density.
 
-## 任务输入
+## Task Inputs
 
-角色身份、年龄感、表情或动作、视线与朝向、服装装备、识别特征。头像明确头肩裁框；全身明确支撑点与动作重心；生物明确身体分区和特征部位。
+Character identity, apparent age, expression or action, eye line and orientation, clothing/gear, and recognizable landmarks. Portraits specify head-and-shoulders framing; full-body characters specify grounding points and center of mass; creatures specify anatomical zoning and distinctive features.
 
-## 设计要点
+## Design Principles
 
-- 头像先组织头部朝向、眉眼、鼻、下颌、颈部和衣领的连续结构，再补小细节。面部明暗同时服务体积与预期年龄感。
-- 全身先看姿态剪影、重心、四肢连接和装备遮挡。武器、帽、翅膀等关键特征在目标网格中有清楚的形状与间隔。
-- 3D 草稿表示主要体块、姿态和遮挡关系；人体或生物曲面按形体处理。像素阶段可适度放大眼睛、手势等识别点。
-- 头发、布料、皮肤及金属分别组织材料形状；遮挡重点是发梢/帽沿→额头、鼻→脸、下颌→颈和衣领接触。
-- 动画保持角色比例、装备归属和锚点一致；动作幅度与停顿服从动作语义。
+- For portraits, establish continuous structural relationships across head orientation, brow, eyes, nose, jawline, neck, and collar before adding micro-details. Facial values convey volume while matching target age.
+- For full-body characters, establish silhouette, center of mass, limb joints, and equipment occlusions first. Key landmarks like weapons, headwear, and wings must maintain legible shapes and negative space on the target grid.
+- 3D blockout represents major anatomical masses, pose, and occlusion hierarchy; treat organic curves with appropriate anatomical volume. The pixel phase may moderately enlarge key landmarks like eyes or hand gestures for clarity.
+- Hair, cloth, skin, and metal organize their own material forms; critical occlusions include hair/hat brim -> forehead, nose -> cheek, jawline -> neck, and collar contacts.
+- Animations maintain character proportions, equipment ownership, and anchors across frames; motion ranges and pauses reflect action semantics.
 
-## 检查重点与参照
+## Inspection Checklist & References
 
-原生尺寸能读出身份、表情或动作；五官与身体连接成立；预期年龄感、支撑和装备前后关系明确。
+Native resolution communicates identity, expression, or action; facial features and anatomical joints are structurally sound; apparent age, grounding, and gear layering are clear.
 
-按[参考使用规则](../styles/parchment-fantasy/reference-library/INDEX.md)选择当前任务可使用的参照。兜帽画像重点检查帽沿与额头的遮挡、鼻梁及面颊亮块是否连贯。
+Select permissible references per [Reference Usage Rules](../styles/parchment-fantasy/reference-library/INDEX.md). For hooded portraits, check occlusion of the brim over the forehead and continuity of bridge-of-nose and cheek highlight blocks.

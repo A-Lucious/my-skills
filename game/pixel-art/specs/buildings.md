@@ -1,21 +1,21 @@
-# 建筑
+# Buildings
 
-适用于独立房屋、塔、遗迹及建筑组；场景中的建筑还需遵循[场景规范](scenes.md)的构图与纵深。
+Applies to standalone houses, towers, ruins, and architectural complexes; buildings within scenes must also follow composition and depth rules in [Scenes](scenes.md).
 
-## 任务输入
+## Task Inputs
 
-建筑用途与时代特征、体量、层数、屋顶形态、门窗入口、结构材料、观察角度、展示尺度和关键构件。
+Building function, era characteristics, massing, story count, roof type, doors/windows/entrances, structural materials, viewing angle, display scale, and key components.
 
-## 设计要点
+## Design Principles
 
-- 先建立体量、屋顶、墙面和入口，再安排梁柱、檐口、台阶及装饰。比例、透视和构件连接共享同一空间依据。
-- 3D 草稿表达主要支撑、开口深度和构件遮挡；目标网格下保留可辨认的门窗、檐口及建筑剪影。
-- 侧墙、屋顶和正面以大面分组，门洞与窗洞表现深度。屋檐/梁→墙、台阶→地及墙脚接触是主要光照关系。
-- 重复构件保持结构节奏，瓦缝、砖石和木纹在此基础上组织局部变化；远处或小尺度优先保留大形。
-- 磨损、裂缝和藤蔓服从材料与受力位置；遗迹的破损仍能解释原有结构。
+- Establish massing, roof, walls, and entrances first, then arrange pillars, eaves, stairs, and ornamentation. Proportions, perspective, and component joints share a unified spatial baseline.
+- 3D blockout expresses primary load-bearing structures, opening depth, and component occlusions; preserve legible doors, windows, eaves, and building silhouettes on the target grid.
+- Group side walls, roofs, and facades into major planar masses; doorways and window openings express depth. Primary lighting relationships include eaves/beams -> walls, steps -> ground, and foundation contacts.
+- Repetitive components maintain structural rhythm, with tile seams, stonework, and wood grain organizing localized variations; prioritize major forms at distance or small scales.
+- Weathering, cracks, and vines follow material properties and stress locations; damaged ruins must still explain their original structure.
 
-## 检查重点与参照
+## Inspection Checklist & References
 
-体量、入口和用途可读，透视与支撑一致；开口和檐口有厚度，屋顶/墙/地面关系清楚；细节密度符合显示尺度。
+Massing, entrances, and function are readable; perspective and support are consistent; openings and eaves have thickness; roof, wall, and ground relationships are distinct; detail density matches display scale.
 
-按[参考使用规则](../styles/parchment-fantasy/reference-library/INDEX.md)选择当前任务可使用的参照，观察梁柱、屋檐、门洞与地面关系；完整制作参数随实际任务记录。
+Select permissible references per [Reference Usage Rules](../styles/parchment-fantasy/reference-library/INDEX.md), observing pillars, eaves, doorways, and ground contact; record complete production parameters with the actual task.

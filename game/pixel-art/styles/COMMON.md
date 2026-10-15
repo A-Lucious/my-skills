@@ -1,27 +1,27 @@
-# 通用像素规范
+# Common Pixel Specifications
 
-各风格共用这些规范；题材、比例、轮廓语言和材料表现由对应 `STYLE.md` 定义。
+All styles share these specifications; themes, proportions, outline language, and material treatments are defined in the corresponding `STYLE.md`.
 
-## 形体与像素簇
+## Forms and Pixel Clusters
 
-- 原生尺寸能辨认主体、动作和关键特征；细节服从大形，纹理服从材料。
-- 保持原生网格，以有规律的阶梯组织曲线和斜边。清理意外毛刺、贴边平行色带（banding）和无意义孤立点；眼睛、宝石亮点等有用途的单像素可保留。
-- 轮廓、材料分区和大明暗先成立，再增加细节。平涂符号以语义和负空间为主，立体对象以转面和遮挡为主。
-- 身份 ID 按类别采样；法线、深度按其数据定义解释。像素抽象可以调整轮廓、放大关键特征，保持对象语义与结构关系。
-- 预览使用原生、整数放大和灰度；剪影用于诊断轮廓。以实际图像判断可读性，自动评估的提示按题材解释。
+- The subject, action, and key landmarks must be recognizable at native resolution; details are subordinate to major forms, and textures are subordinate to materials.
+- Preserve native grids, organizing curves and diagonals through consistent staircasing. Eliminate accidental stray pixels, edge banding, and meaningless noise; purposeful single pixels such as eye dots and gem glints may be retained.
+- Outlines, material zoning, and major values must be established before adding details. Flat symbols prioritize semantic meaning and negative space; 3D objects prioritize planar transitions and occlusions.
+- Identity IDs are sampled by category; normals and depth are interpreted per their data definitions. Pixel abstraction may adjust outlines and enlarge landmarks while preserving semantics and structural relationships.
+- Previews use native scale, integer zoom, and greyscale; silhouettes diagnose outlines. Evaluate legibility from actual images, interpreting automated hints in context.
 
-## 固定色系与预算
+## Fixed Color Families and Budgets
 
-**一组由暗到亮的材料色阶算一个色系。** 多种材料可以共用一系，描边和特效所用的独立色系也计入预算。RGB 色数是统计信息，不是素材预算；例如三个五阶色系仍只算三系。
+**A set of tonal shades progressing from dark to light for a material constitutes one color family.** Multiple materials may share a single family, while independent families used for outlines and special effects count against the budget. Total RGB color count is statistical metadata, not an asset budget; for example, three 5-shade ramps still count as three families.
 
-`palette.json` 是数值依据：`locked`、`family_count`、`families`、每系 `shade_count`（缺省 `shades_per_family`）、`material_families`、`asset_family_limits`、`alpha_policy`。`colors` 与 `ramps` 从这些固定色系派生，`color_count` 表示库存总数。
+`palette.json` provides numerical criteria: `locked`, `family_count`, `families`, per-family `shade_count` (defaulting to `shades_per_family`), `material_families`, `asset_family_limits`, and `alpha_policy`. `colors` and `ramps` derive from these fixed families, and `color_count` represents inventory totals.
 
-开画前记录色板版本、用途、所选色系及材质映射。绘制在选定色阶内完成；需要更改风格配色时，经用户要求更新色板版本。动画和同一素材的全部生产 PNG 共用色系并集预算，共享色阶按声明归属计数。
+Record palette version, intended purpose, selected families, and material mappings before painting. Painting must be conducted within selected ramps; palette version bumps require explicit user instructions. Animations and all production PNGs for a single asset share a pooled family budget, with shared shades counted under declared ownership.
 
-色系阶数保持风格定义，可使用其中的工作子集。明度组织优先调整色块面积和材料分组，保留必要的阴影、受光与高光层次。修改旧素材并采用当前风格时，将其迁移到当前色板。
+Tonal step counts adhere to style definitions; working subsets may be used. Tonal organization prioritizes adjusting block area and material grouping, preserving necessary shadow, illuminated, and specular tiers. When updating legacy assets to the current style, migrate them to the active palette.
 
-## 专项规范
+## Specific Specifications
 
-- [光照](../specs/lighting.md)：受光、遮挡、接触暗部及细化后的明暗复核。
-- [纹理](../specs/texture.md)：材料方向、疏密、色阶与保护区。
-- [交付](../specs/production.md)：源稿、导出、技术检查、评审与记录。
+- [Lighting](../specs/lighting.md): Illumination, occlusion, contact shadows, and post-detail value re-checks.
+- [Texture](../specs/texture.md): Material direction, density, ramps, and protected zones.
+- [Delivery](../specs/production.md): Source files, exports, technical checks, reviews, and logs.

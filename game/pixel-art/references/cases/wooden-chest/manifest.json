@@ -25,9 +25,9 @@
     "pixel_shader_used": false
   },
   "known_limits": [
-    "实心箱腔简化",
-    "九点几何遮挡近似",
-    "早期流程未使用当前固定 Pixel Shader"
+    "Solid interior cavity simplification",
+    "Nine-point geometric occlusion approximation",
+    "Early pipeline that predates the current fixed Pixel Shader"
   ],
   "artifacts": {
     "native.png": {

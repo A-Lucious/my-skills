@@ -1,11 +1,11 @@
 {
-  "title": "螺旋星光动画",
+  "title": "Spiral Star Animation",
   "size": [
     64,
     64
   ],
   "frames": 16,
-  "scope": "四向星展开为圆环，再以花瓣轨迹回聚；时长随动作节奏变化。使用早期动画流程。",
+  "scope": "Four-pointed star expands into a ring, then re-converges along petal trajectories; durations vary with movement rhythm. Uses early animation pipeline.",
   "style": "parchment-fantasy",
   "artifacts": {
     "source.aseprite": {

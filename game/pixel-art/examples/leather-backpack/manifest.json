@@ -1,11 +1,11 @@
 {
-  "title": "多口袋皮革背包",
+  "title": "Multi-Pocket Leather Backpack",
   "size": [
     64,
     64
   ],
   "frames": 1,
-  "scope": "Blender 建模、材质分区 Shader、Aseprite 粗稿与精修候选。",
+  "scope": "Blender modeling, material zoning Shader, Aseprite rough draft, and polish candidate.",
   "style": "parchment-fantasy",
   "artifacts": {
     "native.png": {

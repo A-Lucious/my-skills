@@ -1,11 +1,11 @@
 {
-  "title": "D20 掷骰动画",
+  "title": "D20 Dice Roll Animation",
   "size": [
     32,
     32
   ],
   "frames": 320,
-  "scope": "20 个结果各有 16 帧投掷序列；预览按 1、7、14、20 演播，预览为原生 32×32 的 6 倍展示。使用早期动画流程，未使用当前固定 Shader。",
+  "scope": "20 outcomes each with a 16-frame roll sequence; preview plays outcomes 1, 7, 14, and 20 at 6x zoom from native 32x32. Uses early animation pipeline that predates the current fixed Shader.",
   "style": "parchment-fantasy",
   "artifacts": {
     "source.aseprite": {

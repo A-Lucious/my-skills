@@ -1,48 +1,48 @@
-# 羊皮纸奇幻（Parchment Fantasy）
+# Parchment Fantasy
 
-生产色板 4.3。以暖纸色、低饱和自然材料和少量鲜明色彩组织奇幻题材；色阶保留材质反射、透射与暗部层次。历史视觉研究包含对第三方游戏的观察，来源与非官方声明见 [NOTICE.md](../../NOTICE.md)。本风格不附带第三方游戏截图、裁切图或临摹稿。共用 [COMMON](../COMMON.md)；来源与观察方法见[参考研究](REFERENCE-STUDY.md)。
+Production Palette 4.3. Structures fantasy themes through warm paper tones, low-saturation natural materials, and selective vibrant accents; tonal ramps preserve material reflections, transmittances, and shadow nuances. Historical visual research referenced visual observations of third-party games; see [NOTICE.md](../../NOTICE.md) for provenance and unofficial statements. This style does not bundle third-party game screenshots, crops, or tracing studies. Shares [COMMON](../COMMON.md); see [Reference Studies](REFERENCE-STUDY.md) for provenance and observational methodology.
 
-Blender 通道第三步调用本风格的固定 [Pixel Shader](PIXEL-SHADER.md)，提前展示当前视角的效果，经确认后进入第四步 Aseprite 粗稿；实现保存在本风格目录的 [pixel_shader.py](pixel_shader.py)，当前技术基准为 `1.3.0`、色板 `4.3`、原生 `64×64`。
+Step 3 of the Blender track executes this style's fixed [Pixel Shader](PIXEL-SHADER.md), presenting advance previews under the active camera before proceeding to Step 4 Aseprite rough drafting. The implementation is housed in this style directory at [pixel_shader.py](pixel_shader.py); current technical baseline is `1.3.0`, Palette `4.3`, and native `64x64`.
 
-## 视觉语言
+## Visual Language
 
-羊皮纸界面与暗奇幻题材；场景低饱和，属性符号和特定材料有明确色彩焦点。人物采用写实倾向比例，轮廓取邻近材料的暗面或浅边，使用选择性描边。曲线以稳定台阶表现，细节以有方向的像素簇组织。
+Parchment user interface and dark fantasy theme; scenes maintain low saturation, while attribute symbols and specific materials establish clear focal points. Characters employ semi-realistic proportions; outlines derive from adjacent material shadow planes or pale edges using selective outlining. Curves are expressed through stable staircasing, and details are organized in directional pixel clusters.
 
-| 对象 | 参照特征 |
+| Subject | Reference Characteristics |
 |---|---|
-| 符号与图标 | 以清楚剪影和少量色块表达语义；具体形状由当前任务设计 |
-| 宝石与金属 | 用切面、窄亮边和接触暗部表现材料 |
-| 纸框与装饰 | 暖纸面、台阶转角和留白；按内容设计分栏与装饰节奏 |
-| 道具与旅行装备 | 区分开口、接缝、金属附件和材料转面，关键特征在原生尺寸可读 |
-| 头像 | 暖肤色、深棕发，眉眼、鼻侧、下颌、颈部和衣领连贯；五官比例克制 |
-| 城镇 | 梁柱、灰墙、瓦、门洞、街道和人物材料块清楚，屋檐遮墙、对象贴地 |
+| Symbols & Icons | Clear silhouettes and minimal color blocking communicate semantics; specific shapes designed per task |
+| Gems & Metals | Faceted planes, narrow highlight rims, and contact shadows express material properties |
+| Paper Frames & Trim | Warm paper surfaces, stepped corners, and margins; column dividing and decorative rhythm designed per content |
+| Props & Travel Gear | Distinguish openings, seams, metal hardware, and surface curvatures; landmarks legible at native resolution |
+| Portraits | Warm skin tones, dark brown hair; cohesive brow, nose side, jawline, neck, and collar; restrained facial proportions |
+| Townships | Beams, stone/grey walls, tiles, doorways, streets, and character material blocks distinct; eaves shade walls, objects grounded |
 
-## 网格与信息密度
+## Grids and Information Density
 
-生产画布按内容和显示容器选择，不把截图显示尺寸或压缩后的格子估计当作原生尺寸。参考观察按[研究规范](REFERENCE-STUDY.md)记录。
+Select production canvases based on content and display containers; do not confuse screenshot sizes or compressed grid estimates with native dimensions. Reference observations are logged per the [Study Specification](REFERENCE-STUDY.md).
 
-复杂道具和本风格 Shader 预览默认原生 **64×64**，保留曲面明暗、接缝和材质反光的空间；用户明确指定其他尺寸时按任务执行。头像按其显示容器确定，符号仍用能表达语义与孔洞的较小网格。每个对象独立判断簇尺度和原点。
+Complex props and this style's Shader previews default to native **64x64**, preserving room for surface value gradients, seams, and material highlights; follow task requirements when users explicitly designate other dimensions. Portraits are sized by their display containers; symbols use smaller grids that clearly express semantics and cutouts. Each asset independently determines cluster scale and origin.
 
-游戏显示使用原生 PNG，由显示节点按容器缩放；整数倍 nearest 放大保持像素格，例如 64→128/256。无需先转成矢量图；非整数缩放会造成像素格宽度不均，缩回 32×32 则会丢掉一部分新增细节。接入时仍检查真实显示比例。
+In-game rendering uses native PNGs scaled by UI display nodes; integer-factor nearest-neighbor scaling preserves the pixel grid (e.g., 64 -> 128/256). Pre-converting to vector graphics is unnecessary; non-integer scaling creates uneven pixel grid widths, while downsampling back to 32x32 discards newly introduced details. Always inspect live display proportions during integration.
 
-## 材料与色板
+## Materials and Palette
 
-[palette.json](palette.json) 锁定 20 个可选色系、236 个库存色值。`earth` 为 **18 阶**、`blue` 为 **16 阶**，`ruby` 为 **40 阶**（药液/红色着色玻璃及其低饱和反光），其他立体材质为 **12 阶**；属性符号保留原有 2–5 阶。用途的色系数量上限继续按 JSON；增加同一色系的明暗阶不增加色系计数，也不要求每张图用满全部颜色。
+[palette.json](palette.json) locks 20 selectable color families and 236 inventory color values. `earth` features **18 shades**, `blue` features **16 shades**, `ruby` features **40 shades** (potions / tinted red glass and low-saturation reflections under glass), and other 3D materials feature **12 shades**; attribute symbols retain legacy 2–5 shades. Per-purpose family caps adhere to the JSON schema; adding tonal shades to an existing family does not increment family count, nor is an asset required to exhaust all available shades.
 
-| 色系 | 常见用途 |
+| Family | Common Uses |
 |---|---|
-| `earth`, `green`, `skin`, `hair` | 木石、自然橄榄绿、暖肤色与头发 |
-| `paper`, `parchment` | 浅纸、白符号、页块与浅布 |
-| `leather`, `gold`, `teal` | 暖皮革、亮黄金、蓝绿封面 |
-| `ruby`, `jade`, `fuchsia` | 红/青绿状态宝石、玫红箱内宝石 |
-| `red`, `sky`, `purple`, `heart_green`, `indigo` | 属性专用色块，区别于自然材料 |
-| `neutral`, `blue`, `ember` | 暗灰、冷金属/鳞片、火焰 |
+| `earth`, `green`, `skin`, `hair` | Wood/stone, natural olive green, warm skin tones, and hair |
+| `paper`, `parchment` | Pale paper, white symbols, book pages, and light fabric |
+| `leather`, `gold`, `teal` | Warm leather, bright gold, teal-blue book covers |
+| `ruby`, `jade`, `fuchsia` | Red/cyan-green status gems, magenta chest-interior gems |
+| `red`, `sky`, `purple`, `heart_green`, `indigo` | Attribute-specific colors distinct from natural materials |
+| `neutral`, `blue`, `ember` | Dark grey, cool metal/scales, flame |
 
-原创未指定时默认左上主光；参考临摹按可见受光关系。金属/宝石亮面窄而硬，皮革/布料亮面宽而克制。当前生产 alpha 为 0/255，normal、opacity=255，使用硬边色阶和像素簇。
+Unless specified, original work defaults to top-left key lighting; reference studies adhere to visible lighting. Metal/gem highlights are narrow and sharp; leather/cloth highlights are broad and restrained. Current production uses alpha 0/255, normal blend mode, opacity 255, hard-edged ramps, and pixel clusters.
 
-[palette-v3-legacy.json](palette-v3-legacy.json)用于解释旧输出。参考临摹采用独立观察白名单，其压缩微差按[研究规范](REFERENCE-STUDY.md)记录。
+[palette-v3-legacy.json](palette-v3-legacy.json) interprets older outputs. Reference studies employ independent observation whitelists, recording compression variations per the [Study Specification](REFERENCE-STUDY.md).
 
-## 实测依据
+## Empirical Baselines
 
-- [木箱纹理 v2](../../references/cases/wooden-chest/case.md)：自制单物体的 Blender→Aseprite 材质与纹理案例；早期流程未使用当前固定 Shader。
-- [药水瓶底稿](../../references/cases/health-potion/case.md)：固定 Shader 的材质分区与显示光影案例，仅覆盖第三阶段。
+- [Wooden Chest Texture v2](../../references/cases/wooden-chest/case.md): In-house single-object Blender -> Aseprite material and texture test case; earlier pipeline that predates the fixed Shader.
+- [Potion Bottle Base](../../references/cases/health-potion/case.md): Fixed Shader material zoning and display lighting test case, covering Step 3 only.

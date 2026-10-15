@@ -1,20 +1,20 @@
-# 木箱纹理案例
+# Wooden Chest Texture Case
 
-自制木箱与完整投影，演示材料分区、明暗组织及不规则木纹。主体为 64×64，完整投影画布为 96×64，实际 11 色，alpha 为 0/255。箱腔为实心简化；不代表其他任务可省略开口结构。
+In-house wooden chest with full cast shadow, demonstrating material zoning, value structure, and irregular wood grain. Main subject is 64x64, full-shadow canvas is 96x64, 11 actual colors, alpha is 0/255. The chest cavity uses solid interior simplification; this does not imply opening structures may be omitted in other tasks.
 
-## 制作与实测
+## Production and Verification
 
-简化箱体、盖板、锁扣与金属条 → 正交相机与 Cycles → 原生网格射线查询部件、世界法线和距离 → 按材料与面分明暗 → Aseprite 粗稿与材质细化 → 稀疏短簇及断续接缝 → 完整投影复核。
+Simplified chest body, lid, latch, and metal bands -> Orthographic camera and Cycles -> Native-grid ray queries for components, world normals, and distances -> Value grouping by material and plane -> Aseprite rough draft and material refinement -> Sparse short clusters and broken seams -> Full cast shadow review.
 
-面积光 visibility 是圆盘中心及周边八个固定点的未遮挡比例，属于九点几何近似。本例使用早期 Blender→Aseprite 流程，未使用当前固定 Pixel Shader，不能作为现行六步流程的完整验证。
+Area light visibility represents the unoccluded ratio across the disc center and 8 peripheral points, constituting a 9-point geometric approximation. This case used an earlier Blender -> Aseprite pipeline without the current fixed Pixel Shader, and does not serve as a full verification of the active six-phase pipeline.
 
-- 使用色系为 `leather/gold/hair/earth`，暖木材选择 leather 工作色阶。
-- 木纹多为 2–4 像素短簇，带少量厚簇、小结及不等长接缝。
-- 66 个纹理像素 / 1117 个木材像素，覆盖 5.91%；接缝替换另计，共 132 个主体像素变色。
-- 纹理修改时保护轮廓、锁扣、两条金属带及地面投影。
+- Color families used: `leather/gold/hair/earth`; warm wood selects the leather working ramp.
+- Wood grain consists mostly of 2–4 pixel short clusters, with occasional thicker clusters, small knots, and unequal-length seams.
+- 66 texture pixels / 1117 wood pixels, yielding 5.91% coverage; seam substitutions are calculated separately, totaling 132 altered subject pixels.
+- Outlines, latch, two metal bands, and ground shadow were protected during texture editing.
 
-尺寸、色系、覆盖率和采样数量均为本例参数。可复用的方法是按材料分区、使用稀疏不规则簇、保护关键区域并复核明暗。
+Dimensions, families, coverage, and sample counts are specific to this test case. Reusable techniques include zoning by material, applying sparse irregular clusters, protecting key landmarks, and re-checking values.
 
-## 文件
+## Files
 
-[主体 PNG](native.png)、[像素源稿](source.aseprite)、[完整投影 PNG](with-shadow.png)、[投影源稿](with-shadow.aseprite)、[放大预览](preview.png)、[技术清单](manifest.json)。公开案例不携带原始会话或外部项目路径。
+[Main Subject PNG](native.png), [Pixel Source](source.aseprite), [Full Shadow PNG](with-shadow.png), [Shadow Source](with-shadow.aseprite), [Zoom Preview](preview.png), [Technical Manifest](manifest.json). Public cases do not carry raw sessions or external project paths.

@@ -1,13 +1,13 @@
-# 参考使用规则
+# Reference Usage Rules
 
-公开包仅提供文字规范、色板和自制技术案例，不附带第三方游戏的截图、裁切图、角色原画、提取精灵或临摹稿。历史视觉研究的来源与非官方声明见 [NOTICE.md](../../../NOTICE.md)。
+The public package provides only written specifications, palettes, and in-house technical cases, excluding third-party game screenshots, crops, original concept art, extracted sprites, or tracing studies. See [NOTICE.md](../../../NOTICE.md) for historical visual research sources and unofficial declarations.
 
-任务需要图像参照时，将当前任务提供且可使用的文件放入 `Test Workspace/<task-id>/references/`，记录来源、使用范围和实际观察点。检查姓名、账号、头像、时间标记和画面文字；私人参照不进入公开案例。
+When tasks require visual references, place permissible reference files for the active task in `Test Workspace/<task-id>/references/`, recording provenance, permitted scope, and concrete observation points. Inspect and sanitize names, accounts, avatars, timestamps, and on-screen text; private references must not enter public cases.
 
-按任务观察：
+Key observation focal points by category:
 
-- 人物与生物：头身比例、姿态、五官簇、装备连接、前后遮挡。
-- 场景与建筑：空间层次、事件焦点、梁柱/屋檐/门洞关系、受光与贴地。
-- 道具与界面：剪影、开口、孔洞、接缝、材质区和原生尺寸可读性。
+- Characters & Creatures: Head-to-body proportions, posture, facial feature clusters, gear attachments, foreground/background occlusions.
+- Scenes & Buildings: Spatial depth layers, event focal points, beam/eave/doorway relationships, illumination and grounding.
+- Props & UI: Silhouettes, openings, apertures, seams, material zones, and legibility at native resolution.
 
-可用[木箱纹理案例](../../../references/cases/wooden-chest/case.md)和[药水瓶 Shader 案例](../../../references/cases/health-potion/case.md)研究本技能自身的技术输出。它们不代表第三方游戏的官方资产。
+The [Wooden Chest Texture Case](../../../references/cases/wooden-chest/case.md) and [Potion Bottle Shader Case](../../../references/cases/health-potion/case.md) can be used to study this skill's technical outputs. They do not represent official third-party game assets.

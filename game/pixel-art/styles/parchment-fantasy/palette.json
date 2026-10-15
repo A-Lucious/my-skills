@@ -1,14 +1,14 @@
 {
   "style_id": "parchment-fantasy",
   "version": "4.3",
-  "provenance": "羊皮纸奇幻的非官方工作色板。历史视觉研究包含对 Life in Adventure 的观察，并扩展了立体材质、玻璃反射与透射色阶；不是该游戏的官方色板。色值库存保留以兼容已有自制输出，来源声明见 ../../NOTICE.md。",
+  "provenance": "Unofficial working palette for Parchment Fantasy. Historical visual research referenced observations from Life in Adventure, expanded with 3D materials, glass reflection, and transmission ramps; this is not an official palette of that game. Inventory values are preserved for compatibility with existing in-house outputs; see ../../NOTICE.md for provenance.",
   "locked": true,
   "family_count": 20,
   "shades_per_family": 12,
-  "shade_count_policy": "以每系固定 shade_count 为准；earth 18 阶、blue 16 阶、ruby 40 阶（宝石/药液、红色着色玻璃及其反光），其他立体材质默认 12 阶；属性符号保持原有 2–5 阶。",
+  "shade_count_policy": "Determined by the fixed shade_count per family; earth has 18 shades, blue has 16 shades, ruby has 40 shades (gems/potions, tinted red glass, and reflections), other 3D materials default to 12 shades, and attribute symbols retain legacy 2–5 shades.",
   "families": {
     "neutral": {
-      "name": "冷灰结构（保留其他参照的配色）",
+      "name": "Cool grey structure (preserves colors from other references)",
       "shade_count": 12,
       "ramp": [
         "#191b24",
@@ -26,7 +26,7 @@
       ]
     },
     "earth": {
-      "name": "城镇木石",
+      "name": "Town wood and stone",
       "shade_count": 18,
       "ramp": [
         "#221a14",
@@ -50,7 +50,7 @@
       ]
     },
     "skin": {
-      "name": "肖像暖肤色",
+      "name": "Portrait warm skin tone",
       "shade_count": 12,
       "ramp": [
         "#643e1f",
@@ -68,7 +68,7 @@
       ]
     },
     "hair": {
-      "name": "头发与暖暗结构",
+      "name": "Hair and warm dark structure",
       "shade_count": 12,
       "ramp": [
         "#3f2f27",
@@ -86,7 +86,7 @@
       ]
     },
     "green": {
-      "name": "自然灰橄榄绿",
+      "name": "Natural grey olive green",
       "shade_count": 12,
       "ramp": [
         "#33300f",
@@ -104,7 +104,7 @@
       ]
     },
     "blue": {
-      "name": "冷金属（保留银龙参照的配色）",
+      "name": "Cool metal (preserves colors from silver dragon reference)",
       "shade_count": 16,
       "ramp": [
         "#141c2b",
@@ -126,7 +126,7 @@
       ]
     },
     "ember": {
-      "name": "火焰（保留凤凰参照的配色）",
+      "name": "Flame (preserves colors from phoenix reference)",
       "shade_count": 12,
       "ramp": [
         "#6d2e2a",
@@ -144,7 +144,7 @@
       ]
     },
     "paper": {
-      "name": "界面浅纸与白符号",
+      "name": "UI pale paper and white symbols",
       "shade_count": 12,
       "ramp": [
         "#a5977b",
@@ -162,7 +162,7 @@
       ]
     },
     "parchment": {
-      "name": "道具页块与浅布料",
+      "name": "Prop page block and light fabric",
       "shade_count": 12,
       "ramp": [
         "#75684a",
@@ -180,7 +180,7 @@
       ]
     },
     "leather": {
-      "name": "皮袋与暖皮革",
+      "name": "Leather pouch and warm leather",
       "shade_count": 12,
       "ramp": [
         "#472215",
@@ -198,7 +198,7 @@
       ]
     },
     "gold": {
-      "name": "亮黄金与镶边",
+      "name": "Bright gold and trim",
       "shade_count": 12,
       "ramp": [
         "#664701",
@@ -216,7 +216,7 @@
       ]
     },
     "teal": {
-      "name": "蓝绿书封",
+      "name": "Teal book cover",
       "shade_count": 12,
       "ramp": [
         "#1e3838",
@@ -234,7 +234,7 @@
       ]
     },
     "sky": {
-      "name": "蓝靴符号",
+      "name": "Blue boot symbol",
       "shade_count": 3,
       "ramp": [
         "#4c738b",
@@ -243,7 +243,7 @@
       ]
     },
     "indigo": {
-      "name": "蓝环符号",
+      "name": "Blue ring symbol",
       "shade_count": 4,
       "ramp": [
         "#606aa4",
@@ -253,7 +253,7 @@
       ]
     },
     "purple": {
-      "name": "紫脑符号",
+      "name": "Purple brain symbol",
       "shade_count": 5,
       "ramp": [
         "#885784",
@@ -264,7 +264,7 @@
       ]
     },
     "red": {
-      "name": "红臂符号",
+      "name": "Red arm symbol",
       "shade_count": 5,
       "ramp": [
         "#ad4746",
@@ -275,7 +275,7 @@
       ]
     },
     "ruby": {
-      "name": "红宝石与药液（含玻璃覆盖下的低饱和色阶）",
+      "name": "Ruby and potion (including low-saturation shades under glass)",
       "shade_count": 40,
       "ramp": [
         "#280508",
@@ -321,7 +321,7 @@
       ]
     },
     "jade": {
-      "name": "青绿宝石",
+      "name": "Cyan-green jade",
       "shade_count": 12,
       "ramp": [
         "#3d9171",
@@ -339,7 +339,7 @@
       ]
     },
     "heart_green": {
-      "name": "绿心符号",
+      "name": "Green heart symbol",
       "shade_count": 2,
       "ramp": [
         "#416230",
@@ -347,7 +347,7 @@
       ]
     },
     "fuchsia": {
-      "name": "宝箱内壁与玫红宝石",
+      "name": "Chest interior and magenta gem",
       "shade_count": 12,
       "ramp": [
         "#43292d",
@@ -634,7 +634,7 @@
     "scene": 9,
     "cover": 9
   },
-  "counting_rule": "每个固定色系按一系计；同系的全部固定阶数合计一系；透明不计。素材全帧共用预算。库存不是每枚图标应使用的颜色清单；选择相应角色少数色系。",
+  "counting_rule": "Each fixed family counts as one family; all fixed shades within a family count as one family; transparent pixels are excluded. All frames of an asset share the family budget. Inventory is not a color checklist for every icon; select a restrained subset of families per asset.",
   "alpha_policy": [
     0,
     255
@@ -914,5 +914,5 @@
     ]
   },
   "legacy_palette": "palette-v3-legacy.json",
-  "reference_study_policy": "用户明确要求临摹校准时使用逐对象观察白名单与主体比较，记录压缩与网格误差；与这份原创制作库存区分。不能把临摹白名单中的压缩噪点当新的材质色阶。"
+  "reference_study_policy": "When tracing calibration is explicitly requested, use per-asset observation whitelists and subject comparisons, logging compression and grid error margins separately from this original production inventory. Compression noise in study whitelists must not be treated as new material shades."
 }

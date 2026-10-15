@@ -1,11 +1,11 @@
-# 来源与第三方素材声明
+# Provenance and Third-Party Material Notice
 
-“羊皮纸奇幻”（`parchment-fantasy`）是本技能对暖纸色、低饱和奇幻题材、选择性轮廓和材料色块的一组工作规范。历史视觉研究曾参考游戏 **Life in Adventure** 的视觉表现；这个名称仅用于说明研究来源。
+"Parchment Fantasy" (`parchment-fantasy`) is a set of working specifications for warm paper tones, low-saturation fantasy themes, selective outlines, and material color blocking. Historical visual research referenced visual presentations in the game **Life in Adventure**; this name is used solely to identify the research source.
 
-本技能与 Life in Adventure 及其开发者、发行方无隶属、合作、赞助或官方授权关系，不能将本技能、色板、Shader 或自制示例称为该游戏的官方风格包或官方资产。
+This skill has no affiliation, partnership, sponsorship, or official licensing relationship with Life in Adventure, its developers, or its publishers. Neither this skill, its palettes, shaders, nor in-house examples may be represented as official style packs or official assets of that game.
 
-Life in Adventure 的名称、商标、截图、角色、界面和美术作品等权利归相应权利人所有。公开技能不分发该游戏的截图、裁切图、提取精灵或临摹稿，也不将这些内容用于 README 案例。风格更名不改变第三方作品的权属。
+The name, trademarks, screenshots, characters, UI, and artwork of Life in Adventure belong to their respective copyright owners. The public skill does not distribute screenshots, crops, extracted sprites, or tracing studies from the game, nor are such materials used as README showcase cases. Renaming a style does not alter third-party rights ownership.
 
-色板是历史观察与后续材质扩展形成的非官方工作色板，不声称是该游戏的精确原始色板。公开案例仅展示本技能制作的独立道具技术输出，不暗示来自该游戏；案例阶段和局限以各自说明为准。
+The palette is an unofficial working palette developed through historical observation and subsequent material expansions; it does not claim to be the exact original palette of the game. Public cases solely showcase independent technical asset outputs produced with this skill and do not imply origin from the game. Phase scopes and limitations are defined in their respective documentation.
 
-任务中的第三方参照按当前任务可使用的范围处理，保存在项目工作区；将其用于公开案例前需另行确认来源与可分发范围，并清除个人身份及时间信息。
+Third-party references within a task must be handled within the scope permitted for that task and kept in the project workspace. Before using any reference in public cases, verify source permissions and distributable scope independently, and sanitize personal identity, credentials, and timestamps.

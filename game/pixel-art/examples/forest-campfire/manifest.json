@@ -1,11 +1,11 @@
 {
-  "title": "森林篝火动画",
+  "title": "Forest Campfire Animation",
   "size": [
     180,
     320
   ],
   "frames": 16,
-  "scope": "竖屏原创森林场景，含火焰、烟和余烬循环。使用早期 Shader to RGB/Color Ramp 流程；场景与动画技术候选不代表现行固定 Shader 的验证。",
+  "scope": "Vertical original forest scene with fire, smoke, and ember loops. Uses earlier Shader to RGB / Color Ramp pipeline; scene and animation technical candidate does not represent verification of the active fixed Shader.",
   "style": "parchment-fantasy",
   "artifacts": {
     "source.aseprite": {

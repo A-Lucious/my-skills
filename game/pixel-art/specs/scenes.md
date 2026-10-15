@@ -1,21 +1,21 @@
-# 场景
+# Scenes
 
-适用于事件插图、环境和战斗画面；建筑作为环境组成时同时参考[建筑规范](buildings.md)。
+Applies to event illustrations, environments, and battle screens; when buildings form part of the environment, also refer to [Buildings](buildings.md).
 
-## 任务输入
+## Task Inputs
 
-场景事件、视觉焦点、主要角色与动作、前中后景、地面与路径、时间天气、画面比例及预期显示容器。
+Scene event, visual focal point, primary characters and actions, foreground/midground/background, terrain and pathways, time of day/weather, aspect ratio, and intended display container.
 
-## 设计要点
+## Design Principles
 
-- 构图先确定焦点、主体占比和视线走向，再安排前中后景与留白。原生尺寸能看懂事件或空间关系。
-- 3D 草稿建立地面、主要体块、尺度和遮挡顺序；角色与道具共享空间、相机和光照依据。
-- 用明度、色彩和细节密度区分远近。最清楚的轮廓与对比集中在焦点，远景保留大形。
-- 人物、马、桶等与地面有可信接触；屋檐、树冠、梁柱的投影落在对应表面。雾、火焰或魔法的范围服从场景设定。
-- 墙、瓦、石、植被按材料成簇；纹理方向和密度支持纵深与构图。
+- In composition, establish focal point, subject scale, and visual flow first, then organize depth layers and margins. Events or spatial relationships must be readable at native resolution.
+- 3D blockout establishes ground plane, major volumes, scale, and occlusion hierarchy; characters and props share a unified spatial, camera, and lighting baseline.
+- Differentiate spatial depth using value, color saturation, and detail density. The sharpest outlines and contrast concentrate at the focal point, while distant backgrounds retain major masses.
+- Figures, horses, barrels, and props make plausible contact with the ground; cast shadows from eaves, tree canopies, and beams fall onto appropriate receiver surfaces. Fog, fire, or magical effects follow scene rules.
+- Walls, tiles, rocks, and foliage form material clusters; texture direction and density reinforce depth and composition.
 
-## 检查重点与参照
+## Inspection Checklist & References
 
-焦点明确，前后层次可读，角色动作与事件相符；地面、建筑与对象尺度一致；场景边缘、投影和 UI 裁框完整。
+Focal point is clear, depth layering is legible, character actions align with events; terrain, buildings, and objects maintain consistent scale; scene edges, cast shadows, and UI framing crops are complete.
 
-按[参考使用规则](../styles/parchment-fantasy/reference-library/INDEX.md)选择当前任务可使用的参照，观察纵深、事件焦点、战斗体型差及前后遮挡。
+Select permissible references per [Reference Usage Rules](../styles/parchment-fantasy/reference-library/INDEX.md), observing depth cues, event focal points, battle size differences, and foreground/background occlusions.
