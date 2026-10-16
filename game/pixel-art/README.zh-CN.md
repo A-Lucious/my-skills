@@ -71,7 +71,7 @@ python3 .agents/skills/pixel-art/scripts/mcp_client.py doctor
 
 | 目录 | 内容 |
 |---|---|
-| `cards/` | 物品、肖像、全身角色及物理材质的模块化注入模板 |
+| `cards/` | 物品、通用物理材质及特性扩展的模块化注入模板 |
 | `styles/` | 通用规则、风格定义、固定色板与 Pixel Shader |
 | `specs/` | 点阵基础规范、光照、纹理及交付规范 |
 | `mcp/` | Blender 与 Aseprite 接入说明、固定版本清单 |

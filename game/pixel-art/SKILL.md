@@ -1,6 +1,6 @@
 ---
 name: pixel-art
-description: "Create, modify, and export pixel art assets and sprite animations via Blender MCP and Aseprite MCP. Follow modular card injection templates for props, portraits, characters, and materials, preview fixed style Pixel Shaders, and refine editable sprites. Use the built-in create-style interview to define and save a new pixel art style."
+description: "Create, modify, and export pixel art assets and sprite animations via Blender MCP and Aseprite MCP. Follow modular card injection templates for props and materials, preview fixed style Pixel Shaders, and refine editable sprites. Use the built-in create-style interview to define and save a new pixel art style."
 ---
 
 # Pixel Art
@@ -18,11 +18,10 @@ Assets are constructed by mounting three orthogonal layers of specifications:
 ### Category Node Cards (`cards/<category>/`)
 Each asset category provides dedicated instruction cards tailored for every phase node of the baseline engine:
 
-| Category | Description | Node Cards Directory |
+| Category | Description | Specification / Cards |
 |---|---|---|
 | **Props & Items** | Containers, equipment, potions, weapons, books | [cards/props/](cards/props/) (`3dac`, `lr`, `psap`, `ard`, `pcdt`, `fvc`) |
-| **Portraits & Busts** | Dialog avatars, NPC busts, head planes, facial features | [cards/portraits/](cards/portraits/) (`3dac`, `lr`, `psap`, `ard`, `pcdt`, `fvc`) |
-| **Full-Body Characters** | Combat sprites, monsters, poses, silhouette landmarks | [cards/characters/](cards/characters/) (`3dac`, `lr`, `psap`, `ard`, `pcdt`, `fvc`) |
+| **Characters & Portraits** | Dialog avatars, NPC busts, full-body combat sprites | [specs/characters.md](specs/characters.md) |
 | **Scenes & Buildings** | Event illustrations, environments, architectural structures | [specs/scenes.md](specs/scenes.md), [specs/buildings.md](specs/buildings.md) |
 
 ### Material Cards (`cards/materials/`)

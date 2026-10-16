@@ -5,7 +5,7 @@ This workflow defines the standard six-phase production engine for pixel art ass
 ## Injection Architecture Overview
 
 For each phase, the agent mounts three orthogonal specifications:
-1. **Category Card:** `cards/<category>/<phase-node>.md` (props, portraits, characters, scenes, buildings).
+1. **Category Card / Spec:** `cards/<category>/<phase-node>.md` (such as `cards/props/`) or category specification in `specs/` (characters, scenes, buildings).
 2. **Material Cards:** `cards/materials/<mat>.md` for materials present on the asset (wood, metal, skin, etc.).
 3. **Style Package:** `styles/<style-id>/` (fixed palette, shader, and aesthetic principles).
 
