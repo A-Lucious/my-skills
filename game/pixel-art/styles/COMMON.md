@@ -22,6 +22,8 @@ Tonal step counts adhere to style definitions; working subsets may be used. Tona
 
 ## Specific Specifications
 
+- [Common Base](../specs/common.md): Native grid, staircasing, and cluster rules.
 - [Lighting](../specs/lighting.md): Illumination, occlusion, contact shadows, and post-detail value re-checks.
-- [Texture](../specs/texture.md): Material direction, density, ramps, and protected zones.
+- [Texture](../specs/texture.md): Micro-cluster organization, density, and layer isolation.
+- [Materials](../cards/materials/): Specific material behaviors for wood, metal, skin, cloth, and glass/gems.
 - [Delivery](../specs/production.md): Source files, exports, technical checks, reviews, and logs.

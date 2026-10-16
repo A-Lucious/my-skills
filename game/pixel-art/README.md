@@ -71,8 +71,9 @@ If invoking scripts directly from the skill repo, execute from the target projec
 
 | Directory | Contents |
 |---|---|
+| `cards/` | Modular injection templates for props, portraits, characters, and physical materials |
 | `styles/` | Common rules, style definitions, fixed palettes, and Pixel Shaders |
-| `specs/` | Specifications for characters, scenes, props, buildings, lighting, textures, and delivery |
+| `specs/` | Base specifications for common grid rules, lighting, textures, and delivery |
 | `mcp/` | Blender and Aseprite integration guides, pinned version manifests |
 | `scripts/` | MCP orchestration, diagnostics, and read-only technical verifications |
 | `examples/` | Showcase assets with editable sources, sprite sheets, and frame metadata |

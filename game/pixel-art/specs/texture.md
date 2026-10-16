@@ -1,22 +1,21 @@
-# Pixel Clusters and Material Textures
+# Pixel Clusters & Texture Specification
 
-Textures build upon clear silhouettes, material zoning, and major values, applied only as demanded by the material.
+Defines general principles for micro-cluster organization, density control, and layer isolation. Specific material behaviors are defined in `cards/materials/`.
 
-## Zones and Tonal Ramps
+## 1. Pixel Clusters Principles
+- **Subordination:** Textures must remain subordinate to primary silhouettes, material zoning, and major values. Never apply texture across light/shadow boundaries.
+- **Micro-Cluster Organization:** Texture pixels must form coherent, non-uniform micro-shapes (2–4 pixels in length or small clusters). Eliminate uniform noise, grid-like hatching, and functionless single-pixel speckles.
+- **Resting Space:** Protect resting zones; high-density texture over an entire surface creates visual fatigue. Keep overall texture pixel coverage typically between **5%–8%** of the material area.
 
-- Use material/component zoning, surface orientations, lighting groups, and working ramps; replace 3D zoning with planned pixel regions only when users explicitly waive 3D phases.
-- Maintain isolated texture layers for comparison and pruning. Protect silhouettes, key components, thin metal trim, specular highlights, deep crevices, and cast shadow boundaries.
-- Sample texture shades from adjacent steps within the material's active ramp; reduce contrast on shadow planes and minimize details in deep recesses.
+## 2. Layer Isolation & Protected Zones
+- Maintain isolated texture layers in `.aseprite` to enable quick toggling, inspection, and pruning.
+- **Protected Zones:** Outer silhouettes, major landmark bevels, primary specular highlights, contact crevice shadows, and cast shadow boundaries must be kept free of texture interruptions.
 
-## Direction and Density
+## 3. Direction & Tonal Sampling
+- Texture strokes must follow the planar perspective and contour curvature of the underlying geometry.
+- Sample texture pixels strictly from adjacent tonal steps within the material's active palette ramp; never introduce high-contrast foreign colors for surface textures.
 
-- Convey material properties through coherent, non-uniform micro-clusters, preserving resting areas. Randomness applies strictly to cluster position, length, thickness, spacing, and localized density.
-- Wood grain follows board perspective, structured via short strokes, small knots, and broken seams; metals use less wear with narrower highlights; cloth and leather textures follow folds and anatomical forms.
-- Meaningful single-pixel scuffs or specular dots may be retained; eliminate uniform noise, repetitive patterns, cross-material/cross-plane textures, and functionless pale spots.
-- Record seeds, algorithm versions, and coverage definitions for procedural textures to facilitate reproduction and comparison.
-
-## Inspection Checklist
-
-Subject and materials remain readable at native scale, under zoom, and in greyscale; textures do not fragment shadow boundaries; hierarchy between illuminated and shadow planes remains clear. Evaluate isolated pixel diagnostics by inspecting specific coordinates; diagonal staircasing can be cross-checked via read-only Moore neighborhood (8-connectivity) checks.
-
-See [Wooden Chest Case](../references/cases/wooden-chest/case.md) for small wooden object test parameters. Choose density and cluster scale for other materials, dimensions, and categories based on current observations.
+## 4. Inspection Checklist
+- Check sprite at 1x native resolution, integer zoom (4x/8x), and in greyscale:
+  - Textures enhance material identity without breaking form.
+  - No accidental doubles or staircasing breaks along critical contour edges.
