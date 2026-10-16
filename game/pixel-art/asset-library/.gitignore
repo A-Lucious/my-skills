@@ -1,0 +1,4 @@
+# Keep downloaded artwork and archives out of the source index.
+/packs/
+/cache/
+/downloads/

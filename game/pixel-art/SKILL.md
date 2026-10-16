@@ -13,7 +13,7 @@ When the user invokes `create-style` or asks to create/add a reusable pixel art 
 
 ## 1. Style and Content Specifications
 
-Read [Common Specifications](styles/COMMON.md) first. Select the requested style from the [Style Library](styles/index.md), defaulting to `parchment-fantasy` only when none is specified. Read the selected style's `STYLE.md`, `palette.json`, and `reference-library/INDEX.md` in `styles/<style-id>/`. When visual references are needed, use only permissible references provided for the current task; public packages do not include third-party game assets. Parchment Fantasy examples and technical baselines apply only to that style; use the selected style's own documents for other styles.
+Read [Common Specifications](styles/COMMON.md) first. Select the requested style from the [Style Library](styles/index.md), defaulting to `parchment-fantasy` only when none is specified. Read the selected style's `STYLE.md`, `palette.json`, and `reference-library/INDEX.md` in `styles/<style-id>/`. When visual references are needed, use only permissible references provided for the current task; public packages exclude proprietary third-party game assets. Separately licensed base packs are described below. Parchment Fantasy examples and technical baselines apply only to that style; use the selected style's own documents for other styles.
 
 Read the corresponding category specification for the task; for composite assets, start from the primary subject and supplement with related specs:
 
@@ -25,6 +25,10 @@ Read the corresponding category specification for the task; for composite assets
 | Houses, ruins, standalone buildings | [Buildings](specs/buildings.md) |
 
 All tasks read the [Lighting Specification](specs/lighting.md); read the [Texture Specification](specs/texture.md) when surface textures are needed. Establish a task card for every task following the [Production Specification](specs/production.md); when tracing or calibration is requested, also read the selected style's `REFERENCE-STUDY.md`.
+
+### Reusable Base Assets
+
+For reusable UI components, borders, and small icons, consult the cross-style [source index](asset-library/INDEX.md). This library stores metadata only. Browse upstream previews and verify the selected file's current license before downloading. Follow the [on-demand usage and 50 MiB cache budget](asset-library/README.md); obtain only selected files and their notices, without bulk or full-site downloads. Put working copies and provenance in the target project's `Test Workspace/<task-id>/references/`, then adapt them through Aseprite MCP to the selected style, native grid, and palette, following the asset-track routing below. Remove disposable downloads after delivery. Most sources use CC0; Game-icons primarily uses CC BY 3.0 and requires applicable author credit; see [license records](asset-library/THIRD_PARTY_LICENSES.md).
 
 ## 2. Production Pipeline
 

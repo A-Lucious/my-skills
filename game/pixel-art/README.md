@@ -78,5 +78,10 @@ If invoking scripts directly from the skill repo, execute from the target projec
 | `scripts/` | MCP orchestration, diagnostics, and read-only technical verifications |
 | `examples/` | Showcase assets with editable sources, sprite sheets, and frame metadata |
 | `references/cases/` | In-house technical test cases, operational scopes, and limits |
+| `asset-library/` | Cross-style source URLs, authors, license records, and on-demand usage |
+
+## Reusable Base Assets
+
+The [asset source index](asset-library/README.md) records UI, border, icon and texture sources across styles. Browse the [source websites](asset-library/INDEX.md), then download selected files into the project workspace only when needed, following the 50 MiB cache budget. The index stores metadata and license records; artwork and previews stay upstream. Most listed packs use CC0; Game-icons primarily uses CC BY 3.0 and requires applicable author attribution. See [third-party licenses](asset-library/THIRD_PARTY_LICENSES.md), and adapt working copies through Aseprite MCP.
 
 Historical visual research for Parchment Fantasy referenced **Life in Adventure**; this skill has no official affiliation with the game or its copyright owners. The public distribution does not include screenshots, crops, extracted assets, or direct tracing studies from the game. See [NOTICE.md](NOTICE.md) for provenance and attribution.

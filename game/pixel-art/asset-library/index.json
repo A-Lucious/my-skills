@@ -1,0 +1,266 @@
+{
+  "schema_version": 2,
+  "name": "Reusable Asset Source Index",
+  "storage": "index-only",
+  "source_count": 9,
+  "url_index": "INDEX.md",
+  "on_demand": {
+    "automatic_download": false,
+    "cache_directory": "Test Workspace/asset-cache/",
+    "max_cache_bytes": 52428800,
+    "task_references_directory": "Test Workspace/<task-id>/references/",
+    "policy": "Browse upstream previews first. Download only selected files and their license notices. Check and prune disposable cache before each download; the 50 MiB budget is a workflow rule, not a background service. Remove temporary archives and unused sources after the task."
+  },
+  "artifact_record_note": "URLs, sizes, versions and hashes describe previously verified upstream files, not local holdings. If a file changes, verify its current source and license before updating the record.",
+  "packs": [
+    {
+      "id": "kenney-pixel-adventure",
+      "name": "UI Pack - Pixel Adventure",
+      "author": "Kenney",
+      "source_url": "https://kenney.nl/assets/ui-pack-pixel-adventure",
+      "license": {
+        "id": "CC0-1.0",
+        "name": "Creative Commons CC0 1.0 Universal",
+        "url": "https://creativecommons.org/publicdomain/zero/1.0/"
+      },
+      "tags": [
+        "ui",
+        "pixel",
+        "button",
+        "panel",
+        "slider"
+      ],
+      "recorded_version": "2.0",
+      "recorded_upstream_artifacts": [
+        {
+          "url": "https://kenney.nl/media/pages/assets/ui-pack-pixel-adventure/405ba5278a-1729196257/kenney_ui-pack-pixel-adventure.zip",
+          "sha256": "0b0ed4802ebcfff5e44e370f394baa1d751862a5a4a7612ac4ce84e85faa0627",
+          "bytes": 317032,
+          "kind": "archive"
+        }
+      ]
+    },
+    {
+      "id": "kenney-fantasy-borders",
+      "name": "Fantasy UI Borders",
+      "author": "Kenney",
+      "source_url": "https://kenney.nl/assets/fantasy-ui-borders",
+      "license": {
+        "id": "CC0-1.0",
+        "name": "Creative Commons CC0 1.0 Universal",
+        "url": "https://creativecommons.org/publicdomain/zero/1.0/"
+      },
+      "tags": [
+        "ui",
+        "fantasy",
+        "border",
+        "panel",
+        "button"
+      ],
+      "recorded_version": "1.0",
+      "recorded_upstream_artifacts": [
+        {
+          "url": "https://kenney.nl/media/pages/assets/fantasy-ui-borders/ab29cd0165-1701602367/kenney_fantasy-ui-borders.zip",
+          "sha256": "59532da3bd61195a425585455b40baa6cbf1eda8227c42adcef31a535a737769",
+          "bytes": 358780,
+          "kind": "archive"
+        }
+      ],
+      "notes": [
+        "The upstream sample-font notice names Aoboshi One under the Open Font License; check font licensing separately if using that font."
+      ]
+    },
+    {
+      "id": "kenney-1bit",
+      "name": "1-Bit Pack",
+      "author": "Kenney",
+      "source_url": "https://kenney.nl/assets/1-bit-pack",
+      "license": {
+        "id": "CC0-1.0",
+        "name": "Creative Commons CC0 1.0 Universal",
+        "url": "https://creativecommons.org/publicdomain/zero/1.0/"
+      },
+      "tags": [
+        "pixel",
+        "1-bit",
+        "16x16",
+        "roguelike",
+        "rpg"
+      ],
+      "recorded_version": "1.2",
+      "native_tile_size": {
+        "width": 16,
+        "height": 16
+      },
+      "recorded_upstream_artifacts": [
+        {
+          "url": "https://kenney.nl/media/pages/assets/1-bit-pack/aa867a1f37-1677578516/kenney_1-bit-pack.zip",
+          "sha256": "129a0e74e1dc9091a769d5118be5c88780484c7a3771ee33ac9ef0df02583a9a",
+          "bytes": 657579,
+          "kind": "archive"
+        }
+      ]
+    },
+    {
+      "id": "buch-golden-ui",
+      "name": "Golden UI",
+      "author": "Buch",
+      "source_url": "https://opengameart.org/content/golden-ui",
+      "license": {
+        "id": "CC0-1.0",
+        "url": "https://creativecommons.org/publicdomain/zero/1.0/"
+      },
+      "recorded_upstream_artifacts": [
+        {
+          "filename": "ui.psd",
+          "url": "https://opengameart.org/sites/default/files/ui.psd",
+          "bytes": 573124,
+          "sha256": "56c660e25a8484fc84ad92c2cfa668937869286560ec17567bd3eb07ec59948d"
+        },
+        {
+          "filename": "ui_split.png",
+          "url": "https://opengameart.org/sites/default/files/ui_split.png",
+          "bytes": 21699,
+          "sha256": "1b5422a4d66121f6727be855055fa23f0b21fe620bc52da0a117d480f8c7dd75"
+        },
+        {
+          "filename": "Preview.png",
+          "url": "https://opengameart.org/sites/default/files/ui_preview_upscaled.png",
+          "bytes": 24950,
+          "sha256": "c1882197bd25360d2e74499c034f142546da6d77398f6967d82c9d909a366cbb"
+        }
+      ],
+      "notes": [
+        "The sample lettering is not a complete font."
+      ]
+    },
+    {
+      "id": "0x72-dungeonui",
+      "name": "DungeonUI",
+      "author": "0x72",
+      "source_url": "https://0x72.itch.io/dungeonui",
+      "license": {
+        "id": "CC0-1.0",
+        "url": "https://creativecommons.org/publicdomain/zero/1.0/"
+      },
+      "download_method": "Use the creator page; temporary itch.io download URLs are not stored.",
+      "recorded_upstream_artifacts": [
+        {
+          "filename": "dungeonui.v1.png",
+          "bytes": 16088,
+          "sha256": "a6a1e933977886a0d38d0384ed3ba0a16d84cd97e99ddf5354d3a835e9ee14a3"
+        }
+      ]
+    },
+    {
+      "id": "hexany-1bit-panels",
+      "name": "Hexany’s 1-bit UI Panels",
+      "author": "Hexany Ives",
+      "source_url": "https://hexany-ives.itch.io/hexanys-1-bit-ui-panels",
+      "license": {
+        "id": "CC0-1.0",
+        "url": "https://creativecommons.org/publicdomain/zero/1.0/"
+      },
+      "download_method": "Use the creator page; temporary itch.io download URLs are not stored.",
+      "recorded_upstream_artifacts": [
+        {
+          "filename": "hexanys-1-bit-ui-panels-1.1.0.zip",
+          "bytes": 24968,
+          "sha256": "bc4c2aed1af0e349cb08561351626495efb8a5adcaa3016b66db64589fbf87a0",
+          "version": "1.1.0"
+        }
+      ]
+    },
+    {
+      "id": "system-g6-rpg-ui",
+      "name": "RPG UI",
+      "author": "System G6 / Qoma",
+      "source_url": "https://opengameart.org/content/rpg-ui-1",
+      "license": {
+        "id": "CC0-1.0",
+        "url": "https://creativecommons.org/publicdomain/zero/1.0/"
+      },
+      "recorded_upstream_artifacts": [
+        {
+          "filename": "rpg_ui.7z",
+          "url": "https://opengameart.org/sites/default/files/rpg_ui_0.7z",
+          "bytes": 6500214,
+          "sha256": "047949836f780ac5d58c727b8310ec4bd8943d32f83c8ec3998ffb8aea936f5e"
+        },
+        {
+          "filename": "Preview.png",
+          "url": "https://opengameart.org/sites/default/files/rpg_ui_preview_0.png",
+          "bytes": 3851086,
+          "sha256": "e3297518a942846ff7a27d1175170aa73bea3c69a0605c3595ce522ec51de3e1"
+        }
+      ],
+      "component_sources": [
+        {
+          "name": "Human Skull",
+          "author": "CDmir",
+          "source_url": "https://opengameart.org/content/human-skull-0",
+          "license": "CC0-1.0"
+        },
+        {
+          "name": "Scrolls",
+          "author": "yd",
+          "source_url": "https://opengameart.org/content/scrolls-0",
+          "license": "CC0-1.0"
+        }
+      ]
+    },
+    {
+      "id": "game-icons",
+      "name": "Game-icons.net SVG collection",
+      "author": "Game-icons.net contributors",
+      "source_url": "https://github.com/game-icons/icons",
+      "license": {
+        "id": "CC-BY-3.0 AND CC0-1.0",
+        "url": "https://creativecommons.org/licenses/by/3.0/"
+      },
+      "recorded_upstream_artifacts": [
+        {
+          "url": "https://codeload.github.com/game-icons/icons/tar.gz/82d948812bfe3f269ef8f731dcdb07b08160edc4",
+          "sha256": "6ede4bfaed3bbe3cbe4b188b46ab2d62a28bcf737cbfcd1f0edcfdf12c124cff",
+          "bytes": 3015620,
+          "kind": "archive"
+        }
+      ],
+      "source_commit": "82d948812bfe3f269ef8f731dcdb07b08160edc4",
+      "browse_url": "https://game-icons.net/",
+      "license_notice_url": "https://github.com/game-icons/icons/blob/82d948812bfe3f269ef8f731dcdb07b08160edc4/license.txt",
+      "attribution_url": "https://game-icons.net/faq.html",
+      "download_method": "Download only selected SVG files from the website or pinned repository, with author and license records.",
+      "notes": [
+        "Most icons use CC BY 3.0. Viscious Speed and Zeromancer are marked CC0 in the upstream notice. Confirm the individual icon page and author before use."
+      ]
+    },
+    {
+      "id": "screaming-brain-studios",
+      "name": "Screaming Brain Studios",
+      "author": "Screaming Brain Studios",
+      "source_url": "https://screamingbrainstudios.itch.io/",
+      "license": {
+        "id": "CC0-1.0",
+        "url": "https://creativecommons.org/publicdomain/zero/1.0/"
+      },
+      "website_url": "https://screamingbrainstudios.com/",
+      "mirror_url": "https://opengameart.org/users/screaming-brain-studios",
+      "selected_source_pages": [
+        {
+          "name": "Tiny Buttons Pack",
+          "url": "https://screamingbrainstudios.itch.io/tiny-buttons-pack"
+        },
+        {
+          "name": "Mini Texture Pack 2: Rooftops",
+          "url": "https://opengameart.org/content/150-roof-textures"
+        },
+        {
+          "name": "Mini Texture Pack 3: Liquids",
+          "url": "https://opengameart.org/content/140-liquid-textures"
+        }
+      ],
+      "scope": "Catalogue links only. No full-site crawl or automatic download."
+    }
+  ]
+}

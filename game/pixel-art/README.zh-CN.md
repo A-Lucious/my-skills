@@ -78,5 +78,10 @@ python3 .agents/skills/pixel-art/scripts/mcp_client.py doctor
 | `scripts/` | MCP 调用编排、诊断与只读技术检查 |
 | `examples/` | 展示素材及其可编辑源稿、图集和帧数据 |
 | `references/cases/` | 自制技术案例、适用范围与限制 |
+| `asset-library/` | 跨风格素材来源网址、作者、协议记录与按需取用说明 |
+
+## 通用基础素材
+
+[素材来源索引](asset-library/README.zh-CN.md)只保存跨风格的来源网址、作者、协议和校验信息。先在[作者网站](asset-library/INDEX.md)浏览预览，需要时才下载选中的文件到项目工作区，遵守 50 MiB 缓存预算。多数来源为 CC0；Game-icons 以 CC BY 3.0 为主，使用时保留对应作者署名，详见[第三方协议说明](asset-library/THIRD_PARTY_LICENSES.md)。选中的工作副本通过 Aseprite MCP 改造为目标风格。
 
 羊皮纸奇幻的历史视觉研究参考过 **Life in Adventure**，本技能与该游戏及其权利人无官方关联。公开包不附带该游戏的截图、裁切图、提取素材或临摹稿；来源与权属说明见 [NOTICE.md](NOTICE.md)。
