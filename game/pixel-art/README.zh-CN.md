@@ -24,6 +24,12 @@ flowchart LR
 
 硬表面与空间素材采用完整的 3D 通道；有机与装饰类 UI 可按任务选择纯 2D 起稿。各阶段展示实际预览并记录评审，Shader 效果在进入像素粗稿前展示。
 
+## Tips
+
+1. 请确保 Agent 环境已安装并接入 **Blender MCP** 和 **Aseprite MCP**。
+2. 该技能的上下文较长，请确保 Agent 有足够的上下文容量来承载技能说明及当前任务。
+3. 当前内置一种风格 `parchment-fantasy`。可调用技能内置的 [create-style](commands/create-style.md)，通过问答扩展独立风格，例如：`使用 $pixel-art create-style，帮我创建一个新风格。`
+
 ## 案例
 
 <table>

@@ -24,6 +24,12 @@ flowchart LR
 
 Hard-surface and spatial assets follow the complete 3D track; organic and decorative UI assets can choose the pure 2D blockout track based on task requirements. Actual previews are shown and reviewed at each stage, with Shader results presented before entering rough draft pixel editing.
 
+## Tips
+
+1. Ensure **Blender MCP** and **Aseprite MCP** are installed and connected in the agent's environment.
+2. This skill has substantial context. Ensure the agent has enough context capacity for its instructions and the current task.
+3. One style, `parchment-fantasy`, is currently bundled. Extend the style library through the built-in [create-style](commands/create-style.md) interview, for example: `Using $pixel-art create-style, help me create a new style.`
+
 ## Showcase
 
 <table>

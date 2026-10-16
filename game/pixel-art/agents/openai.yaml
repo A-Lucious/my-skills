@@ -1,7 +1,7 @@
 interface:
   display_name: "Pixel Art"
-  short_description: "Create pixel art via Blender and Aseprite following character, scene, prop, and building specifications"
-  default_prompt: "Using $pixel-art, execute the six-step production pipeline based on style and category specifications. After Blender modeling and lighting, invoke the fixed Pixel Shader from the style directory in Step 3 to preview the result in advance, then proceed to Aseprite rough drafting, refinement, and inspection."
+  short_description: "Create pixel art assets and define reusable styles"
+  default_prompt: "Use $pixel-art to create assets through the appropriate Blender/Aseprite track, or use its create-style command to define and save a new style through an interview."
 
 dependencies:
   tools:

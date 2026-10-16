@@ -1,15 +1,19 @@
 ---
 name: pixel-art
-description: "Create, modify, and export pixel art assets and sprite animations. Follow category and style specs to model and light in Blender MCP, run fixed Pixel Shaders from style directories with advance previews, and import, polish, and export via Aseprite MCP."
+description: "Create, modify, and export pixel art assets and sprite animations via Blender MCP and Aseprite MCP. Follow category and style specs, preview fixed style Pixel Shaders, and refine editable sprites. Use the built-in create-style interview to define and save a new pixel art style."
 ---
 
 # Pixel Art
 
 Determine the subject, purpose, and delivery goals from user requirements, assemble style and category specifications into task inputs, and execute the production pipeline. User-specified styles, simplifications, and review modes take precedence over defaults.
 
+## Built-in Command: create-style
+
+When the user invokes `create-style` or asks to create/add a reusable pixel art style, follow [commands/create-style.md](commands/create-style.md). Interview for missing visual direction, palette and tonal steps, and reference examples, then write an independent style directory and register it in the library. This is a style-authoring workflow; enter the asset production pipeline only when a sample or calibration asset is also requested. A one-off change to an asset's appearance does not by itself create a reusable style.
+
 ## 1. Style and Content Specifications
 
-Read [Common Specifications](styles/COMMON.md) first. The default style is `parchment-fantasy`; read its [STYLE.md](styles/parchment-fantasy/STYLE.md), [palette.json](styles/parchment-fantasy/palette.json), and [Reference Usage Rules](styles/parchment-fantasy/reference-library/INDEX.md). When visual references are needed, use only permissible references provided for the current task; public packages do not include third-party game assets. Select other styles from the [Style Library](styles/index.md).
+Read [Common Specifications](styles/COMMON.md) first. Select the requested style from the [Style Library](styles/index.md), defaulting to `parchment-fantasy` only when none is specified. Read the selected style's `STYLE.md`, `palette.json`, and `reference-library/INDEX.md` in `styles/<style-id>/`. When visual references are needed, use only permissible references provided for the current task; public packages do not include third-party game assets. Parchment Fantasy examples and technical baselines apply only to that style; use the selected style's own documents for other styles.
 
 Read the corresponding category specification for the task; for composite assets, start from the primary subject and supplement with related specs:
 
@@ -20,7 +24,7 @@ Read the corresponding category specification for the task; for composite assets
 | Props, equipment, icons, paper frames, decorations | [Props](specs/props.md) |
 | Houses, ruins, standalone buildings | [Buildings](specs/buildings.md) |
 
-All tasks read the [Lighting Specification](specs/lighting.md); read the [Texture Specification](specs/texture.md) when surface textures are needed. Establish a task card for every task following the [Production Specification](specs/production.md); when tracing or calibration is requested, also read the [Reference Study Specification](styles/parchment-fantasy/REFERENCE-STUDY.md).
+All tasks read the [Lighting Specification](specs/lighting.md); read the [Texture Specification](specs/texture.md) when surface textures are needed. Establish a task card for every task following the [Production Specification](specs/production.md); when tracing or calibration is requested, also read the selected style's `REFERENCE-STUDY.md`.
 
 ## 2. Production Pipeline
 
@@ -37,7 +41,7 @@ Avoid a one-size-fits-all approach; route assets according to their inherent cha
 
 When creating, modifying, or exporting assets in Track A or Track B Strategy 2, execute the six phases in [workflow.md](workflow.md) sequentially: **1: 3D & Camera -> 2: Lighting & Render -> 3: Style Pixel Shader & Advance Preview -> 4: Aseprite Rough Draft -> 5: Pixel Clusters, Details & Texture -> 6: Final Visual Check**. When Track B Strategy 1 is selected, record the pure 2D blockout track in the task card and proceed directly to Phase 4 for Aseprite silhouette blockout, retaining artifacts and check records.
 
-The Pixel Shader is fixed per style as `styles/<style-id>/pixel_shader.py` and executed directly inside Blender via Blender MCP. Do not invent per-task algorithms or cross-apply shaders between styles. For Parchment Fantasy implementation and invocation, see [Pixel Shader](styles/parchment-fantasy/PIXEL-SHADER.md). Present the Shader preview under the confirmed camera angle and complete review before proceeding to Phase 4.
+The Pixel Shader is fixed per style as `styles/<style-id>/pixel_shader.py` and executed directly inside Blender via Blender MCP. Read that style's `PIXEL-SHADER.md` for implementation, invocation, and validation status. Do not invent per-task algorithms or cross-apply shaders between styles. For Parchment Fantasy implementation and invocation, see [Pixel Shader](styles/parchment-fantasy/PIXEL-SHADER.md). Draft styles require their missing implementation or calibration before entering 3D production; a 2D-only style does not waive Track A requirements. Present the Shader preview under the confirmed camera angle and complete review before proceeding to Phase 4.
 
 The current technical baseline for Parchment Fantasy is Shader `1.3.0`, Palette `4.3`, and native `64x64`: preserves real display lighting, supports material-to-family partitioning, and prevents cross-color bleeding on parts such as bottle necks. See [Shader Baseline](styles/parchment-fantasy/PIXEL-SHADER.md#technical-baseline) for baseline parameters and ranges; generate and showcase the current effect for each new object in Phase 3.
 
