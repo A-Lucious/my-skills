@@ -10,7 +10,7 @@
 
 ## 制作流程
 
-先确定对象、用途、尺寸和风格，再选择适合素材的制作通道。Blender 提供形体与光照依据，Aseprite 完成像素整理、细化和正式导出。
+先确定对象、用途、尺寸和风格。Blender 提供形体与光照依据，Aseprite 完成像素整理、细化和正式导出。
 
 ```mermaid
 flowchart LR
@@ -19,10 +19,9 @@ flowchart LR
     C --> D["Aseprite<br/>像素粗稿"]
     D --> E["像素精修<br/>纹理与动画"]
     E --> F["效果检查<br/>与交付"]
-    G["纯 2D 通道<br/>有机与装饰类 UI"] --> D
 ```
 
-硬表面与空间素材采用完整的 3D 通道；有机与装饰类 UI 可按任务选择纯 2D 起稿。各阶段展示实际预览并记录评审，Shader 效果在进入像素粗稿前展示。
+各阶段展示实际预览并记录评审，Shader 效果在进入像素粗稿前展示。
 
 ## Tips
 
@@ -68,7 +67,7 @@ python3 .agents/skills/pixel-art/scripts/mcp_client.py doctor
 
 ## 技能说明
 
-[SKILL.md](SKILL.md) 是技能入口，负责风格、分类和制作通道的选择；[workflow.md](workflow.md) 说明各阶段的执行与评审方式。
+[SKILL.md](SKILL.md) 是技能入口，负责风格与分类的选择；[workflow.md](workflow.md) 说明各阶段的执行与评审方式。
 
 | 目录 | 内容 |
 |---|---|

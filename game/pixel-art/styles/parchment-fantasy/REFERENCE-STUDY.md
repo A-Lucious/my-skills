@@ -2,7 +2,7 @@
 
 Applies to user-requested replications, tracing studies, or style calibrations. Studies document provenance, using independent observation whitelists and per-asset comparisons; original color schemes use the production palette.
 
-Studies and calibrations follow the [Pipeline](../../workflow.md) and skill entrypoint to select tracks; the Blender track executes all six phases, running the fixed style Shader in Step 3 with advance previews, unless prompts explicitly waive designated phases. The observations, transcriptions, and comparisons below are specialized operations within the pipeline and do not substitute for Blender modeling, lighting guidance, or advance Shader previews.
+Studies and calibrations follow the [Pipeline](../../workflow.md); execution covers all six phases, running the fixed style Shader in Step 3 with advance previews, unless prompts explicitly waive designated phases. The observations, transcriptions, and comparisons below are specialized operations within the pipeline and do not substitute for Blender modeling, lighting guidance, or advance Shader previews.
 
 ## Provenance and Scope
 

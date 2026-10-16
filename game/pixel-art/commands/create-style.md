@@ -15,7 +15,7 @@ Start with visual direction, color/tonal preferences, and examples. Cover the re
 | Reference examples | Existing images, links, games/artists, or descriptive examples; what to adopt or avoid in each. Ask whether examples exist, but continue from verbal direction when none are available. Inspect supplied visuals before claiming observations; record uninspected named examples as such. |
 | Shapes and pixels | Proportions, exaggeration, silhouette language, native sizes by category, cluster density, outlines (width/color/selective or continuous), texture density, dithering, and antialiasing. |
 | Light and materials | Key light direction, shadow softness, value range, specular/glass/emissive treatment, material-to-family mappings, and transparency policy. |
-| Scope and validation | Relevant asset categories, 3D track and/or eligible pure 2D use, animation needs, and whether a calibration sample is wanted now. Style creation alone does not request an asset or authorize game integration. |
+| Scope and validation | Relevant asset categories, animation needs, and whether a calibration sample is wanted now. Style creation alone does not request an asset or authorize game integration. |
 
 For example, an opening batch in Chinese can ask:
 
@@ -46,7 +46,7 @@ styles/<style-id>/
     └── INDEX.md
 ```
 
-Create `pixel_shader.py` when implementing the 3D track as described below. If only specifications are being created and it is absent, state that explicitly in `STYLE.md`, `PIXEL-SHADER.md`, and the index entry; do not create a placeholder executable. A purely 2D style may omit it and mark it not applicable to its current scope. Do not copy `palette-v3-legacy.json`; new styles have no legacy versions.
+Create `pixel_shader.py` when implementing the shader as described below. If only specifications are being created and it is absent, state that explicitly in `STYLE.md`, `PIXEL-SHADER.md`, and the index entry; do not create a placeholder executable. Do not copy `palette-v3-legacy.json`; new styles have no legacy versions.
 
 The request to create a style authorizes these skill-library edits. Keep interview working notes, temporary scripts, logs, source references, and calibration artifacts in `Test Workspace/create-style-<style-id>/`. Store reusable decisions in the style files, without private conversation transcripts or machine-specific paths.
 
@@ -54,7 +54,7 @@ The request to create a style authorizes these skill-library edits. Keep intervi
 
 ### STYLE.md
 
-Include display name and ID, specification/palette versions, readiness by track, intended categories, visual language, shapes/proportions, native grids and cluster density, outlines, color-family budgets, lighting/materials, textures, transparency, and relevant animation rules. Link `../COMMON.md`, local palette, Shader notes, study rules, and reference index. Explain how style choices specialize COMMON; surface conflicts rather than silently changing shared production rules.
+Include display name and ID, specification/palette versions, readiness status, intended categories, visual language, shapes/proportions, native grids and cluster density, outlines, color-family budgets, lighting/materials, textures, transparency, and relevant animation rules. Link `../COMMON.md`, local palette, Shader notes, study rules, and reference index. Explain how style choices specialize COMMON; surface conflicts rather than silently changing shared production rules.
 
 Record a compact rationale connecting the interview's defining preferences to usable drawing rules. Distinguish documented decisions, untested proposals, and observed calibration conclusions. A style without real calibration is a specification draft, even when all files are present.
 
@@ -77,7 +77,7 @@ Document the style's 3D conversion contract: native grid, palette mapping, mater
 
 When the requested scope includes Shader implementation, author a self-contained `pixel_shader.py` for this style's decisions, loading its sibling `palette.json`. Expose a documented `render_preview` entrypoint accepting the source scene, output directory, dimensions, selected families, and asset type; document additional inputs. Importing the module must not render or alter the source scene. Preserve upstream data, record script/palette hashes and actual arguments in a manifest, and generate native base and same-view comparison outputs through Blender MCP. Use the existing [Blender integration rules](../mcp/blender.md); do not call or import another style's production Shader, rename its implementation unchanged, or substitute external pixel processing.
 
-Writing specifications does not require launching Blender or Aseprite. If implementation or live calibration is outside the current request or the tools are unavailable, save the requested specification with the exact pending work and readiness limits. A script that has only passed syntax checks remains unvalidated. Before 3D production, complete the independent implementation and actual Step 3 preview; do not label a missing or stubbed Shader ready. Pure 2D eligibility still follows the parent skill's track routing.
+Writing specifications does not require launching Blender or Aseprite. If implementation or live calibration is outside the current request or the tools are unavailable, save the requested specification with the exact pending work and readiness limits. A script that has only passed syntax checks remains unvalidated. Before production, complete the independent implementation and actual Step 3 preview; do not label a missing or stubbed Shader ready.
 
 ### REFERENCE-STUDY.md
 
@@ -93,5 +93,5 @@ Keep third-party and private reference files in the task workspace under [NOTICE
 
 1. Add one row to `styles/index.md` with the unique ID, visual direction, links to the new files, and any draft/unvalidated scope. Retain existing rows and the default.
 2. Run `python3 <skill-root>/scripts/check_palette.py --style <style-id>` and fix schema, ramp ordering, and budget failures. Check relative links and consistency among the directory ID, palette, style docs, and Shader metadata. If a Shader was written, syntax-check it without executing Blender-dependent code; keep any cache under the task workspace.
-3. If a calibration sample was requested, read the applicable category and production specs and run the appropriate Blender/Aseprite MCP track. Show actual previews and record technical checks, agent review, and user acceptance separately. Save outputs in the task workspace and summarize observed conclusions in the style docs; a passing palette check alone does not validate appearance or a Shader. Missing tools block live calibration, not saving the agreed specifications.
+3. If a calibration sample was requested, read the applicable category and production specs and run the Blender/Aseprite pipeline. Show actual previews and record technical checks, agent review, and user acceptance separately. Save outputs in the task workspace and summarize observed conclusions in the style docs; a passing palette check alone does not validate appearance or a Shader. Missing tools block live calibration, not saving the agreed specifications.
 4. Deliver links to the new style directory's main files, summarize its defining choices and readiness, and show a usage prompt such as `Using $pixel-art, create <asset> in the <style-id> style`. State remaining implementation/calibration work when applicable. Clean up disposable working files while retaining necessary calibration previews and editable sources.

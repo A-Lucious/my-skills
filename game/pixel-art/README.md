@@ -10,7 +10,7 @@ The default style is **Parchment Fantasy** (style ID: `parchment-fantasy`), but 
 
 ## Pipeline
 
-First define the subject, purpose, dimensions, and style, then choose the appropriate asset track. Blender establishes form and lighting baselines, while Aseprite handles pixel cleanup, detail refinement, and final exports.
+First define the subject, purpose, dimensions, and style. Blender establishes form and lighting baselines, while Aseprite handles pixel cleanup, detail refinement, and final exports.
 
 ```mermaid
 flowchart LR
@@ -19,10 +19,9 @@ flowchart LR
     C --> D["Aseprite<br/>Rough Draft"]
     D --> E["Pixel Refinement<br/>Texture & Anim"]
     E --> F["Visual Check<br/>& Delivery"]
-    G["Pure 2D Track<br/>Organic & Decorative UI"] --> D
 ```
 
-Hard-surface and spatial assets follow the complete 3D track; organic and decorative UI assets can choose the pure 2D blockout track based on task requirements. Actual previews are shown and reviewed at each stage, with Shader results presented before entering rough draft pixel editing.
+Actual previews are shown and reviewed at each stage, with Shader results presented before entering rough draft pixel editing.
 
 ## Tips
 
@@ -68,7 +67,7 @@ If invoking scripts directly from the skill repo, execute from the target projec
 
 ## Skill Structure
 
-[SKILL.md](SKILL.md) is the main skill entrypoint, handling style selection, taxonomy, and track routing; [workflow.md](workflow.md) outlines phase-by-phase execution and review criteria.
+[SKILL.md](SKILL.md) is the main skill entrypoint, handling style selection and taxonomy; [workflow.md](workflow.md) outlines phase-by-phase execution and review criteria.
 
 | Directory | Contents |
 |---|---|

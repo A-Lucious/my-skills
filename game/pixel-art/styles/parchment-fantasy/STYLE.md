@@ -2,7 +2,7 @@
 
 Production Palette 4.3. Structures fantasy themes through warm paper tones, low-saturation natural materials, and selective vibrant accents; tonal ramps preserve material reflections, transmittances, and shadow nuances. Historical visual research referenced visual observations of third-party games; see [NOTICE.md](../../NOTICE.md) for provenance and unofficial statements. This style does not bundle third-party game screenshots, crops, or tracing studies. Shares [COMMON](../COMMON.md); see [Reference Studies](REFERENCE-STUDY.md) for provenance and observational methodology.
 
-Step 3 of the Blender track executes this style's fixed [Pixel Shader](PIXEL-SHADER.md), presenting advance previews under the active camera before proceeding to Step 4 Aseprite rough drafting. The implementation is housed in this style directory at [pixel_shader.py](pixel_shader.py); current technical baseline is `1.3.0`, Palette `4.3`, and native `64x64`.
+Step 3 of the pipeline executes this style's fixed [Pixel Shader](PIXEL-SHADER.md), presenting advance previews under the active camera before proceeding to Step 4 Aseprite rough drafting. The implementation is housed in this style directory at [pixel_shader.py](pixel_shader.py); current technical baseline is `1.3.0`, Palette `4.3`, and native `64x64`.
 
 ## Visual Language
 

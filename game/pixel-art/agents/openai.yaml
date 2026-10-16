@@ -1,7 +1,7 @@
 interface:
   display_name: "Pixel Art"
   short_description: "Create pixel art assets and define reusable styles"
-  default_prompt: "Use $pixel-art to create assets through the appropriate Blender/Aseprite track, or use its create-style command to define and save a new style through an interview."
+  default_prompt: "Use $pixel-art to create assets through the Blender/Aseprite pipeline, or use its create-style command to define and save a new style through an interview."
 
 dependencies:
   tools:
