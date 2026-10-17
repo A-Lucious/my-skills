@@ -18,6 +18,12 @@ For an existing Aseprite source that already passed through this Shader, continu
 
 Record the triggering user text, source/provenance, selected route, whether a model was actually called, and the source -> Shader -> Aseprite artifact paths. Explicit user instructions about generation or preprocessing take precedence. Merely updating cards or discussing a model does not request image generation.
 
+### Default Framing in Image-Generation Prompts
+
+When image generation is authorized for a character portrait or dialogue avatar, include the following composition requirement in the generation or edit prompt. Explicit user framing requirements take precedence.
+
+> Use a tight head-and-neck portrait composition. Let the head and visible neck occupy most of the frame, with only a small margin above the hair or headwear. Show just a narrow strip of the collar or upper garment along the bottom edge, with the shoulders, chest, and torso cropped out. Keep the face large and readable at the target pixel resolution.
+
 ## 1. Input Modes & Attribute Sources
 
 | Input | Design approach |

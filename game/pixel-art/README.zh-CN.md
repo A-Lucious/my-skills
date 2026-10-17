@@ -33,6 +33,8 @@ flowchart LR
 
 ## 案例
 
+### 道具、动画与材质案例
+
 <table>
   <tr>
     <td align="center" valign="middle"><img src="examples/leather-backpack/preview.png" alt="多口袋皮革背包" width="192"></td>
@@ -45,6 +47,40 @@ flowchart LR
     <td align="center" valign="middle"><img src="references/cases/wooden-chest/preview.png" alt="木箱纹理与投影" width="192"></td>
   </tr>
 </table>
+
+### 人物画像案例
+
+<table>
+  <tr>
+    <td align="center" valign="middle">
+      <img src="references/cases/portrait-smoothing-baseline/preview.png" alt="平滑 Shader 效果基准" width="180"><br/>
+      <b>平滑 Shader 效果基准</b><br/>
+      <sub>用户认可的平滑色块与观感基准</sub>
+    </td>
+    <td align="center" valign="middle">
+      <img src="references/cases/cloaked-youth/preview.png" alt="兜帽青年画像" width="180"><br/>
+      <b>兜帽青年</b><br/>
+      <sub>头颈大占比特写构图（免精修）</sub>
+    </td>
+  </tr>
+  <tr>
+    <td align="center" valign="middle">
+      <img src="references/cases/giant-goblin/preview.png" alt="巨型地精画像" width="180"><br/>
+      <b>巨型地精</b><br/>
+      <sub>宽颌厚颈与异质五官像素底稿</sub>
+    </td>
+    <td align="center" valign="middle">
+      <img src="references/cases/ranger-failed-baseline/preview.png" alt="游侠失败基线案例" width="180"><br/>
+      <b>游侠（失败基线案例）</b><br/>
+      <sub>“无参考照片，无生图”下使用 Blender 建模的失败案例</sub>
+    </td>
+  </tr>
+</table>
+
+- [平滑 Shader 效果基准](references/cases/portrait-smoothing-baseline/case.md)：生图来源路线进入 Aseprite 之前的方向性平滑（Anisotropic Kuwahara）与 Oklab 色板映射基准，色块高度归并，光影层次明晰。
+- [兜帽青年（头颈大占比特写）](references/cases/cloaked-youth/case.md)：原生 64×64，验证了特写构图规范（头部与颈部占据主要画面，底部仅保留少许斗篷领口，免躯干服饰挤占面部像素预算），比例已获认可。
+- [巨型地精 / 哥布林](references/cases/giant-goblin/case.md)：原生 64×64，非人生物与怪物画像底稿，验证了宽颌、厚颈、尖耳与獠牙等特征的像素化与 Shader 处理。
+- [游侠（失败基线案例）](references/cases/ranger-failed-baseline/case.md)：**“无参考照片，无生图”下使用 Blender 建模的失败案例**。作为反面教材归档保留：由于在无真实参考下手工盲目建 3D 头部模型，导致面部骨骼体块僵硬、表情木讷疲惫；且半身像构图中服饰占据过多面积，严重挤占了五官神态的像素表现空间。确立了后续人物画像必须以“人脸特写构图”和“具备可靠造型来源”的约束规范。
 
 ## 使用
 

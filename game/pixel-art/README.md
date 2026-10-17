@@ -33,6 +33,8 @@ For portraits, the [design card](cards/portraits/design.md) selects the input ro
 
 ## Showcase
 
+### Props, Animations & Materials
+
 <table>
   <tr>
     <td align="center" valign="middle"><img src="examples/leather-backpack/preview.png" alt="Multi-pocket leather backpack" width="192"></td>
@@ -45,6 +47,40 @@ For portraits, the [design card](cards/portraits/design.md) selects the input ro
     <td align="center" valign="middle"><img src="references/cases/wooden-chest/preview.png" alt="Wooden chest texture and shadow" width="192"></td>
   </tr>
 </table>
+
+### Portrait Cases
+
+<table>
+  <tr>
+    <td align="center" valign="middle">
+      <img src="references/cases/portrait-smoothing-baseline/preview.png" alt="Portrait smoothing Shader baseline" width="180"><br/>
+      <b>Smoothing Shader Baseline</b><br/>
+      <sub>Approved smoothing & color-clustering reference</sub>
+    </td>
+    <td align="center" valign="middle">
+      <img src="references/cases/cloaked-youth/preview.png" alt="Cloaked youth portrait" width="180"><br/>
+      <b>Cloaked Youth</b><br/>
+      <sub>Tight head-and-neck composition (approved)</sub>
+    </td>
+  </tr>
+  <tr>
+    <td align="center" valign="middle">
+      <img src="references/cases/giant-goblin/preview.png" alt="Giant goblin portrait" width="180"><br/>
+      <b>Giant Goblin</b><br/>
+      <sub>Heavy jaw, thick neck & creature features</sub>
+    </td>
+    <td align="center" valign="middle">
+      <img src="references/cases/ranger-failed-baseline/preview.png" alt="Ranger failed baseline case" width="180"><br/>
+      <b>Ranger (Failed Baseline)</b><br/>
+      <sub>Failed case modeled in Blender without photo reference or AI generation</sub>
+    </td>
+  </tr>
+</table>
+
+- [Portrait Smoothing Shader Baseline](references/cases/portrait-smoothing-baseline/case.md): Approved benchmark for directional smoothing (Anisotropic Kuwahara) and Oklab palette mapping before manual Aseprite postprocessing.
+- [Cloaked Youth (Tight Head-and-Neck Framing)](references/cases/cloaked-youth/case.md): Native 64×64. Validates the close-up composition requirement where the head and neck fill most of the canvas, avoiding torso or cloth details competing for facial pixel budget.
+- [Giant Goblin](references/cases/giant-goblin/case.md): Native 64×64. Validates non-human creature portrait conversion with wide jaw, pointed ears, and tusks.
+- [Ranger (Failed Baseline Case)](references/cases/ranger-failed-baseline/case.md): **A failed case modeled in Blender "without reference photos and without AI generation"**. Archived as a cautionary baseline: blind manual 3D modeling without photographic reference produced stiff, lifeless facial anatomy, while the bust/half-body composition left insufficient pixels for facial expression. Established the tight head-and-neck composition standard and the need for reliable visual grounding.
 
 ## Usage
 
