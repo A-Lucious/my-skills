@@ -2,6 +2,8 @@
 
 Applies to portraits, full-body characters, and creatures; the chosen style dictates proportions, exaggeration, and detail density.
 
+For head-and-shoulders portraits and busts, start with [Portrait Design](../cards/portraits/design.md), then mount the corresponding phase cards in `cards/portraits/`. The principles below remain shared character guidance.
+
 ## Task Inputs
 
 Character identity, apparent age, expression or action, eye line and orientation, clothing/gear, and recognizable landmarks. Portraits specify head-and-shoulders framing; full-body characters specify grounding points and center of mass; creatures specify anatomical zoning and distinctive features.

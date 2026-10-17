@@ -4,6 +4,8 @@ Production Palette 4.3. Structures fantasy themes through warm paper tones, low-
 
 Step 3 of the pipeline executes this style's fixed [Pixel Shader](PIXEL-SHADER.md), presenting advance previews under the active camera before proceeding to Step 4 Aseprite rough drafting. The implementation is housed in this style directory at [pixel_shader.py](pixel_shader.py); current technical baseline is `1.3.0`, Palette `4.3`, and native `64x64`.
 
+Portraits using the design card's conditional image-source route instead apply the [smooth portrait Pixel Shader](PORTRAIT-PIXEL-SHADER.md) before Aseprite. It smooths the existing 2D source and reuses this style's locked palette mapper.
+
 ## Visual Language
 
 Parchment user interface and dark fantasy theme; scenes maintain low saturation, while attribute symbols and specific materials establish clear focal points. Characters employ semi-realistic proportions; outlines derive from adjacent material shadow planes or pale edges using selective outlining. Curves are expressed through stable staircasing, and details are organized in directional pixel clusters.

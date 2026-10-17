@@ -2,6 +2,8 @@
 
 This workflow defines the standard six-phase production engine for pixel art assets. The engine defines phase transitions, technical checks, and tool orchestration, while specific asset rules are dynamically mounted via **Card Injection Hooks**.
 
+**Portrait route selection:** First read [Portrait Design](cards/portraits/design.md). Its conditional image-source route replaces Steps 1–2 with a selected 2D source and uses the smooth portrait Shader in Step 3, followed by Steps 4–6. Apply the portrait cards' source-based comparisons in place of camera/guidance comparisons; do not fabricate 3D passes. Other routes retain the standard phases below.
+
 ## Injection Architecture Overview
 
 For each phase, the agent mounts three orthogonal specifications:

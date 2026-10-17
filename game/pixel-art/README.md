@@ -23,6 +23,8 @@ flowchart LR
 
 Actual previews are shown and reviewed at each stage, with Shader results presented before entering rough draft pixel editing.
 
+For portraits, the [design card](cards/portraits/design.md) selects the input route. When the user identifies an upload as model-generated or needs image generation, the selected 2D source passes through the [smooth portrait Pixel Shader](styles/parchment-fantasy/PORTRAIT-PIXEL-SHADER.md) before Aseprite. An existing suitable AI image needs no regeneration; eyes and expression are refined in Aseprite. Ordinary references do not automatically trigger an image-model call.
+
 ## Tips
 
 1. Ensure **Blender MCP** and **Aseprite MCP** are installed and connected in the agent's environment.
@@ -71,7 +73,7 @@ If invoking scripts directly from the skill repo, execute from the target projec
 
 | Directory | Contents |
 |---|---|
-| `cards/` | Modular injection templates for props, materials, and feature extensions |
+| `cards/` | Modular injection templates for props, portraits, materials, and feature extensions |
 | `styles/` | Common rules, style definitions, fixed palettes, and Pixel Shaders |
 | `specs/` | Base specifications for common grid rules, lighting, textures, and delivery |
 | `mcp/` | Blender and Aseprite integration guides, pinned version manifests |

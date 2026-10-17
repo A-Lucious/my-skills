@@ -44,6 +44,8 @@ Passing `--style` alone verifies palette schema definitions; omitting `--familie
 
 Q1 evaluates 3D form, Q2 evaluates lighting guidance, Q3 evaluates Step 3 style Pixel Shader output, Q4 evaluates Step 4 rough drafts, and Q5 evaluates Step 6 final visual results; Step 5 internal detail checks do not constitute Q5. Phases are confirmed by the user sequentially by default; when user prompts explicitly authorize omitting a phase, log the authorization and omitted status. When users request consolidated checks or single-trial runs, execute all non-waived production phases and agent self-checks, reviewing per user instructions; Shader previews must still be shown before Step 4 production.
 
+For the conditional [portrait image-source route](../cards/portraits/design.md), record its triggering user text and 2D source instead of 3D/light production. Mark Q1/Q2 as replaced by that route, without claiming execution or approval; Q3 reviews the smooth image Shader and Q4/Q5 remain applicable. This defined route needs no additional phase-waiver prompt.
+
 Maintain separate records for: phase execution status and artifacts, technical checks and results, agent visual self-checks (Unchecked / Passed / Rework Required), and user reviews (Pending Review / Approved / Rework). Passing technical checks indicates only that technical criteria were met; visual self-checks cannot replace user sign-off. User "Approved" status requires verbatim quotes of explicit confirmation linked to specific preview versions, remaining pending review otherwise. Revisions re-open affected checks only.
 
 Candidates may be exported for review; candidate delivery does not equal user acceptance or formal archiving. Unresolved issues must be listed alongside candidates without declaring "All checks passed" or "Requirements fully met." Retain guidance and comparison evidence supporting current decisions prior to review; if users explicitly request early cleanup, record the scope of cleaned evidence. After review, purge intermediate process files per file specs, retaining final sources, essential previews, and summary conclusions.
@@ -51,6 +53,8 @@ Candidates may be exported for review; candidate delivery does not equal user ac
 ## Task Card and Continuity Template
 
 Maintain a record in `Test Workspace/reports/<id>.md`, populating conditional fields per task. Workflow, 3D, lighting, and phase artifact records cannot be omitted due to asset category; when a phase is explicitly waived by the user, cite verbatim prompts and define the scope, avoiding `N/A` or "flat symbol":
+
+For the portrait image-source route, adapt the 3D/lighting fields to source provenance and observed 2D lighting. Record model-called yes/no, trigger text, source hash/crop, preprocessing script and parameters, and source -> smooth native base -> Aseprite import paths. Camera, geometry passes, and Q1/Q2 sign-offs are not required for that route.
 
 ```markdown
 # <asset-id>

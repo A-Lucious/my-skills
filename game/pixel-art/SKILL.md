@@ -1,6 +1,6 @@
 ---
 name: pixel-art
-description: "Create, modify, and export pixel art assets and sprite animations via Blender MCP and Aseprite MCP. Follow modular card injection templates for props and materials, preview fixed style Pixel Shaders, and refine editable sprites. Use the built-in create-style interview to define and save a new pixel art style."
+description: "Create, modify, and export pixel art assets and sprite animations via Blender MCP and Aseprite MCP. Follow modular card injection templates for props, portraits, and materials, preview fixed style Pixel Shaders, and refine editable sprites. Use the built-in create-style interview to define and save a new pixel art style."
 ---
 
 # Pixel Art
@@ -21,8 +21,11 @@ Each asset category provides dedicated instruction cards tailored for every phas
 | Category | Description | Specification / Cards |
 |---|---|---|
 | **Props & Items** | Containers, equipment, potions, weapons, books | [cards/props/](cards/props/) (`3dac`, `lr`, `psap`, `ard`, `pcdt`, `fvc`) |
-| **Characters & Portraits** | Dialog avatars, NPC busts, full-body combat sprites | [specs/characters.md](specs/characters.md) |
+| **Portraits** | Dialog avatars, head-and-shoulders portraits, NPC busts | [cards/portraits/design.md](cards/portraits/design.md), then `cards/portraits/<phase-node>.md` (`3dac`, `lr`, `psap`, `ard`, `pcdt`, `fvc`) |
+| **Characters & Creatures** | Full-body combat sprites, characters, creatures | [specs/characters.md](specs/characters.md) |
 | **Scenes & Buildings** | Event illustrations, environments, architectural structures | [specs/scenes.md](specs/scenes.md), [specs/buildings.md](specs/buildings.md) |
+
+For portraits, read the [design card](cards/portraits/design.md) before production and select its input route. Image generation is conditional on the user's prompt; the image-source route applies the smooth portrait Pixel Shader before Aseprite. Otherwise use the standard six-phase pipeline. Mount only the corresponding portrait card at each applicable phase.
 
 ### Material Cards (`cards/materials/`)
 Mount applicable physical material rules to govern highlights, value transitions, and cluster patterns in Phase 5:
@@ -42,7 +45,7 @@ For reusable UI components, borders, and small icons, consult the cross-style [s
 
 ## 2. Production Pipeline
 
-Execute the six phases in [workflow.md](workflow.md) sequentially:
+Follow the selected route in [workflow.md](workflow.md). The standard route executes these six phases sequentially:
 1. **3D & Camera (3dac):** Mount `cards/<category>/3dac.md`.
 2. **Lighting & Render (lr):** Mount `cards/<category>/lr.md` and `specs/lighting.md`.
 3. **Style Pixel Shader Preview (psap):** Mount `cards/<category>/psap.md` and style shader.
@@ -50,9 +53,9 @@ Execute the six phases in [workflow.md](workflow.md) sequentially:
 5. **Pixel Clusters, Details & Texture (pcdt):** Mount `cards/<category>/pcdt.md`, `cards/materials/*.md`, and `specs/texture.md`.
 6. **Final Visual Check (fvc):** Mount `cards/<category>/fvc.md` and `specs/production.md`.
 
-For Parchment Fantasy, execute `styles/parchment-fantasy/pixel_shader.py` via Blender MCP at native `64x64`, Palette `4.3`. Present Shader previews under confirmed camera angles before proceeding to Phase 4.
+For Parchment Fantasy's standard 3D route, execute `styles/parchment-fantasy/pixel_shader.py` via Blender MCP at native `64x64`, Palette `4.3`. The conditional portrait image route instead uses [the smooth portrait Shader](styles/parchment-fantasy/PORTRAIT-PIXEL-SHADER.md). Present the selected route's Shader preview before proceeding to Phase 4.
 
-Phases may be omitted only when explicitly stated by user prompts; cite verbatim user text in the task card. Do not omit 3D or lighting unilaterally. Phase completion is validated through real artifacts, upstream comparisons, and visual self-checks.
+Except for the conditional portrait image route defined in the design card, phases may be omitted only when explicitly stated by user prompts; cite verbatim user text in the task card. Phase completion is validated through real artifacts, upstream comparisons, and visual self-checks. The portrait route is not a general waiver for other categories.
 
 ## 3. MCP Operations
 

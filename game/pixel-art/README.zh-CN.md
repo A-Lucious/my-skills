@@ -23,6 +23,8 @@ flowchart LR
 
 各阶段展示实际预览并记录评审，Shader 效果在进入像素粗稿前展示。
 
+人物画像先由[设计卡](cards/portraits/design.md)选择输入路线。用户明确说明上传图来自生图模型，或需要生图时，选定的二维图先经过[平滑人物 Pixel Shader](styles/parchment-fantasy/PORTRAIT-PIXEL-SHADER.md)，再进入 Aseprite 精修眼睛和表情。已有 AI 图够用时无需重新生成，普通参考图不自动触发生图模型调用。
+
 ## Tips
 
 1. 请确保 Agent 环境已安装并接入 **Blender MCP** 和 **Aseprite MCP**。
@@ -71,7 +73,7 @@ python3 .agents/skills/pixel-art/scripts/mcp_client.py doctor
 
 | 目录 | 内容 |
 |---|---|
-| `cards/` | 物品、通用物理材质及特性扩展的模块化注入模板 |
+| `cards/` | 物品、人物画像、通用物理材质及特性扩展的模块化注入模板 |
 | `styles/` | 通用规则、风格定义、固定色板与 Pixel Shader |
 | `specs/` | 点阵基础规范、光照、纹理及交付规范 |
 | `mcp/` | Blender 与 Aseprite 接入说明、固定版本清单 |

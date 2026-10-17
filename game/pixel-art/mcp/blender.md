@@ -47,6 +47,8 @@ Query identities, world positions, normals, and ray distances at pixel centers o
 
 ## Step 3: Style Pixel Shader and Direct Base Output
 
+For the conditional [portrait image-source route](../cards/portraits/design.md), use the [smooth 2D portrait Shader](../styles/parchment-fantasy/PORTRAIT-PIXEL-SHADER.md) instead of the 3D-render instructions below. Its input is the selected 2D image; no physical-lighting or geometry passes are required. Preserve the real source and record its preprocessing parameters.
+
 Load `styles/<style-id>/pixel_shader.py` directly through live Blender MCP to render native pixel PNGs inside Blender. Each style maintains its own fixed script; see [Pixel Shader](../styles/parchment-fantasy/PIXEL-SHADER.md) for Parchment Fantasy implementations, inputs, and executable calls. Bpy nodes and rendering are executed via real MCP; external scripts only orchestrate calls and must not read/write pixels to forge Shader outputs.
 
 - **Verify implementation first.** Check the selected style script path, version, hash, and Blender/engine compatibility; use interfaces actually provided by that script. If missing or incompatible, maintain that style's script and preview results first; do not borrow from other styles, download external plugins with matching names, or assemble improvised node setups per task.
