@@ -1,6 +1,6 @@
 # Portraits: Input, Character Design & Native Grid
 
-Read before production for facial portraits, dialog avatars, and busts. Select the input route below, then follow the applicable portrait phase cards in the [workflow](../../workflow.md). Style parameters come from the selected style; character-specific measurements belong in the task record.
+Read before production for facial portraits, dialog avatars, and busts. Select the input route below, then follow the applicable portrait phase cards in the [workflow](../../workflow.md). Style parameters come from the selected style; character-specific measurements belong in the task record. For a comprehensive portrait guide and real three-baseline comparisons, see [docs/portrait-generation.md](../../docs/portrait-generation.md).
 
 ## 0. Conditional Image Generation & Shader Route
 

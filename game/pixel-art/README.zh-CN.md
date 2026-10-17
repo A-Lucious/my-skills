@@ -80,7 +80,9 @@ flowchart LR
 - [平滑 Shader 效果基准](references/cases/portrait-smoothing-baseline/case.md)：生图来源路线进入 Aseprite 之前的方向性平滑（Anisotropic Kuwahara）与 Oklab 色板映射基准，色块高度归并，光影层次明晰。
 - [兜帽青年（头颈大占比特写）](references/cases/cloaked-youth/case.md)：原生 64×64，验证了特写构图规范（头部与颈部占据主要画面，底部仅保留少许斗篷领口，免躯干服饰挤占面部像素预算），比例已获认可。
 - [巨型地精 / 哥布林](references/cases/giant-goblin/case.md)：原生 64×64，非人生物与怪物画像底稿，验证了宽颌、厚颈、尖耳与獠牙等特征的像素化与 Shader 处理。
+- [骷髅画像（生图来源路线）](references/cases/skeleton-portrait-image-gen/case.md)：原生 64×64，验证了全身参考图转头颈特写、生图触发词分支与专属平滑 Shader 处理流程。
 - [游侠（失败基线案例）](references/cases/ranger-failed-baseline/case.md)：**“无参考照片，无生图”下使用 Blender 建模的失败案例**。作为反面教材归档保留：由于在无真实参考下手工盲目建 3D 头部模型，导致面部骨骼体块僵硬、表情木讷疲惫；且半身像构图中服饰占据过多面积，严重挤占了五官神态的像素表现空间。确立了后续人物画像必须以“人脸特写构图”和“具备可靠造型来源”的约束规范。
+- [人物画像生成说明与三次骷髅基线对比](docs/portrait-generation.md)：人物画像特写构图、3D 与 2D 生图双分支决策，以及三次骷髅画像基线对比深度指南。
 
 ## 使用
 
