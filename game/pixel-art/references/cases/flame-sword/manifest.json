@@ -1,0 +1,117 @@
+{
+  "case": "flame-sword",
+  "status": "accepted-and-archived",
+  "style": "parchment-fantasy",
+  "purpose": "prop",
+  "palette_version": "4.3",
+  "native_size": [
+    64,
+    64
+  ],
+  "preview_scale": 6,
+  "visible_colors": 22,
+  "families": [
+    "blue",
+    "earth",
+    "ember"
+  ],
+  "alpha_values": [
+    0,
+    255
+  ],
+  "pipeline": {
+    "route": "Blender MCP -> fixed Pixel Shader -> Aseprite MCP",
+    "shader_version": "1.3.0",
+    "shader_native_size": [
+      64,
+      64
+    ],
+    "render_engine": "Cycles",
+    "projection": "orthographic",
+    "spatial_guidance": "real native-grid ray casts; material IDs, world normals, positions, distances",
+    "guidance_usage": "material IDs restrict palette mapping; normals and distances support structural inspection",
+    "editable_layers": [
+      "base-ref",
+      "draft",
+      "fire-detail",
+      "metal-highlight",
+      "cloth-fold"
+    ],
+    "base_ref_hidden_and_locked": true,
+    "visible_layer_offset": [
+      -4,
+      2
+    ]
+  },
+  "checks": {
+    "native_size": [
+      64,
+      64
+    ],
+    "preview_size": [
+      384,
+      384
+    ],
+    "visible_colors": 22,
+    "visible_pixels": 575,
+    "bbox_exclusive": [
+      12,
+      7,
+      53,
+      57
+    ],
+    "alpha_values": [
+      0,
+      255
+    ],
+    "families": [
+      "blue",
+      "earth",
+      "ember"
+    ],
+    "foreign_colors": 0,
+    "outside_selected_families": 0,
+    "connected_components_4": [
+      575
+    ],
+    "exact_nearest_neighbor_preview": true,
+    "base_ref_matches_shader": true,
+    "public_shader_base_pixels_identical": true,
+    "public_machine_path_metadata": false
+  },
+  "review": {
+    "final": "accepted for archiving",
+    "intermediate_user_signoffs": "not separately recorded"
+  },
+  "known_limits": [
+    "Static inventory item; no flame animation.",
+    "No game integration.",
+    "Selective outlines and thin diagonal highlights retained; no zero-noise claim."
+  ],
+  "artifacts": {
+    "backgrounds.png": {
+      "bytes": 4396,
+      "sha256": "06caf60c226e302402f36a8d965ced1d037a242a7e92c6f9e4774acccfbc2d42"
+    },
+    "case.md": {
+      "bytes": 3631,
+      "sha256": "e62c42ce9fc37584109a682692043052b5b7ed88eba1ac5144d853985dff9209"
+    },
+    "native.png": {
+      "bytes": 1742,
+      "sha256": "2b7965520d65c83b4a678516c79be6231ebb2a35b2e6377db655017da56656ee"
+    },
+    "preview.png": {
+      "bytes": 3627,
+      "sha256": "12fca1a552fcf6eddee854c0d002be56b5e298f752dc2ebf2fdc2938881bc308"
+    },
+    "shader-base.png": {
+      "bytes": 2228,
+      "sha256": "a2397edcbdd2658fe135fa82feb1b8a8f2fc0ff36c316ef4c01ac7a7878aaaad"
+    },
+    "source.aseprite": {
+      "bytes": 2831,
+      "sha256": "1cd56be1910315c4693320412c3d3b6de7b1f7083522ea7ec2c4de65a1ae12d6"
+    }
+  }
+}

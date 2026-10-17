@@ -46,7 +46,14 @@ For portraits, the [design card](cards/portraits/design.md) selects the input ro
     <td align="center" valign="middle"><img src="references/cases/health-potion/preview.png" alt="Potion bottle Shader base" width="192"></td>
     <td align="center" valign="middle"><img src="references/cases/wooden-chest/preview.png" alt="Wooden chest texture and shadow" width="192"></td>
   </tr>
+  <tr>
+    <td align="center" valign="middle"><a href="references/cases/flame-sword/case.md"><img src="references/cases/flame-sword/preview.png" alt="Flame sword" width="192"></a></td>
+    <td></td>
+    <td></td>
+  </tr>
 </table>
+
+- [Flame Sword](references/cases/flame-sword/case.md): Accepted 64×64 transparent item, made through Blender, the fixed Pixel Shader, and Aseprite refinement; includes layered source and inventory-background previews.
 
 ### Portrait Cases
 

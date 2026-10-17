@@ -46,7 +46,14 @@ flowchart LR
     <td align="center" valign="middle"><img src="references/cases/health-potion/preview.png" alt="药水瓶 Shader 底稿" width="192"></td>
     <td align="center" valign="middle"><img src="references/cases/wooden-chest/preview.png" alt="木箱纹理与投影" width="192"></td>
   </tr>
+  <tr>
+    <td align="center" valign="middle"><a href="references/cases/flame-sword/case.md"><img src="references/cases/flame-sword/preview.png" alt="火焰长剑" width="192"></a></td>
+    <td></td>
+    <td></td>
+  </tr>
 </table>
+
+- [火焰长剑](references/cases/flame-sword/case.md)：已验收的 64×64 透明物品，经 Blender、固定像素 Shader 与 Aseprite 精修，附分层源稿与物品栏背景预览。
 
 ### 人物画像案例
 
