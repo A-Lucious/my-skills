@@ -54,10 +54,12 @@ flowchart LR
   <tr>
     <td align="center" valign="middle"><img src="references/cases/portrait-smoothing-baseline/preview.png" alt="平滑 Shader 效果基准" width="180"></td>
     <td align="center" valign="middle"><img src="references/cases/cloaked-youth/preview.png" alt="兜帽青年画像" width="180"></td>
+    <td align="center" valign="middle"><img src="references/cases/giant-goblin/preview.png" alt="巨型地精画像" width="180"></td>
   </tr>
   <tr>
-    <td align="center" valign="middle"><img src="references/cases/giant-goblin/preview.png" alt="巨型地精画像" width="180"></td>
     <td align="center" valign="middle"><img src="references/cases/ranger-failed-baseline/preview.png" alt="游侠失败基线案例" width="180"></td>
+    <td align="center" valign="middle"><img src="references/cases/skeleton-portrait/preview.png" alt="骷髅画像" width="180"></td>
+    <td></td>
   </tr>
 </table>
 

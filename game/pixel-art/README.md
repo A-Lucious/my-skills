@@ -54,10 +54,12 @@ For portraits, the [design card](cards/portraits/design.md) selects the input ro
   <tr>
     <td align="center" valign="middle"><img src="references/cases/portrait-smoothing-baseline/preview.png" alt="Portrait smoothing Shader baseline" width="180"></td>
     <td align="center" valign="middle"><img src="references/cases/cloaked-youth/preview.png" alt="Cloaked youth portrait" width="180"></td>
+    <td align="center" valign="middle"><img src="references/cases/giant-goblin/preview.png" alt="Giant goblin portrait" width="180"></td>
   </tr>
   <tr>
-    <td align="center" valign="middle"><img src="references/cases/giant-goblin/preview.png" alt="Giant goblin portrait" width="180"></td>
     <td align="center" valign="middle"><img src="references/cases/ranger-failed-baseline/preview.png" alt="Ranger failed baseline case" width="180"></td>
+    <td align="center" valign="middle"><img src="references/cases/skeleton-portrait/preview.png" alt="Skeleton portrait" width="180"></td>
+    <td></td>
   </tr>
 </table>
 
