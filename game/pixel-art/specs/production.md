@@ -18,6 +18,9 @@ Organize layers purposefully per object, preserving layered sources. Scenes may 
 
 ## Outputs and Technical Checks
 
+The standard 3D baseline also requires `guidance/prelight-manifest.json`, `surface-guidance.json`, `structure.json`, the Aseprite-generated `dither-mask.png`, the Shader manifest, and constrained `reports/cleanup.json`. Verify their native grids and hashes agree. Reject cross-material source-color writes; record skipped ambiguous candidates and the ray/render alpha discrepancy separately. The default cleanup preserves alpha. Preserve `base-ref` and `draft` layers; zero safe edits is a valid measured result, not permission for unconstrained neighbor recoloring.
+
+
 | Task | Deliverables |
 |---|---|
 | Static | `.aseprite` + scale=1 PNG; transparent or scene background as designed |
@@ -46,6 +49,18 @@ Q1 evaluates 3D form, Q2 evaluates lighting guidance, Q3 evaluates Step 3 style 
 
 For the conditional [portrait image-source route](../cards/portraits/design.md), record its triggering user text and 2D source instead of 3D/light production. Mark Q1/Q2 as replaced by that route, without claiming execution or approval; Q3 reviews the smooth image Shader and Q4/Q5 remain applicable. This defined route needs no additional phase-waiver prompt.
 
+**Baseline B — Agent Pure-Draw** ([baselines.md](baselines.md), [pure_draw.md](../cards/features/pure_draw.md)) replaces the six phases entirely. There is no 3D form (Q1), no lighting guidance (Q2) and no style Shader (Q3); do not mark them "passed" or claim them. Instead:
+
+| Review | Baseline B equivalent |
+|---|---|
+| Q1 / Q2 | not applicable — record the reference's measured structure instead of a 3D/light baseline |
+| Q3 | the silhouette pass plus the tone-band milestones (`previews/<task>-step-NN-*.png`) |
+| Q4 | the 1× and integer-zoom inspection of the drawn result against the reference |
+| Q5 | the measured fidelity table from `pure_draw.py verify` plus the user's confirmation |
+
+Its technical gate is `Test Workspace/<task>/reports/pure-draw-metrics.json`: default SSIM ≥ 0.995, PSNR ≥ 40 dB, ≥ 97% of pixels within 4/255 per channel. `check_palette.py` does **not** gate Baseline B — the working palette is the reference's own quantized colors — so record the style-palette deviation explicitly rather than failing a check that does not apply. Report the full metric table, and state separately whether bit-identical pixels were required; a redraw cannot be bit-identical to a resampled screenshot.
+
+
 Maintain separate records for: phase execution status and artifacts, technical checks and results, agent visual self-checks (Unchecked / Passed / Rework Required), and user reviews (Pending Review / Approved / Rework). Passing technical checks indicates only that technical criteria were met; visual self-checks cannot replace user sign-off. User "Approved" status requires verbatim quotes of explicit confirmation linked to specific preview versions, remaining pending review otherwise. Revisions re-open affected checks only.
 
 Candidates may be exported for review; candidate delivery does not equal user acceptance or formal archiving. Unresolved issues must be listed alongside candidates without declaring "All checks passed" or "Requirements fully met." Retain guidance and comparison evidence supporting current decisions prior to review; if users explicitly request early cleanup, record the scope of cleaned evidence. After review, purge intermediate process files per file specs, retaining final sources, essential previews, and summary conclusions.
@@ -58,6 +73,7 @@ For the portrait image-source route, adapt the 3D/lighting fields to source prov
 
 ```markdown
 # <asset-id>
+Baseline: A Production / B Agent Pure-Draw — chosen because <reason, citing the user request>
 Requirements: Original / Study; taxonomy and purpose; style-id; delivery goals; allowable simplifications
 Workflow: Execution / reuse / omission status and evidence paths across 6 phases; omitted phases and verbatim user prompts ("No phase omission authorized" if not waived)
 Dimensions: Native WxH; display container and scaling ratio; margins, framing, and anchors
@@ -75,6 +91,12 @@ Checks: Technical criteria and results; agent visual self-check with concrete ra
 Artifacts: Sources, exports, previews, jobs/logs; current phase and acceptance/integration status
 Continuity: Preserved relationships, remaining issues, next steps
 ```
+
+On Baseline B, swap the 3D / Lighting / Pixel Base / Shader fields for the pure-draw fields listed in
+[the pure-draw card](../cards/features/pure_draw.md#8-task-record-fields): reference hash and measured
+size/color count, palette mode and working palette, silhouette tone, the draw job and its per-band
+pixel counts, milestone previews, and the fidelity table.
+
 
 ## Game Integration
 

@@ -1,5 +1,7 @@
 # Props: Lighting & Render Setup (lr)
 
+For the standard 3D route, sample native geometry and run structural Sobel/mask preparation before the lighting bake. Use the sole [structural production baseline](../../styles/parchment-fantasy/PIXEL-SHADER.md).
+
 Focuses on cast shadow projection, cavity depth, self-illumination, and material ID separation.
 
 ## 1. Key & Ambient Lighting Rig

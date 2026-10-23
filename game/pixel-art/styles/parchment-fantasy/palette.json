@@ -913,6 +913,5 @@
       "#6ddcaf"
     ]
   },
-  "legacy_palette": "palette-v3-legacy.json",
   "reference_study_policy": "When tracing calibration is explicitly requested, use per-asset observation whitelists and subject comparisons, logging compression and grid error margins separately from this original production inventory. Compression noise in study whitelists must not be treated as new material shades."
 }

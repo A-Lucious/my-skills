@@ -1,5 +1,7 @@
 # Portraits: Aseprite Rough Draft (ard)
 
+For the standard 3D route, import the exact protected Shader base, then execute the [constrained source-color cleanup](../../styles/parchment-fantasy/PIXEL-SHADER.md#4-constrained-correction-through-aseprite-mcp) on `draft` before artistic refinement; preserve the hidden locked `base-ref`.
+
 Mount the selected style's palette and [Common Specifications](../../specs/common.md). Establish readable identity and facial volume before micro-detail.
 
 ## 1. Import & Editable Structure

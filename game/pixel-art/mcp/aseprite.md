@@ -40,6 +40,10 @@ python3 .agents/skills/pixel-art/scripts/mcp_client.py tools apply_operations
 - `shade_region_by_light`, `shift_along_ramp`, and `outline_smart` operate on ordered ramps for a single material. For approximate shading, specify clear regions, `base_color`, and a small `tolerance`; check occlusion independently. `assess_sprite` verifies coverage against complete palette sets, and lightness order hints must be interpreted per material.
 - Read `newFrame` and `renumbered_from` after frame insertion/duplication, updating subsequent frame indices accordingly.
 
+## Structural Baseline Handoff
+
+For the standard 3D route, Aseprite MCP is used twice: first to write/export the pre-light protection mask emitted by `scripts/structural_edges.py prepare`, and later to execute the exact-base import/constrained source-color cleanup job emitted by `structural_edges.py cleanup`. Follow [the executable baseline](../styles/parchment-fantasy/PIXEL-SHADER.md). These jobs precede artistic refinement; diagnostic edge colors never become the exported sprite.
+
 ## Single Calls and Previews
 
 Phase 4 imports the confirmed Phase 3 native PNG directly as a base, then modifies it into a rough draft in Aseprite. Relative paths below are within `Test Workspace/`; `input_image` uses the actual file corresponding to `outputs.pixel` in Phase 3's `shader-manifest.json`. Verify dimensions and actual layers with `get_sprite_info`. Retain the untouched base as a reference layer, duplicate it into an active draft layer, and refine material colors, silhouettes, key landmarks, and major value masses via Aseprite MCP. Save the modified source along with base-to-draft comparison previews. Successful import completes base preparation only; completing the rough draft requires actual pixel edits and inspection logs.
@@ -107,6 +111,21 @@ Following failures or interruptions, inspect logs, `get_sprite_info`, and actual
 | [make_style_sample.py](../scripts/make_style_sample.py) | Rebuilds the 4-frame lantern sample, generating jobs for MCP execution; uses historical colors; pass `--overwrite` to rebuild. |
 | [reference_study.py](../scripts/reference_study.py) | Historical strict transcription tool that reads sources and manifests to generate jobs from scratch; run only when explicitly requested; cannot replace standard Blender base imports. |
 | [compare_reference_study.py](../scripts/compare_reference_study.py) | Compares actual MCP exports against frozen iteration references, outputting per-asset reports. |
+| [pure_draw.py](../scripts/pure_draw.py) | **Baseline B (Agent Pure-Draw).** `analyze` quantizes a supplied reference and emits a `create_sprite → fill_layer → draw_pixel_map × bands → export_png` job plus a manifest; `verify` compares the export to the reference (SSIM/PSNR/tolerance coverage) and writes `pure-draw-metrics.json`, exiting non-zero below the gates. Analysis/JSON only — it never draws or writes pixels. See [the pure-draw card](../cards/features/pure_draw.md). |
+
+Baseline B round trip:
+
+```bash
+python3 .agents/skills/pixel-art/scripts/pure_draw.py analyze \
+  --reference "<task>/references/source.png" --task <task-id> --asset-id <id>
+python3 .agents/skills/pixel-art/scripts/mcp_client.py run \
+  "Test Workspace/<task-id>/reports/pure-draw.job.json" \
+  --log-name <task-id>-pure-draw.mcp.log.json
+python3 .agents/skills/pixel-art/scripts/pure_draw.py verify \
+  --reference "<task>/references/source.png" \
+  --result "<task>/exports/<id>.png" --task <task-id>
+```
+
 
 Example invocation for reference study (manifest definition in [Study Specification](../styles/parchment-fantasy/REFERENCE-STUDY.md)):
 

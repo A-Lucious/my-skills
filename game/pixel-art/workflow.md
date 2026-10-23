@@ -1,6 +1,15 @@
 # Production Pipeline Engine
 
-This workflow defines the standard six-phase production engine for pixel art assets. The engine defines phase transitions, technical checks, and tool orchestration, while specific asset rules are dynamically mounted via **Card Injection Hooks**.
+This workflow defines **Baseline A**, the six-phase production engine for original pixel art assets. The engine defines phase transitions, technical checks, and tool orchestration, while specific asset rules are dynamically mounted via **Card Injection Hooks**.
+
+**Which baseline:** this skill also ships **Baseline B, the Agent Pure-Draw Baseline**
+([cards/features/pure_draw.md](cards/features/pure_draw.md)), which redraws a supplied 2D image
+faithfully at its own pixel size with Aseprite only — no 3D, no Shader, no image import. Read
+[Baseline Selection](specs/baselines.md) first and choose; the Agent decides per task and records the
+choice. Everything below applies to Baseline A only. Rule of thumb: a supplied image plus a request
+to reproduce it (「画这个」「复刻」「按这张图」, a similarity target, an existing screenshot or piece of
+art) is Baseline B; a described subject, or an image used as style guidance for a *new* asset that
+must fit the locked palette, is Baseline A.
 
 **Portrait route selection:** First read [Portrait Design](cards/portraits/design.md). Its conditional image-source route replaces Steps 1–2 with a selected 2D source and uses the smooth portrait Shader in Step 3, followed by Steps 4–6. Apply the portrait cards' source-based comparisons in place of camera/guidance comparisons; do not fabricate 3D passes. Other routes retain the standard phases below.
 
@@ -18,9 +27,9 @@ For each phase, the agent mounts three orthogonal specifications:
 | Phase | Mandatory Verification Before Proceeding | Primary Injection Hook |
 |---|---|---|
 | **1: 3D & Camera** | Proportions, articulation, volumes, and silhouette hold at target resolution; structural baselines recorded. | `cards/<category>/3dac.md` |
-| **2: Lighting & Render** | Physical key/ambient lights, occlusion cast shadows, and material ID passes verified in scene data. | `cards/<category>/lr.md` + `specs/lighting.md` |
-| **3: Style Shader Preview** | Fixed style script executed via Blender MCP; native base and same-view comparison inspected; Q3 status logged. | `cards/<category>/psap.md` + Style Shader |
-| **4: Rough Draft** | Native PNG imported via Aseprite MCP as locked base; palette mapped; landmarks exaggerated on draft layer. | `cards/<category>/ard.md` + `palette.json` |
+| **2: Structure, Lighting & Render** | Native geometry sampled and structural Sobel/masks prepared before the actual lighting bake; key/fill and material ownership verified. | `cards/<category>/lr.md` + `specs/lighting.md` |
+| **3: Style Shader Preview** | Mandatory structure mask → protected SOFT.04 → style palette through Blender MCP; native base/comparison inspected; Q3 logged. | `cards/<category>/psap.md` + Style Shader |
+| **4: Rough Draft** | Exact native PNG imported as locked base; constrained source-color cleanup applied on draft; landmarks refined. | `cards/<category>/ard.md` + `palette.json` |
 | **5: Details & Texture** | Curves cleaned; micro-clusters and material highlights placed; greyscale value re-check passed. | `cards/<category>/pcdt.md` + `cards/materials/*.md` |
 | **6: Final Check** | Prompt alignment verified; 1x native and integer-scaled UI checks passed; formal export generated. | `cards/<category>/fvc.md` + `specs/production.md` |
 
@@ -40,16 +49,17 @@ For each phase, the agent mounts three orthogonal specifications:
 
 ---
 
-## Step 2: Lighting Setup and Value Definition (lr)
+## Step 2: Pre-light Structure, Lighting and Value Definition (lr)
 
 **Goal:** Establish volume, value hierarchy, and occlusion cast shadows.
 
 - **Injection Hooks:** Read `cards/<category>/lr.md` and [Lighting Specification](specs/lighting.md).
 - **Operations:**
-  1. **Position key and ambient lights** according to the task lighting plan (defaulting to upper-left 45° key light).
-  2. **Trace occlusion shadows:** Ensure physical cast shadows (brims over foreheads, lids over cavities, limbs over torsos) fall accurately across receiving planes.
-  3. **Establish contact shadows:** Ensure dark crevice shadows anchor joints, seams, and ground contact points.
-  4. **Export Guidance Maps:** Save color render with alpha, alongside real part/material IDs, surface normals, and depth data via Blender MCP.
+  1. **Prepare structure before lighting:** Follow the style’s [structural baseline](styles/parchment-fantasy/PIXEL-SHADER.md): native visibility/normals/depth/IDs → Sobel/NMS → thinning/corner removal → candidates/protection band. Use `sample_structure` through Blender MCP, then `structural_edges.py prepare` and the Aseprite MCP mask job.
+  2. **Position key and ambient lights** according to the task lighting plan (defaulting to upper-left 45° key light).
+  3. **Trace occlusion shadows:** Ensure physical cast shadows (brims over foreheads, lids over cavities, limbs over torsos) fall accurately across receiving planes.
+  4. **Establish contact shadows:** Ensure dark crevice shadows anchor joints, seams, and ground contact points.
+  5. **Bake actual lighting with the prepared structure:** Save color render with alpha, alongside real part/material IDs, surface normals, and depth data via Blender MCP.
 - **Deliverables:** Lighted preview render, raw guidance data, light source parameters, and data dictionary (Q2).
 
 ---
@@ -60,7 +70,7 @@ For each phase, the agent mounts three orthogonal specifications:
 
 - **Injection Hooks:** Read `cards/<category>/psap.md` and `styles/<style-id>/PIXEL-SHADER.md`.
 - **Operations:**
-  1. **Execute fixed style script:** Run `styles/<style-id>/pixel_shader.py` directly inside Blender via Blender MCP with confirmed camera, target native dimensions, and active palette families.
+  1. **Execute the sole structural baseline:** Run `render_preview` with mandatory `guidance_dir` after pre-light sampling and real Aseprite mask creation. Apply protected SOFT.04 before fixed style palette quantization. Preserve the confirmed camera, native grid and material ownership. The [executable instructions](styles/parchment-fantasy/PIXEL-SHADER.md) define stage calls and outputs.
   2. **Inspect Shader Output:** Check native PNG and integer-upscaled previews for form retention, aperture clarity, and absence of cross-material color bleeding.
   3. **Present Advance Preview (Q3):** Showcase native base and same-view before/after comparison to user; record Q3 confirmation before proceeding to Aseprite.
 - **Deliverables:** Native pixel PNG base, same-view comparison, shader manifest, and Q3 status.
@@ -73,10 +83,11 @@ For each phase, the agent mounts three orthogonal specifications:
 
 - **Injection Hooks:** Read `cards/<category>/ard.md` and `styles/<style-id>/palette.json`.
 - **Operations:**
-  1. **Import Native Base:** Pass the confirmed Phase 3 PNG to Aseprite MCP's `import_image`. Preserve the raw imported base as a locked `base-ref` layer; duplicate it to an active `draft` layer.
-  2. **Palette Ramp Mapping:** Map continuous render shades strictly to the declared family ramps in `palette.json`, eliminating stray interpolations.
-  3. **Landmark Exaggeration:** Reinforce features that must be instantly readable (eyes, latches, weapon edges, buckles), deliberately enlarging critical pixels where appropriate.
-  4. **Organize Value Masses:** Group render gradients into coherent illuminated, shadow, and contact shadow pixel clusters, cross-checking 3D guidance normals.
+  1. **Prepare the native handoff:** Confirm the exact Phase 3 PNG and its guidance manifest. On the standard 3D route, the job in the next operation performs the import; do not pre-create the same destination sprite.
+  2. **Import and apply constrained source-color cleanup:** Run `structural_edges.py cleanup` and its Aseprite MCP job. It imports the exact base, preserves a hidden locked `base-ref`, writes only safe same-object/material source colors to `draft`, records skipped candidates, and preserves alpha. No additional artistic changes are implied by these algorithmic edits. The conditional 2D portrait route imports its smooth base directly and follows its own refinement card.
+  3. **Palette Ramp Mapping:** Map continuous render shades strictly to the declared family ramps in `palette.json`, eliminating stray interpolations.
+  4. **Landmark Exaggeration:** Reinforce features that must be instantly readable (eyes, latches, weapon edges, buckles), deliberately enlarging critical pixels where appropriate.
+  5. **Organize Value Masses:** Group render gradients into coherent illuminated, shadow, and contact shadow pixel clusters, cross-checking 3D guidance normals.
 - **Deliverables:** `.aseprite` source retaining `base-ref` and `draft` layers, unified comparison preview, and draft check records (Q4).
 
 ---

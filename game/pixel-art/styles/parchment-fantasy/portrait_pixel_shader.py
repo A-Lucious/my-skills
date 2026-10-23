@@ -10,9 +10,9 @@ from pathlib import Path
 
 import bpy
 
-VERSION = "1.0.0"
+VERSION = "1.1.0"
 SCRIPT = Path(__file__).resolve()
-STYLE_SCRIPT = SCRIPT.with_name("pixel_shader.py")
+STYLE_SCRIPT = SCRIPT.with_name("palette_mapper.py")
 PALETTE = SCRIPT.with_name("palette.json")
 
 
@@ -177,7 +177,7 @@ def render_preview(input_image, *, output_dir, families, size=(64, 64),
         scene.render.filepath = str(native_path)
         bpy.ops.render.render(write_still=True, scene=scene.name)
         mapped = _scene(scene.name + "_Palette", size)
-        style["_compositor"](mapped, colours, _image(native_path), masks)
+        style["build_compositor"](mapped, colours, _image(native_path), masks)
         mapped.render.image_settings.color_depth = "8"
         mapped_path = output / ("pixel-base-v01.png" if smooth else "before-native.png")
         mapped.render.filepath = str(mapped_path)

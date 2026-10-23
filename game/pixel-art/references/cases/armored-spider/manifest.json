@@ -1,0 +1,71 @@
+{
+  "case": "armored-spider",
+  "status": "accepted",
+  "style": "parchment-fantasy",
+  "purpose": "portrait",
+  "palette_version": "4.3",
+  "native_size": [
+    96,
+    96
+  ],
+  "preview_scale": 6,
+  "visible_colors": 36,
+  "families": [
+    "earth",
+    "blue",
+    "gold"
+  ],
+  "alpha_values": [
+    255
+  ],
+  "pipeline": {
+    "input": "model-generated 2D head-and-neck design",
+    "image_model_called": true,
+    "source_size": [
+      1254,
+      1254
+    ],
+    "smooth_shader_version": "1.0.0",
+    "palette_mapper_version": "1.3.0",
+    "working_size": [
+      384,
+      384
+    ],
+    "smoothing_radius": 4.0,
+    "face_bypass": false,
+    "eye_refinement": "Aseprite MCP",
+    "editable_layers": [
+      "base-ref",
+      "draft",
+      "eyes-detail",
+      "fangs-detail",
+      "armor-detail"
+    ],
+    "base_ref_hidden_and_locked": true
+  },
+  "checks": {
+    "foreign_colors": 0,
+    "outside_selected_families": 0,
+    "exact_nearest_neighbor_preview": true,
+    "base_ref_matches_shader": true
+  },
+  "known_limits": [
+    "Opaque parchment background; this is a portrait rather than a transparent full-body sprite.",
+    "Lighting is inherited from the 2D source; no 3D guidance passes are claimed.",
+    "Retained intentional glints, diagonal clusters, and shaded material transitions; no zero-noise claim."
+  ],
+  "artifacts": {
+    "native.png": {
+      "sha256": "bb7a1c63d061da3a13f1e51c9fc791e6265c1398ca0fc0dd42a298a7a0a3acca"
+    },
+    "preview.png": {
+      "sha256": "8aced870abc9bdcfa9c910908413e016720dde7f7fbe479aeb80055ff1c6d479"
+    },
+    "comparison.png": {
+      "sha256": "2d9fb673614b176ff3e6db1a3aa11b2773280be3e12ec2d371638261ce89cd14"
+    },
+    "source.aseprite": {
+      "sha256": "b56431598f82d2c0326d52b603c3dcf458a282476451d28ff84af3df4f49834f"
+    }
+  }
+}

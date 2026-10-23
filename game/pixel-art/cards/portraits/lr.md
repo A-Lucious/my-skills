@@ -1,5 +1,7 @@
 # Portraits: Lighting & Render Setup (lr)
 
+For the standard 3D route, sample native geometry and run structural Sobel/mask preparation before the lighting bake. Use the sole [structural production baseline](../../styles/parchment-fantasy/PIXEL-SHADER.md).
+
 Mount [Lighting Specification](../../specs/lighting.md) and use the structural baseline from [3D & Camera](3dac.md).
 
 This card applies to the standard 3D route. The conditional image-source route preserves the selected image's visible lighting and proceeds to [Shader preprocessing](psap.md). Record the visible value structure, without inventing physical lights or geometry guidance.

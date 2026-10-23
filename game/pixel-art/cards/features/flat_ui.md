@@ -1,5 +1,9 @@
 # Feature Card: Flat UI & Decorative Elements (Track B)
 
+> This card is a **sub-strategy inside Baseline A (Production)**: it lets flat decorations skip the
+> Blender phases. It is not "Baseline B" — Baseline B is the
+> [Agent Pure-Draw Baseline](pure_draw.md). See [Baseline Selection](../../specs/baselines.md).
+
 Focuses on pure 2D silhouette blockout, parchment frame rhythm, and semantic icons.
 
 ## 1. Pure 2D Blockout (Track B Strategy 1)

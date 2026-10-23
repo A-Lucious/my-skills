@@ -1,5 +1,7 @@
 # Scenes
 
+For Blender production, use the sole [pre-light structural baseline](../styles/parchment-fantasy/PIXEL-SHADER.md): native geometry/Sobel → protection mask → actual lighting → protected SOFT.04 → palette → constrained Aseprite correction.
+
 Applies to event illustrations, environments, and battle screens; when buildings form part of the environment, also refer to [Buildings](buildings.md).
 
 ## Task Inputs

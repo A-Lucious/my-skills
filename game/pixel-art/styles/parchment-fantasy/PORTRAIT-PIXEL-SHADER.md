@@ -2,7 +2,7 @@
 
 Use only on the conditional image-source route in [Portrait Design](../../cards/portraits/design.md). A generated portrait or an upload explicitly identified as model-generated receives this preprocessing before Aseprite. This document does not itself authorize a model call.
 
-[portrait_pixel_shader.py](portrait_pixel_shader.py) runs inside Blender MCP. It preserves the selected image's framing and lighting, applies regular 4x4 footprint sampling to a 4x native working grid, anisotropic Kuwahara smoothing, and footprint sampling to native size. Palette mapping reuses [pixel_shader.py](pixel_shader.py)'s fixed Oklab implementation and Palette 4.3. No face or eye region bypasses smoothing; eye and expression refinement belongs in Aseprite.
+[portrait_pixel_shader.py](portrait_pixel_shader.py) runs inside Blender MCP. It preserves the selected image's framing and lighting, applies regular 4x4 footprint sampling to a 4x native working grid, anisotropic Kuwahara smoothing, and footprint sampling to native size. Palette mapping reuses [palette_mapper.py](palette_mapper.py)'s fixed Oklab implementation and Palette 4.3. No face or eye region bypasses smoothing; eye and expression refinement belongs in Aseprite.
 
 ## Invocation
 

@@ -2,7 +2,10 @@
 
 Defines core illumination physics, value hierarchies, occlusion relationships, and post-detail verification. Material-specific light reactions are defined in `cards/materials/`.
 
-## 1. Core Lighting Setup
+## 1. Pre-light Structure and Core Lighting Setup
+
+On the standard 3D route, sample alpha/visibility, geometric world normals, depth/ray distance, object and material identity on the final native grid before rendering lighting. Run structural Sobel/NMS → thinning → corner removal → protected/candidate masks, then create the native mask through Aseprite MCP. IDs use adjacent-label inequality. These geometry signals remain independent of illumination. Follow the [structural baseline](../styles/parchment-fantasy/PIXEL-SHADER.md); actual lighting still comes from Blender rendering.
+
 - **Lighting Rig:** The task card must record key light screen direction, elevation, softness/hardness, and ambient fill intensity. Defaults to top-left 45° key light unless task requirements specify otherwise.
 - **Shared Light Coherence:** 3D guidance, shader renders, and pixel drafts must share identical light directions and coordinate frames.
 - **Color Mapping Integrity:** Shader comparisons must maintain consistent AgX/Look/exposure settings; tonal quantization may group values but must not create unmotivated pitch-black voids or blown-out highlights.

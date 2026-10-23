@@ -1,0 +1,100 @@
+{
+  "case": "ancient-marble-fountain",
+  "status": "showcase",
+  "gallery_category": "buildings",
+  "style": "parchment-fantasy",
+  "purpose": "scene",
+  "palette_version": "4.3",
+  "native_size": [
+    64,
+    64
+  ],
+  "preview_scale": 6,
+  "preview_background": "transparent",
+  "visible_colors": 23,
+  "families": [
+    "paper",
+    "blue",
+    "teal",
+    "green"
+  ],
+  "alpha_values": [
+    0,
+    255
+  ],
+  "pipeline": {
+    "route": "Blender MCP -> fixed Pixel Shader -> Aseprite MCP",
+    "shader_version": "1.3.0",
+    "render_engine": "Cycles",
+    "projection": "orthographic",
+    "spatial_guidance": "real native-grid ray casts; IDs, world normals, positions, ray distances",
+    "ray_hits": 1397,
+    "shader_material_family_violations": 0,
+    "editable_layers": [
+      "base-ref",
+      "draft",
+      "marble-veins",
+      "weathering",
+      "water-details",
+      "masonry-joints"
+    ],
+    "base_ref_hidden_and_locked": true
+  },
+  "checks": {
+    "native_size": [
+      64,
+      64
+    ],
+    "preview_size": [
+      384,
+      384
+    ],
+    "visible_colors": 23,
+    "visible_pixels": 1398,
+    "bbox_exclusive": [
+      5,
+      15,
+      59,
+      50
+    ],
+    "alpha_values": [
+      0,
+      255
+    ],
+    "foreign_colors": 0,
+    "outside_selected_families": 0,
+    "exact_nearest_neighbor_preview": true,
+    "base_ref_matches_shader": true,
+    "public_machine_path_metadata": false
+  },
+  "review": {
+    "showcase_inclusion": "requested",
+    "intermediate_user_signoffs": "not separately recorded"
+  },
+  "known_limits": [
+    "Static asset; no animation or game integration.",
+    "Thin highlights and selective outlines retained; no zero-noise claim."
+  ],
+  "artifacts": {
+    "backgrounds.png": {
+      "bytes": 4991,
+      "sha256": "dceda74d86aeacc7650e0db0b73314517c4c2ebadc5b51b3c44107bfb5024df1"
+    },
+    "case.md": {
+      "bytes": 3629,
+      "sha256": "668b6a8978a7eee033fcb0602506f22ecd6fdfaa46a21132a9cdd041512eb8f3"
+    },
+    "native.png": {
+      "bytes": 2214,
+      "sha256": "cc348c66109db75c42708ba53c9d78c3bedf6ad5d6f3f1e2a5603b2c8e4dc21e"
+    },
+    "preview.png": {
+      "bytes": 3978,
+      "sha256": "4d1bedc641ccc77a740dcd37532e3aed84b2ea65a0f1787af4a89701d24e37e3"
+    },
+    "source.aseprite": {
+      "bytes": 3767,
+      "sha256": "550004f805a153297ac9035cea6cb763ba67bb08c65e3a7e740d4bd5c2ecd24d"
+    }
+  }
+}

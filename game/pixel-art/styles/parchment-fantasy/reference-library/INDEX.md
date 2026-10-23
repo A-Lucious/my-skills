@@ -13,3 +13,5 @@ Key observation focal points by category:
 - Props & UI: Silhouettes, openings, apertures, seams, material zones, and legibility at native resolution.
 
 The [Wooden Chest Texture Case](../../../references/cases/wooden-chest/case.md) and [Potion Bottle Shader Case](../../../references/cases/health-potion/case.md) can be used to study this skill's technical outputs. They do not represent official third-party game assets.
+
+The current executable production check is the [structural backpack case](../../../references/cases/structural-backpack/case.md). Earlier cases are visual/material references, not alternate production routes.

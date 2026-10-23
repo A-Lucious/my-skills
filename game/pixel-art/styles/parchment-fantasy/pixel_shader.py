@@ -1,54 +1,94 @@
-"""Parchment Fantasy Pixel Shader v1.3.0, executed inside Blender through Blender MCP.
+"""Parchment Fantasy 2.0.0: pre-light structure -> protected SOFT.04 -> palette.
 
-Screen-space compositor: native grid -> nearest locked palette colour -> hard alpha.
-Materials, geometry, active camera and lights are shared read-only with the source.
-Loading this module does not change the scene or render anything.
+Run sampling/rendering via Blender MCP. Mask creation and final pixel edits use
+Aseprite MCP between these stages. Importing this module has no scene effects.
 """
-
+import bpy
 import hashlib
+import importlib.util
 import json
+import os
+from array import array
 from pathlib import Path
 
-import bpy
-
-VERSION = "1.3.0"
+VERSION = "2.0.0"
 STYLE_ID = "parchment-fantasy"
 DEFAULT_SIZE = (64, 64)
-ALPHA_THRESHOLD = 0.5
 FILTER_SIZE = 0.01
+ALPHA_THRESHOLD = 0.5
 LIGHTNESS_WEIGHT = 2.0
-RGB_TO_LMS = (
-    (0.4122214708, 0.5363325363, 0.0514459929),
-    (0.2119034982, 0.6806995451, 0.1073969566),
-    (0.0883024619, 0.2817188376, 0.6299787005),
-)
-LMS_TO_OKLAB = (
-    (0.2104542553, 0.7936177850, -0.0040720468),
-    (1.9779984951, -2.4285922050, 0.4505937099),
-    (0.0259040371, 0.7827717662, -0.8086757660),
-)
 SCRIPT_PATH = Path(__file__).resolve()
 PALETTE_PATH = SCRIPT_PATH.with_name("palette.json")
+MAPPER_PATH = SCRIPT_PATH.with_name("palette_mapper.py")
+_spec = importlib.util.spec_from_file_location("parchment_palette_mapper", MAPPER_PATH)
+mapper = importlib.util.module_from_spec(_spec)
+_spec.loader.exec_module(mapper)
+_node = mapper._node
 
 
-def _linear(hex_colour):
-    rgb = [int(hex_colour[i:i + 2], 16) / 255 for i in (1, 3, 5)]
-    return tuple(c / 12.92 if c <= 0.04045 else ((c + 0.055) / 1.055) ** 2.4
-                 for c in rgb) + (1.0,)
+def _workspace(path):
+    project = Path(os.environ.get("PIXEL_PROJECT_ROOT", SCRIPT_PATH.parents[5]))
+    workspace = (project / "Test Workspace").resolve()
+    path = Path(path).resolve()
+    if path == workspace or not path.is_relative_to(workspace):
+        raise ValueError("Use a task directory inside Test Workspace.")
+    return path
 
 
-def _node(tree, kind, label, location):
-    node = tree.nodes.new(kind)
-    node.label = label
-    node.location = location
-    return node
+def _signature(scene):
+    """Hash evaluated geometry, camera, frame and material slots."""
+    digest = hashlib.sha256()
+    state = {"frame": scene.frame_current, "camera": scene.camera.name,
+             "camera_matrix": [list(r) for r in scene.camera.matrix_world],
+             "camera_type": scene.camera.data.type, "ortho": scene.camera.data.ortho_scale,
+             "lens": scene.camera.data.lens, "shift": [scene.camera.data.shift_x, scene.camera.data.shift_y]}
+    digest.update(json.dumps(state, sort_keys=True).encode())
+    with bpy.context.temp_override(scene=scene):
+        bpy.context.view_layer.update()
+        depsgraph = bpy.context.evaluated_depsgraph_get()
+        for obj in sorted(scene.objects, key=lambda obj: obj.name):
+            digest.update(json.dumps([obj.name, obj.type, obj.hide_render, [list(r) for r in obj.matrix_world],
+                                      [slot.material.name if slot.material else None for slot in obj.material_slots]]).encode())
+            if obj.type == 'MESH':
+                evaluated = obj.evaluated_get(depsgraph)
+                mesh = evaluated.to_mesh()
+                try:
+                    coords = array('f', [0.0]) * (len(mesh.vertices) * 3)
+                    mesh.vertices.foreach_get('co', coords)
+                    loops = array('i', [0]) * len(mesh.loops)
+                    mesh.loops.foreach_get('vertex_index', loops)
+                    mids = array('i', [0]) * len(mesh.polygons)
+                    mesh.polygons.foreach_get('material_index', mids)
+                    digest.update(coords.tobytes()); digest.update(loops.tobytes()); digest.update(mids.tobytes())
+                finally:
+                    evaluated.to_mesh_clear()
+    return digest.hexdigest()
 
 
-def _oklab(rgb):
-    """Palette metadata only. Public-domain Oklab matrices by Bjorn Ottosson."""
-    lms = [sum(a * b for a, b in zip(rgb, row)) ** (1 / 3) for row in RGB_TO_LMS]
-    return tuple(sum(a * b for a, b in zip(lms, row)) for row in LMS_TO_OKLAB)
-
+def _protected_lightness(tree, render, lightness, math_node, structural_mask):
+    coordinate = _node(tree, "CompositorNodeImageCoordinates", "Native pixel centres", (-1300, -2000))
+    tree.links.new(render.outputs["Image"], coordinate.inputs["Image"])
+    repeat = _node(tree, "ShaderNodeVectorMath", "Repeat native cells", (-1100, -2000))
+    repeat.operation = "MULTIPLY"
+    repeat.inputs[1].default_value = (*render.image.size, 0.0)
+    tree.links.new(coordinate.outputs["Normalized"], repeat.inputs[0])
+    rotate = _node(tree, "ShaderNodeVectorRotate", "Screen angle 45 degrees", (-900, -2000))
+    rotate.rotation_type = "Z_AXIS"
+    rotate.inputs["Angle"].default_value = 0.785398
+    tree.links.new(repeat.outputs["Vector"], rotate.inputs["Vector"])
+    fraction = _node(tree, "ShaderNodeVectorMath", "Cell fraction", (-700, -2000))
+    fraction.operation = "FRACTION"
+    tree.links.new(rotate.outputs["Vector"], fraction.inputs[0])
+    xy = _node(tree, "ShaderNodeSeparateXYZ", "Cell coordinates", (-500, -2000))
+    tree.links.new(fraction.outputs["Vector"], xy.inputs[0])
+    dx = math_node("ABSOLUTE", math_node("SUBTRACT", xy.outputs["X"], 0.5))
+    dy = math_node("ABSOLUTE", math_node("SUBTRACT", xy.outputs["Y"], 0.5))
+    pattern = math_node("MULTIPLY", math_node("MAXIMUM", dx, dy), 2.0)
+    offset = math_node("MULTIPLY", math_node("SUBTRACT", pattern, 0.5), 0.04)
+    mask_node = _node(tree, "CompositorNodeImage", "Structure protection: 0=edge / 1=interior", (-100, -2300))
+    mask_node.image = structural_mask
+    offset = math_node("MULTIPLY", offset, mask_node.outputs["Image"])
+    return math_node("MINIMUM", math_node("MAXIMUM", math_node("ADD", lightness, offset), 0.0), 1.0)
 
 def _material_masks(scene, size, families, material_families, output):
     """Query true Blender geometry; identity masks never substitute for lighting.
@@ -57,8 +97,6 @@ def _material_masks(scene, size, families, material_families, output):
     For transparent materials the caller must declare families for that front
     surface, including transmitted colours it wants to allow.
     """
-    if not material_families:
-        return []
     from mathutils import Vector
 
     palette = json.loads(PALETTE_PATH.read_text())
@@ -68,7 +106,16 @@ def _material_masks(scene, size, families, material_families, output):
     groups = list(dict.fromkeys(tuple(allowed) for allowed in material_families.values()))
     width, height = size
     camera = scene.camera
-    frame = camera.data.view_frame(scene=scene)
+    # Camera projection must use the target aspect, even if the source scene was
+    # last previewed at a different resolution. Do not change the source scene.
+    grid_scene = bpy.data.scenes.new('Structural sampling grid')
+    try:
+        grid_scene.render.resolution_x, grid_scene.render.resolution_y = size
+        grid_scene.render.pixel_aspect_x = scene.render.pixel_aspect_x
+        grid_scene.render.pixel_aspect_y = scene.render.pixel_aspect_y
+        frame = camera.data.view_frame(scene=grid_scene)
+    finally:
+        bpy.data.scenes.remove(grid_scene)
     left, right = min(p.x for p in frame), max(p.x for p in frame)
     bottom, top = min(p.y for p in frame), max(p.y for p in frame)
     plane_z = frame[0].z
@@ -97,7 +144,9 @@ def _material_masks(scene, size, families, material_families, output):
                 evaluated = obj.evaluated_get(depsgraph)
                 slot = evaluated.data.polygons[face].material_index
                 material = evaluated.data.materials[slot].name if slot < len(evaluated.data.materials) else None
-                allowed = material_families.get(material)
+                if material not in material_families:
+                    raise ValueError(f'Visible material {material!r} requires an explicit family assignment.')
+                allowed = material_families[material]
                 if allowed:
                     group = groups.index(tuple(allowed))
                     pixels[group][(height - y - 1) * width + x] = 1.0
@@ -123,117 +172,7 @@ def _material_masks(scene, size, families, material_families, output):
     return masks
 
 
-def _compositor(scene, colours, lighting_image, material_masks):
-    """Build real Blender nodes; do not read/write image pixels in Python."""
-    tree = bpy.data.node_groups.new(f"Parchment Fantasy Pixel Shader {VERSION}", "CompositorNodeTree")
-    tree["pixel_shader_version"] = VERSION
-    tree.interface.new_socket(name="Image", in_out="OUTPUT", socket_type="NodeSocketColor")
-    render = _node(tree, "CompositorNodeImage", "Actual lighting, source view transform baked", (-1000, 0))
-    render.image = lighting_image
-    pixel = _node(tree, "CompositorNodePixelate", "Native pixel grid (1 px)", (-600, 0))
-    pixel.inputs["Size"].default_value = 1
-    tree.links.new(render.outputs["Image"], pixel.inputs["Color"])
-
-    # Render Layers are premultiplied; palette comparison needs straight RGB.
-    straight = _node(tree, "CompositorNodePremulKey", "Straight RGB", (-400, 0))
-    straight.inputs["Type"].default_value = "To Straight"
-    tree.links.new(pixel.outputs["Color"], straight.inputs[0])
-    source = straight.outputs[0]
-    rgb = _node(tree, "CompositorNodeSeparateColor", "Display-linear RGB", (-200, 0))
-    rgb.mode = "RGB"
-    tree.links.new(source, rgb.inputs[0])
-
-    def math_node(operation, a, b=None, *, location=(0, 0)):
-        node = _node(tree, "ShaderNodeMath", operation, location)
-        node.operation = operation
-        for index, value in enumerate([a] if b is None else [a, b]):
-            if isinstance(value, (int, float)):
-                node.inputs[index].default_value = value
-            else:
-                tree.links.new(value, node.inputs[index])
-        return node.outputs[0]
-
-    def dot_nodes(components, coefficients, location):
-        terms = [math_node("MULTIPLY", c, weight, location=(location[0], location[1] - i * 80))
-                 for i, (c, weight) in enumerate(zip(components, coefficients))]
-        partial = math_node("ADD", terms[0], terms[1], location=(location[0] + 140, location[1]))
-        return math_node("ADD", partial, terms[2], location=(location[0] + 280, location[1]))
-
-    lms = [dot_nodes(list(rgb.outputs)[:3], row, (-100, -300 - i * 300))
-           for i, row in enumerate(RGB_TO_LMS)]
-    roots = [math_node("POWER", math_node("MAXIMUM", c, 0.0, location=(400, -300 - i * 300)), 1 / 3,
-                       location=(540, -300 - i * 300)) for i, c in enumerate(lms)]
-    lab = [dot_nodes(roots, row, (600, -300 - i * 300)) for i, row in enumerate(LMS_TO_OKLAB)]
-    def nearest_palette(subset, row=0):
-        nearest = None
-        minimum = None
-        for index, colour in enumerate(subset):
-            x, y = 1200 + index * 600, row - index * 240
-            palette_lab = _oklab(_linear(colour)[:3])
-            count = 0
-
-            def step(operation, a, b=None):
-                nonlocal count
-                location = (x + (count % 4) * 140, y - (count // 4) * 100)
-                count += 1
-                return math_node(operation, a, b, location=location)
-
-            differences = [step("SUBTRACT", component, target) for component, target in zip(lab, palette_lab)]
-            squares = [step("MULTIPLY", d, d) for d in differences]
-            lightness_distance = step("MULTIPLY", squares[0], LIGHTNESS_WEIGHT)
-            distance = step("ADD", step("ADD", lightness_distance, squares[1]), squares[2])
-            if nearest is None:
-                constant = _node(tree, "ShaderNodeMixRGB", colour, (x, y + 100))
-                constant.inputs[0].default_value = 0.0
-                constant.inputs[1].default_value = _linear(colour)
-                nearest = constant.outputs[0]
-                minimum = distance
-                continue
-            closer = _node(tree, "ShaderNodeMath", "Closer palette entry?", (x + 100, y))
-            closer.operation = "LESS_THAN"
-            tree.links.new(distance, closer.inputs[0])
-            tree.links.new(minimum, closer.inputs[1])
-            choose = _node(tree, "ShaderNodeMixRGB", f"Choose {colour}", (x + 180, y + 100))
-            choose.blend_type = "MIX"
-            tree.links.new(closer.outputs[0], choose.inputs[0])
-            tree.links.new(nearest, choose.inputs[1])
-            choose.inputs[2].default_value = _linear(colour)
-            nearest = choose.outputs[0]
-            best = _node(tree, "ShaderNodeMath", "Minimum distance", (x + 180, y - 100))
-            best.operation = "MINIMUM"
-            tree.links.new(minimum, best.inputs[0])
-            tree.links.new(distance, best.inputs[1])
-            minimum = best.outputs[0]
-        return nearest
-
-    nearest = nearest_palette(colours)
-    for group_index, mask in enumerate(material_masks):
-        row = -18000 * (group_index + 1)
-        masked_palette = nearest_palette(mask["colours"], row)
-        mask_input = _node(tree, "CompositorNodeImage", "Actual material identity", (len(colours) * 600, row))
-        mask_input.image = mask["image"]
-        mix = _node(tree, "ShaderNodeMixRGB", " / ".join(mask["families"]), (len(colours) * 600 + 140, row))
-        tree.links.new(mask_input.outputs["Image"], mix.inputs[0])
-        tree.links.new(nearest, mix.inputs[1])
-        tree.links.new(masked_palette, mix.inputs[2])
-        nearest = mix.outputs[0]
-
-    alpha = _node(tree, "ShaderNodeMath", "Hard alpha > 0.5", (len(colours) * 600, -200))
-    alpha.operation = "GREATER_THAN"
-    tree.links.new(render.outputs["Alpha"], alpha.inputs[0])
-    alpha.inputs[1].default_value = ALPHA_THRESHOLD
-    set_alpha = _node(tree, "CompositorNodeSetAlpha", "Binary transparency", (len(colours) * 600, 0))
-    set_alpha.inputs["Type"].default_value = "Replace Alpha"
-    tree.links.new(nearest, set_alpha.inputs["Image"])
-    tree.links.new(alpha.outputs[0], set_alpha.inputs["Alpha"])
-    output = _node(tree, "NodeGroupOutput", "Parchment Fantasy native pixel output", (len(colours) * 600 + 240, 0))
-    tree.links.new(set_alpha.outputs[0], output.inputs["Image"])
-    scene.compositing_node_group = tree
-    scene.render.use_compositing = True
-    return tree
-
-
-def create_pixel_scene(source_scene, *, size=DEFAULT_SIZE, families, asset_type, lighting_image, material_masks=(), material_families=None, name=None):
+def _create_pixel_scene(source_scene, *, size, families, asset_type, lighting_image, material_masks, material_families, structural_mask, name=None):
     """Create a work scene for the source's active camera; never replace materials.
 
     Per-task inputs: target (W,H), declared palette families, asset usage, scene name.
@@ -284,7 +223,9 @@ def create_pixel_scene(source_scene, *, size=DEFAULT_SIZE, families, asset_type,
     scene.view_settings.use_curve_mapping = False
     scene.view_settings.use_white_balance = False
     # Temporal noise can change palette choices. Keep the source's sample count/seed.
-    _compositor(scene, colours, lighting_image, material_masks)
+    def transform(tree, render, lightness, math_node):
+        return _protected_lightness(tree, render, lightness, math_node, structural_mask)
+    mapper.build_compositor(scene, colours, lighting_image, material_masks, lightness_transform=transform)
     manifest = {
         "shader": STYLE_ID, "version": VERSION,
         "script": str(SCRIPT_PATH), "script_sha256": hashlib.sha256(SCRIPT_PATH.read_bytes()).hexdigest(),
@@ -299,7 +240,11 @@ def create_pixel_scene(source_scene, *, size=DEFAULT_SIZE, families, asset_type,
         "filter_size": FILTER_SIZE, "alpha_threshold": ALPHA_THRESHOLD,
         "colour_distance": "2 * delta Oklab L squared + delta a squared + delta b squared",
         "lightness_weight": LIGHTNESS_WEIGHT, "extra_brightness_curve": False,
-        "material_families": material_families or {},
+        "material_families": material_families,
+        "structural_mask": structural_mask.filepath,
+        "dither": {"strength": 0.04, "space": "Oklab L", "rotation_radians": 0.785398, "frequency": list(size), "edge_multiplier": 0, "interior_multiplier": 1, "mean_corrected": False},
+        "palette_mapper_version": mapper.VERSION,
+        "palette_mapper_sha256": hashlib.sha256(MAPPER_PATH.read_bytes()).hexdigest(),
         "material_masks": [{"families": m["families"], "path": m["image"].filepath} for m in material_masks],
         "input_view_transform": source_scene.view_settings.view_transform,
         "input_look": source_scene.view_settings.look,
@@ -316,67 +261,104 @@ def create_pixel_scene(source_scene, *, size=DEFAULT_SIZE, families, asset_type,
     return scene, manifest
 
 
-def render_preview(source_scene, *, output_dir, size=DEFAULT_SIZE, families, asset_type, comparison_scale=4, material_families=None):
-    """Render A/B evidence and save both editable scenes through Blender itself.
+def sample_structure(source_scene, *, output_dir, size=DEFAULT_SIZE, families,
+                     material_families, protected_materials=()):
+    """Sample before lighting. Next run structural_edges.py prepare + its MCP job."""
+    output = _workspace(output_dir)
+    if source_scene.camera is None or source_scene.compositing_node_group is not None:
+        raise ValueError("Use the confirmed camera scene without a compositor.")
+    if len(size) != 2 or any(type(n) is not int or n < 1 for n in size):
+        raise ValueError("size must be two positive integers.")
+    if not families or not material_families:
+        raise ValueError("Declare families and every visible material's allowed families.")
+    guidance = output / 'guidance'
+    if guidance.exists() and any(guidance.iterdir()):
+        raise FileExistsError("Use a new task/version directory.")
+    guidance.mkdir(parents=True, exist_ok=True)
+    _material_masks(source_scene, size, families, material_families, guidance)
+    signature = _signature(source_scene)
+    manifest = {'version': VERSION, 'source_scene': source_scene.name,
+                'source_signature': signature, 'source_file': bpy.data.filepath,
+                'size': list(size), 'families': families,
+                'material_families': material_families,
+                'protected_materials': list(protected_materials),
+                'sampled_before_lighting': True,
+                'surface_sha256': hashlib.sha256((guidance/'surface-guidance.json').read_bytes()).hexdigest()}
+    (guidance/'prelight-manifest.json').write_text(json.dumps(manifest, indent=2)+'\n')
+    return manifest
 
-    All output stays under the project's Test Workspace. No Aseprite production
-    edits occur here; its MCP may import the images later to assemble review previews.
-    """
-    root = SCRIPT_PATH.parents[5] / "Test Workspace"
-    output = Path(output_dir).resolve()
-    if not output.is_relative_to(root.resolve()):
-        raise ValueError("Shader preview output must stay inside Test Workspace.")
-    if type(comparison_scale) is not int or comparison_scale < 1:
-        raise ValueError("comparison_scale must be a positive integer.")
-    paths = {key: output / filename for key, filename in {
-        "smooth": "before-smooth.png", "raw_native": "before-native.png",
-        "lighting": "lighting-native.png", "pixel": "pixel-base-v01.png",
-        "blend": "shader-preview.blend", "manifest": "shader-manifest.json",
-    }.items()}
-    if any(path.exists() for path in paths.values()):
-        raise FileExistsError("Preview already exists. Choose a new task/version directory.")
-    raw_scene = source_scene.copy()
-    raw_scene.name = f"{source_scene.name}_Parchment Fantasy_Before"
-    raw_scene.use_fake_user = True
-    raw_scene.render.image_settings.media_type = "IMAGE"
-    raw_scene.render.image_settings.file_format = "PNG"
-    raw_scene.render.image_settings.color_mode = "RGBA"
-    raw_scene.render.image_settings.color_depth = "8"
-    raw_scene.render.resolution_percentage = 100
-    raw_scene.render.use_sequencer = False
-    raw_scene.render.use_compositing = False
+
+def render_preview(source_scene, *, output_dir, guidance_dir, asset_type):
+    """Render only the structural baseline; prelight data and MCP mask are mandatory."""
+    output, guidance = _workspace(output_dir), _workspace(guidance_dir)
+    config = json.loads((guidance/'prelight-manifest.json').read_text())
+    structure = json.loads((guidance/'structure.json').read_text())
+    if config['version'] != VERSION or config['source_signature'] != _signature(source_scene):
+        raise ValueError("Geometry/camera/frame changed; resample structure in a new task.")
+    if config['source_scene'] != source_scene.name:
+        raise ValueError("Structure belongs to a different source scene.")
+    surface_hash = hashlib.sha256((guidance/'surface-guidance.json').read_bytes()).hexdigest()
+    if surface_hash != config['surface_sha256'] or surface_hash != structure['surface_sha256']:
+        raise ValueError("Structure and surface guidance do not match.")
+    if output.exists() and any(output.iterdir()):
+        raise FileExistsError("Use a new empty Shader output directory.")
+    size = tuple(config['size'])
+    mask_path = guidance/'dither-mask.png'
+    mask = bpy.data.images.load(str(mask_path), check_existing=False)
+    if tuple(mask.size) != size:
+        raise ValueError("Aseprite structure mask must match the native grid.")
+    mask.colorspace_settings.name = 'Non-Color'
+    values = list(mask.pixels)
+    band = {tuple(xy) for xy in structure['band_xy']}
+    for y in range(size[1]):
+        for x in range(size[0]):
+            index = ((size[1]-1-y)*size[0]+x)*4
+            expected = 0.0 if (x,y) in band else 1.0
+            if any(abs(values[index+c]-expected)>1e-6 for c in range(3)) or values[index+3]!=1.0:
+                raise ValueError('Aseprite mask pixels do not match the structure protection band.')
+    mask.pack()
     output.mkdir(parents=True, exist_ok=True)
-    raw_scene.render.resolution_x, raw_scene.render.resolution_y = [n * comparison_scale for n in size]
-    raw_scene.render.filepath = str(paths["smooth"])
-    bpy.ops.render.render(write_still=True, scene=raw_scene.name)
-    # Bake the source view transform through Blender, before palette quantization.
-    # This preserves AgX/look/exposure rather than comparing scene-linear HSV V
-    # against a display palette and then applying a different view transform.
-    lighting_scene = raw_scene.copy()
-    lighting_scene.name = f"{source_scene.name}_Parchment Fantasy_Lighting"
+    lighting_scene = source_scene.copy()
+    lighting_scene.name = source_scene.name + '_Actual_Lighting'
     lighting_scene.use_fake_user = True
     lighting_scene.render.resolution_x, lighting_scene.render.resolution_y = size
+    lighting_scene.render.resolution_percentage = 100
     lighting_scene.render.filter_size = FILTER_SIZE
-    lighting_scene.render.dither_intensity = 0.0
-    lighting_scene.render.image_settings.color_depth = "16"
-    lighting_scene.render.filepath = str(paths["lighting"])
+    lighting_scene.render.dither_intensity = 0
+    lighting_scene.render.use_compositing = False
+    lighting_scene.render.use_sequencer = False
+    lighting_scene.render.image_settings.media_type = 'IMAGE'
+    lighting_scene.render.image_settings.file_format = 'PNG'
+    lighting_scene.render.image_settings.color_mode = 'RGBA'
+    lighting_scene.render.image_settings.color_depth = '16'
+    lighting_scene.render.filepath = str(output/'lighting-native.png')
     bpy.ops.render.render(write_still=True, scene=lighting_scene.name)
-    lighting_image = bpy.data.images.load(str(paths["lighting"]), check_existing=False)
-    lighting_image.colorspace_settings.name = "sRGB"
-    lighting_image.alpha_mode = "STRAIGHT"
-    lighting_image.pack()
-    masks = _material_masks(lighting_scene, size, families, material_families or {}, output)
-    pixel_scene, manifest = create_pixel_scene(source_scene, size=size, families=families,
-                                               asset_type=asset_type, lighting_image=lighting_image,
-                                               material_masks=masks, material_families=material_families)
-    raw_scene.render.resolution_x, raw_scene.render.resolution_y = size
-    raw_scene.render.filepath = str(paths["raw_native"])
-    bpy.ops.render.render(write_still=True, scene=raw_scene.name)
-    pixel_scene.render.filepath = str(paths["pixel"])
+    lighting = bpy.data.images.load(lighting_scene.render.filepath, check_existing=False)
+    lighting.colorspace_settings.name = 'sRGB'; lighting.alpha_mode = 'STRAIGHT'; lighting.pack()
+    palette = json.loads(PALETTE_PATH.read_text())
+    groups = list(dict.fromkeys(tuple(f) for f in config['material_families'].values()))
+    masks = []
+    for index, group in enumerate(groups, 1):
+        image = bpy.data.images.load(str(guidance/f'material-mask-{index}.png'), check_existing=False)
+        image.colorspace_settings.name = 'Non-Color'; image.pack()
+        masks.append({'families': list(group), 'image': image,
+                      'colours': list(dict.fromkeys(c for f in group for c in palette['families'][f]['ramp']))})
+    pixel_scene, manifest = _create_pixel_scene(
+        source_scene, size=size, families=config['families'], asset_type=asset_type,
+        lighting_image=lighting, material_masks=masks,
+        material_families=config['material_families'], structural_mask=mask,
+        name=f'{source_scene.name}_{output.parent.name}_Structural_Pixel')
+    pixel_scene.render.filepath = str(output/'pixel-base-v01.png')
     bpy.ops.render.render(write_still=True, scene=pixel_scene.name)
-    manifest["outputs"] = {key: str(path) for key, path in paths.items()}
-    manifest["comparison_scale"] = comparison_scale
-    paths["manifest"].write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n")
-    bpy.context.window.scene = pixel_scene
-    bpy.ops.wm.save_as_mainfile(filepath=str(paths["blend"]), copy=True)
+    manifest.update({'guidance_dir': str(guidance), 'structure': structure['metrics'],
+                     'surface_sha256': surface_hash,
+                     'structural_mask_sha256': hashlib.sha256(mask_path.read_bytes()).hexdigest(),
+                     'outputs': {'pixel': pixel_scene.render.filepath,
+                                 'lighting': lighting_scene.render.filepath,
+                                 'blend': str(output/'shader-preview.blend')}})
+    pixel_scene['pixel_shader_manifest'] = json.dumps(manifest)
+    bpy.data.libraries.write(str(output/'shader-preview.blend'),
+                             {source_scene, lighting_scene, pixel_scene},
+                             fake_user=True, compress=True)
+    (output/'shader-manifest.json').write_text(json.dumps(manifest, indent=2)+'\n')
     return manifest

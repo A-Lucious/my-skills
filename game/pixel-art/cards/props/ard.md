@@ -1,5 +1,7 @@
 # Props: Aseprite Rough Draft (ard)
 
+For the standard 3D route, import the exact protected Shader base, then execute the [constrained source-color cleanup](../../styles/parchment-fantasy/PIXEL-SHADER.md#4-constrained-correction-through-aseprite-mcp) on `draft` before artistic refinement; preserve the hidden locked `base-ref`.
+
 Focuses on base import, palette ramp mapping, landmark exaggeration, and value mass consolidation.
 
 ## 1. Import & Layer Discipline

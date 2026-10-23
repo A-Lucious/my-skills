@@ -1,0 +1,95 @@
+{
+  "case": "shrub",
+  "status": "showcase",
+  "gallery_category": "buildings",
+  "style": "parchment-fantasy",
+  "purpose": "prop",
+  "palette_version": "4.3",
+  "native_size": [
+    64,
+    64
+  ],
+  "preview_scale": 6,
+  "preview_background": "transparent",
+  "visible_colors": 15,
+  "families": [
+    "green",
+    "earth"
+  ],
+  "alpha_values": [
+    0,
+    255
+  ],
+  "pipeline": {
+    "route": "Blender MCP -> fixed Pixel Shader -> Aseprite MCP",
+    "shader_version": "1.3.0",
+    "render_engine": "Cycles",
+    "projection": "orthographic",
+    "spatial_guidance": "real native-grid ray casts; IDs, world normals, positions, ray distances",
+    "ray_hits": 1312,
+    "shader_material_family_violations": 0,
+    "editable_layers": [
+      "base-ref",
+      "draft",
+      "leaf-details"
+    ],
+    "base_ref_hidden_and_locked": true
+  },
+  "checks": {
+    "native_size": [
+      64,
+      64
+    ],
+    "preview_size": [
+      384,
+      384
+    ],
+    "visible_colors": 15,
+    "visible_pixels": 1330,
+    "bbox_exclusive": [
+      6,
+      13,
+      58,
+      49
+    ],
+    "alpha_values": [
+      0,
+      255
+    ],
+    "foreign_colors": 0,
+    "outside_selected_families": 0,
+    "exact_nearest_neighbor_preview": true,
+    "base_ref_matches_shader": true,
+    "public_machine_path_metadata": false
+  },
+  "review": {
+    "showcase_inclusion": "requested",
+    "intermediate_user_signoffs": "not separately recorded"
+  },
+  "known_limits": [
+    "Static asset; no animation or game integration.",
+    "Thin highlights and selective outlines retained; no zero-noise claim."
+  ],
+  "artifacts": {
+    "backgrounds.png": {
+      "bytes": 3974,
+      "sha256": "25f6c3ca1d6a7cfe39b118b0b5d36375d3163d725830f479d2bde26d5f78fddb"
+    },
+    "case.md": {
+      "bytes": 3186,
+      "sha256": "c0a9babac48c263aa750aca8cf370d3a94baf8997beed41694c70728f38b2de1"
+    },
+    "native.png": {
+      "bytes": 1493,
+      "sha256": "abe666743875ad508d513bcf7bb1e54c4a6f91ecb7323138ac85701151bd4882"
+    },
+    "preview.png": {
+      "bytes": 3030,
+      "sha256": "3af59ffdc0cde083c08441903386c72504fcc110abba76babc2d7dd6b1d7ceba"
+    },
+    "source.aseprite": {
+      "bytes": 2333,
+      "sha256": "48d93c10f97f1c8ea721344edf3a1ed87e723ca29f36746620af9052e0d7fbe5"
+    }
+  }
+}

@@ -2,7 +2,7 @@
 
 Production Palette 4.3. Structures fantasy themes through warm paper tones, low-saturation natural materials, and selective vibrant accents; tonal ramps preserve material reflections, transmittances, and shadow nuances. Historical visual research referenced visual observations of third-party games; see [NOTICE.md](../../NOTICE.md) for provenance and unofficial statements. This style does not bundle third-party game screenshots, crops, or tracing studies. Shares [COMMON](../COMMON.md); see [Reference Studies](REFERENCE-STUDY.md) for provenance and observational methodology.
 
-Step 3 of the pipeline executes this style's fixed [Pixel Shader](PIXEL-SHADER.md), presenting advance previews under the active camera before proceeding to Step 4 Aseprite rough drafting. The implementation is housed in this style directory at [pixel_shader.py](pixel_shader.py); current technical baseline is `1.3.0`, Palette `4.3`, and native `64x64`.
+Pre-light structural Sobel and Aseprite-generated protection masks precede the actual lighting render. SOFT.04 is disabled within the cleaned structure’s 1px band and remains 0.04 inside; Step 3 of the pipeline executes this style's fixed [Pixel Shader](PIXEL-SHADER.md), presenting advance previews under the active camera before proceeding to Step 4 Aseprite rough drafting. The implementation is housed in this style directory at [pixel_shader.py](pixel_shader.py); current technical baseline is `2.0.0`, Palette `4.3`, and native `64x64`.
 
 Portraits using the design card's conditional image-source route instead apply the [smooth portrait Pixel Shader](PORTRAIT-PIXEL-SHADER.md) before Aseprite. It smooths the existing 2D source and reuses this style's locked palette mapper.
 
@@ -42,9 +42,9 @@ In-game rendering uses native PNGs scaled by UI display nodes; integer-factor ne
 
 Unless specified, original work defaults to top-left key lighting; reference studies adhere to visible lighting. Metal/gem highlights are narrow and sharp; leather/cloth highlights are broad and restrained. Current production uses alpha 0/255, normal blend mode, opacity 255, hard-edged ramps, and pixel clusters.
 
-[palette-v3-legacy.json](palette-v3-legacy.json) interprets older outputs. Reference studies employ independent observation whitelists, recording compression variations per the [Study Specification](REFERENCE-STUDY.md).
+Reference studies employ independent observation whitelists, recording compression variations per the [Study Specification](REFERENCE-STUDY.md).
 
-## Empirical Baselines
+## In-house Visual References
 
 - [Wooden Chest Texture v2](../../references/cases/wooden-chest/case.md): In-house single-object Blender -> Aseprite material and texture test case; earlier pipeline that predates the fixed Shader.
-- [Potion Bottle Base](../../references/cases/health-potion/case.md): Fixed Shader material zoning and display lighting test case, covering Step 3 only.
+- [Potion Bottle Base](../../references/cases/health-potion/case.md): Historical material/lighting visual reference, not the current production baseline.

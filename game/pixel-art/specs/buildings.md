@@ -1,5 +1,7 @@
 # Buildings
 
+For Blender production, use the sole [pre-light structural baseline](../styles/parchment-fantasy/PIXEL-SHADER.md): native geometry/Sobel → protection mask → actual lighting → protected SOFT.04 → palette → constrained Aseprite correction.
+
 Applies to standalone houses, towers, ruins, and architectural complexes; buildings within scenes must also follow composition and depth rules in [Scenes](scenes.md).
 
 ## Task Inputs

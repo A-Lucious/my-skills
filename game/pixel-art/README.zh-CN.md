@@ -10,18 +10,28 @@
 
 ## 制作流程
 
-先确定对象、用途、尺寸和风格。Blender 提供形体与光照依据，Aseprite 完成像素整理、细化和正式导出。
+技能有**两条基线**，由 Agent 按任务选择（见[基线选择](specs/baselines.md)）。
+
+**基线 A：制作基线**。先确定对象、用途、尺寸和风格。Blender 提供形体与光照依据，Aseprite 完成像素整理、细化和正式导出。
+
+Blender 唯一基线：光照前结构 Sobel → 修改/保护掩码 → 实际光照 → 受保护 SOFT.04 → 色板量化 → Aseprite 受约束源色修正 → 精修。[执行入口](styles/parchment-fantasy/PIXEL-SHADER.md)。
 
 ```mermaid
-flowchart LR
-    A["3D 建模<br/>与相机"] --> B["光照<br/>与渲染"]
-    B --> C["Pixel Shader<br/>效果预览"]
-    C --> D["Aseprite<br/>像素粗稿"]
-    D --> E["像素精修<br/>纹理与动画"]
-    E --> F["效果检查<br/>与交付"]
+flowchart TD
+    A["Blender model / fixed camera"] --> S["Native geometry → structural Sobel"]
+    S --> M["Aseprite candidate / protection masks"]
+    A --> L["Actual lighting render"]
+    M --> D["Protected SOFT.04"]
+    L --> D
+    D --> P["Style palette quantization"]
+    P --> R["Aseprite constrained source-color correction"]
+    M --> R
+    R --> F["Artistic refinement / export"]
 ```
 
 各阶段展示实际预览并记录评审，Shader 效果在进入像素粗稿前展示。
+
+**基线 B：Agent 纯画基线**。当需求是复刻一张已有的二维图（截图、现成美术、界面元素）而不是设计新对象时，只用 Aseprite 在参考图自身的像素尺寸上重画：量出主色与剪影、用 median cut 定工作调色板、按亮度切 8 档由暗到亮逐层落笔，最后对照原图做量化验收（SSIM / PSNR / 容差覆盖率）。见 [cards/features/pure_draw.md](cards/features/pure_draw.md)。
 
 人物画像先由[设计卡](cards/portraits/design.md)选择输入路线。用户明确说明上传图来自生图模型，或需要生图时，选定的二维图先经过[平滑人物 Pixel Shader](styles/parchment-fantasy/PORTRAIT-PIXEL-SHADER.md)，再进入 Aseprite 精修眼睛和表情。已有 AI 图够用时无需重新生成，普通参考图不自动触发生图模型调用。
 
@@ -31,9 +41,100 @@ flowchart LR
 2. 该技能的上下文较长，请确保 Agent 有足够的上下文容量来承载技能说明及当前任务。
 3. 当前内置一种风格 `parchment-fantasy`。可调用技能内置的 [create-style](commands/create-style.md)，通过问答扩展独立风格，例如：`使用 $pixel-art create-style，帮我创建一个新风格。`
 
+## 提示词示例
+
+5 种代表性输入方式，每个示例按「提示词 → 参考图（如有）→ 结果图」展示。前三个为同一题材，提示词差异只在参考图说明与生图触发词（「按这个图」/「用生图模型」）；完整路线对比见[人物画像生成说明](docs/portrait-generation.md)。
+
+### （1）仅提示词 — 基线 A（3D 生产流程）
+
+> 调用pixel-art，画骷髅的人物画像。
+
+无参考图。请求按完整制作流程执行：Blender 几何与物理光照、固定风格 Pixel Shader，再到 Aseprite 精修。幽绿灵魂火、额头裂痕和酒红围巾为制作时的设计补充。
+
+<img src="docs/images/skeleton-v1-preview.png" alt="仅提示词生成的骷髅头像，6× 预览" width="192">
+
+64×64 原生，6× 最近邻预览。
+
+### （2）提示词 + 参考图 — 基线 A（3D 解剖还原）
+
+> 按这个图，调用pixel-art画骷髅的人物画像（参考图是全身图，但是人物画像不是，注意）
+
+参考图仅用于提取头颈解剖，不触发生图模型；结果保留参考图的裸颅骨、眼眶与牙列结构。
+
+<table>
+  <tr>
+    <td align="center" valign="middle"><img src="docs/images/skeleton-v2-ref.png" alt="全身骨架参考图，339×234" width="220"><br><sub>参考图 · 339×234</sub></td>
+    <td align="center" valign="middle"><img src="docs/images/skeleton-v2-preview.png" alt="骷髅头像 v2，6× 预览" width="192"><br><sub>结果 · 64×64 原生</sub></td>
+  </tr>
+</table>
+
+### （3）提示词 + 要求生图模型 — 条件 2D 生图管线
+
+> 按这个图，调用pixel-art并用生图模型画骷髅的人物画像（参考图是全身图，但是人物画像不是，注意）
+
+显式命中「用生图模型」触发词后，3D 建模与物理光照被 1254×1254 生图概念图取代，再经平滑人物 Pixel Shader 进入 Aseprite。
+
+<table>
+  <tr>
+    <td align="center" valign="middle"><img src="docs/images/skeleton-v2-ref.png" alt="全身骨架参考图" width="150"><br><sub>参考图</sub></td>
+    <td align="center" valign="middle"><img src="docs/images/skeleton-v3-concept.png" alt="生图概念图，1254×1254" width="140"><br><sub>生图概念图 · 1254×1254</sub></td>
+    <td align="center" valign="middle"><img src="docs/images/skeleton-v3-preview.png" alt="骷髅头像 v3，6× 预览" width="192"><br><sub>结果 · 64×64 Shader 底稿</sub></td>
+  </tr>
+</table>
+
+本案例完成到 Phase 3 Shader 像素底稿，未继续做 Aseprite 精修。
+
+### （4）提示词 + 无参考图 + 要求基线 2 — Aseprite 2D 直绘
+
+> 使用基线2画一个Fantasy风格的ui背景，类似于一张向下逐渐破碎的纸张
+
+基线 B 的定义是复刻用户提供的二维参考图，本轮没有参考图，因此按 [Flat UI / 2D 直绘](cards/features/flat_ui.md)分流执行：只用 Aseprite，跳过 Blender、光照与 Pixel Shader 三个阶段。180×320 原生、15 色、4 图层；技术自检通过，用户评审待定。
+
+<img src="docs/images/baseline-b-shattered-parchment.png" alt="破碎羊皮纸 UI 背景，180×320 原生" width="180">
+
+### （5）提示词 + 参考图 + 要求基线 2 — Agent 纯画
+
+> 在不调用 pixel-art 下，请尝试用 aseprite 纯画这张图，要求按一定的步骤画，并保证 99 相似
+
+只用 Aseprite 在参考图自身的 260×75 尺寸上重画：256 色 median cut 工作调色板、8 个明度档、14 个落笔步骤，最后对照原图做量化验收。该案例是基线 B 的标定案例，其数值作为纯画复刻的预期基准。
+
+<table>
+  <tr>
+    <td align="center" valign="middle"><img src="docs/images/baseline-b-brush-reference.png" alt="奶油笔刷参考图，260×75" width="260"><br><sub>参考图 · 260×75</sub></td>
+    <td align="center" valign="middle"><img src="docs/images/baseline-b-brush-result.png" alt="纯画复刻结果，260×75" width="260"><br><sub>结果 · 260×75</sub></td>
+  </tr>
+</table>
+
+**SSIM 0.999615 · PSNR 48.90 dB · 99.70% 像素逐通道误差 ≤ 8/255 · 97.83% ≤ 4/255。** 逐像素完全相同 77.88%——参考图本身带重采样噪声，重画不可能做到 100%。详见[纯画基线卡](cards/features/pure_draw.md)与[基线选择规范](specs/baselines.md)。
+
+<img src="docs/images/baseline-b-brush-comparison.png" alt="参考图与纯画结果 2× 上下对比" width="420">
+
+上为参考图、下为纯画结果，均为 2× 显示：显示尺度下已难以分辨。
+
 ## 案例
 
-### 道具、动画与材质案例
+### 建筑
+
+本案例集将树木、灌木等环境植被与遗迹平台统一归入建筑。下列预览与原生 PNG 均保留透明背景。
+
+<table>
+  <tr>
+    <th>灌木丛</th>
+    <th>桦树</th>
+    <th>远古大理石遗迹平台</th>
+  </tr>
+  <tr>
+    <td align="center" valign="middle"><a href="references/cases/shrub/case.md"><img src="references/cases/shrub/preview.png" alt="灌木丛透明预览" width="192"></a></td>
+    <td align="center" valign="middle"><a href="references/cases/birch-tree/case.md"><img src="references/cases/birch-tree/preview.png" alt="桦树透明预览" width="192"></a></td>
+    <td align="center" valign="middle"><a href="references/cases/ancient-marble-fountain/case.md"><img src="references/cases/ancient-marble-fountain/preview.png" alt="远古大理石遗迹平台透明预览" width="192"></a></td>
+  </tr>
+</table>
+
+- [灌木丛](references/cases/shrub/case.md)：64×64 灰橄榄绿叶团，保留短枝干和独立叶片细节层。
+- [桦树](references/cases/birch-tree/case.md)：64×64 白色树皮、深色横纹和疏密叶冠。
+- [远古大理石遗迹平台](references/cases/ancient-marble-fountain/case.md)：64×64 六边外池与中央高台，双层浅凹蓄水面，带大理石纹和风化石块拼缝。
+
+### 物品
 
 <table>
   <tr>
@@ -48,12 +149,13 @@ flowchart LR
   </tr>
   <tr>
     <td align="center" valign="middle"><a href="references/cases/flame-sword/case.md"><img src="references/cases/flame-sword/preview.png" alt="火焰长剑" width="192"></a></td>
-    <td></td>
+    <td align="center" valign="middle"><a href="references/cases/bear-trap/case.md"><img src="references/cases/bear-trap/preview.png" alt="捕兽夹透明预览" width="192"></a></td>
     <td></td>
   </tr>
 </table>
 
 - [火焰长剑](references/cases/flame-sword/case.md)：已验收的 64×64 透明物品，经 Blender、固定像素 Shader 与 Aseprite 精修，附分层源稿与物品栏背景预览。
+- [捕兽夹](references/cases/bear-trap/case.md)：64×64 张开铁夹，包含锯齿、中央踏板、弹簧和短链，附透明 PNG 与分层源稿。
 
 ### 人物画像案例
 
@@ -66,10 +168,11 @@ flowchart LR
   <tr>
     <td align="center" valign="middle"><img src="references/cases/ranger-failed-baseline/preview.png" alt="游侠失败基线案例" width="180"></td>
     <td align="center" valign="middle"><img src="references/cases/skeleton-portrait/preview.png" alt="骷髅画像" width="180"></td>
-    <td></td>
+    <td align="center" valign="middle"><a href="references/cases/armored-spider/case.md"><img src="references/cases/armored-spider/preview.png" alt="盔甲蜘蛛人物画像" width="192"></a></td>
   </tr>
 </table>
 
+- [盔甲蜘蛛人物画像](references/cases/armored-spider/case.md)：已验收的 96×96 生图来源画像，经平滑 Shader 与 Aseprite 精修，附可编辑源稿和精修前后对比。
 - [人物画像生成说明与三次骷髅基线对比](docs/portrait-generation.md)：人物画像特写构图、3D 与 2D 生图双分支决策，以及三次骷髅画像基线对比深度指南。
 
 ## 使用

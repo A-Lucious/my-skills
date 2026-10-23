@@ -1,5 +1,7 @@
 # Characters Specification
 
+For Blender production, use the sole [pre-light structural baseline](../styles/parchment-fantasy/PIXEL-SHADER.md): native geometry/Sobel → protection mask → actual lighting → protected SOFT.04 → palette → constrained Aseprite correction.
+
 Applies to portraits, full-body characters, and creatures; the chosen style dictates proportions, exaggeration, and detail density.
 
 For head-and-shoulders portraits and busts, start with [Portrait Design](../cards/portraits/design.md), then mount the corresponding phase cards in `cards/portraits/`. The principles below remain shared character guidance.

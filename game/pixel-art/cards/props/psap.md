@@ -1,5 +1,7 @@
 # Props: Style Pixel Shader & Advance Preview (psap)
 
+For the standard 3D route, require the pre-light structure mask and apply protected SOFT.04 before palette quantization through the [structural baseline](../../styles/parchment-fantasy/PIXEL-SHADER.md).
+
 Focuses on resolution budgeting, shader execution, and cross-material bleed prevention.
 
 ## 1. Resolution Budgeting

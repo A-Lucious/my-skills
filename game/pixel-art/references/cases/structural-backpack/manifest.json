@@ -1,0 +1,43 @@
+{
+  "version": "2.0.0",
+  "shader_exactly_matches_accepted_c": true,
+  "formal_export_exactly_matches_accepted_c": true,
+  "cross_material_pixels": 0,
+  "alpha_unchanged": true,
+  "size": [
+    64,
+    64
+  ],
+  "opaque_pixels": 1921,
+  "color_count": 34,
+  "cleanup_pixels": 1,
+  "standalone_reload_exact": true,
+  "standalone_only_three_production_scenes": true,
+  "packed_images": true,
+  "legacy_entrypoints_removed": true,
+  "stale_camera_rejected": true,
+  "shared_2d_mapper_exact": true,
+  "rectangular_48x32_pipeline_verified": true,
+  "skill_validator_passed": true,
+  "script_sha256": "097872e5d941f5bdcd80188cff75cc56907babf4926215120d06a545088bd10f",
+  "pixel_sha256": "57a8ba6f491feae4d56c240edb86cbebb8fff19f7578ee75e82b0873900d057d",
+  "style": "parchment-fantasy",
+  "palette_version": "4.3",
+  "families": [
+    "leather",
+    "earth",
+    "gold",
+    "green"
+  ],
+  "scope": "Structural algorithm and constrained rough-draft cleanup; artistic refinement follows",
+  "workflow_accepted": true,
+  "files": {
+    "native": "native.png",
+    "preview": "preview.png",
+    "source": "source.aseprite"
+  },
+  "skill_internal_links_valid": true,
+  "standalone_scene_count": 3,
+  "standalone_embedded_legacy_texts": 0,
+  "published_script_sha256": "70e9d9ed4a5cb34a7a618f8cdc16a07d4852338ad39da9163e7cd843c86a473f"
+}

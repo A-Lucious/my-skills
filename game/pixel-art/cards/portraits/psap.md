@@ -1,5 +1,7 @@
 # Portraits: Style Pixel Shader & Advance Preview (psap)
 
+For the standard 3D route, require the pre-light structure mask and apply protected SOFT.04 before palette quantization through the [structural baseline](../../styles/parchment-fantasy/PIXEL-SHADER.md).
+
 First use [Portrait Design](design.md) to select the route. Use the character record's native dimensions, framing, and declared palette families.
 
 ## 1. Native Base Generation

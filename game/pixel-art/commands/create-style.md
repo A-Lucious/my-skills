@@ -46,7 +46,7 @@ styles/<style-id>/
     └── INDEX.md
 ```
 
-Create `pixel_shader.py` when implementing the shader as described below. If only specifications are being created and it is absent, state that explicitly in `STYLE.md`, `PIXEL-SHADER.md`, and the index entry; do not create a placeholder executable. Do not copy `palette-v3-legacy.json`; new styles have no legacy versions.
+Create `pixel_shader.py` when implementing the shader as described below. If only specifications are being created and it is absent, state that explicitly in `STYLE.md`, `PIXEL-SHADER.md`, and the index entry; do not create a placeholder executable.
 
 The request to create a style authorizes these skill-library edits. Keep interview working notes, temporary scripts, logs, source references, and calibration artifacts in `Test Workspace/create-style-<style-id>/`. Store reusable decisions in the style files, without private conversation transcripts or machine-specific paths.
 
@@ -75,7 +75,7 @@ Calculate inventory counts and derived material ramps from the family data to av
 
 Document the style's 3D conversion contract: native grid, palette mapping, material zoning, alpha edges, outline/dithering behavior where relevant, supported Blender versions/engines, callable inputs/outputs, and implementation/validation status. Version implemented scripts independently and pair them with the local palette version.
 
-When the requested scope includes Shader implementation, author a self-contained `pixel_shader.py` for this style's decisions, loading its sibling `palette.json`. Expose a documented `render_preview` entrypoint accepting the source scene, output directory, dimensions, selected families, and asset type; document additional inputs. Importing the module must not render or alter the source scene. Preserve upstream data, record script/palette hashes and actual arguments in a manifest, and generate native base and same-view comparison outputs through Blender MCP. Use the existing [Blender integration rules](../mcp/blender.md); do not call or import another style's production Shader, rename its implementation unchanged, or substitute external pixel processing.
+When the requested scope includes Shader implementation, author a self-contained `pixel_shader.py` for this style's decisions, loading its sibling `palette.json`. Use the structural production contract: expose `sample_structure` for native-grid guidance before lighting, require the generated Aseprite protection mask in `render_preview`, apply protected SOFT.04 before the style palette, then constrain Aseprite source-color writes by surface identity. Document the style-specific inputs; do not add alternate Blender baselines. Importing the module must not render or alter the source scene. Preserve upstream data, record script/palette hashes and actual arguments in a manifest, and generate native base and same-view comparison outputs through Blender MCP. Use the existing [Blender integration rules](../mcp/blender.md); do not call or import another style's production Shader, rename its implementation unchanged, or substitute external pixel processing.
 
 Writing specifications does not require launching Blender or Aseprite. If implementation or live calibration is outside the current request or the tools are unavailable, save the requested specification with the exact pending work and readiness limits. A script that has only passed syntax checks remains unvalidated. Before production, complete the independent implementation and actual Step 3 preview; do not label a missing or stubbed Shader ready.
 

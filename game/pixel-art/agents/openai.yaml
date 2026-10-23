@@ -1,7 +1,7 @@
 interface:
   display_name: "Pixel Art"
-  short_description: "Create pixel art assets and define reusable styles"
-  default_prompt: "Use $pixel-art to create assets through the Blender/Aseprite pipeline, or use its create-style command to define and save a new style through an interview."
+  short_description: "Create pixel art assets, redraw references, and define reusable styles"
+  default_prompt: "Use $pixel-art to create an asset through the pre-light structural Sobel, protected SOFT.04, and constrained Aseprite cleanup production baseline, or redraw a supplied reference image with the Aseprite-only pure-draw baseline, or use its create-style command to define and save a new style through an interview."
 
 dependencies:
   tools:
